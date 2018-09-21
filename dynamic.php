@@ -1,5 +1,5 @@
 rends={<?php
-$chl="renders.txt";
+$chl="data/renders.txt";
 $f=fopen($chl,"r");
 $g=explode("\n",fread($f,filesize($chl)));
 function trans($tex){

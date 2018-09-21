@@ -4,7 +4,7 @@
     <body>
         <h2>Changelog</h2>
         <?php
-        $chl="changelog.txt";
+        $chl="data/changelog.txt";
         $f=fopen($chl,"r");
         $g=explode("\n",fread($f,filesize($chl)));
         $h=array_map(function($n){return explode("'\"'",$n);},$g);
