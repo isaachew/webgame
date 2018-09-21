@@ -1,0 +1,4 @@
+When person joins a group, server broadcasts to ID number 0 of group and to new person to give it its ID and ICE candidate. This client then broadcasts to number 1, and so on until the message completes a loop.
+Then, whenever someone sends a message to update the game, they broadcast the update to the client's ID + 1, and  that client broadcasts to that client's ID + 2, and so on.
+Whenever someone leaves the game, it broadcasts a message to both server and the next ID. Then the message propagates and server updates the list of groups.
+ID starts from 0.
