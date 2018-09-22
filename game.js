@@ -52,4 +52,6 @@ clear=false
 function choose(ch){
     return ch[Math.floor(Math.random()*ch.length)]
 }
+re=function(el){$(el).attr("class","remo");
+setTimeout(el.remove.bind(el),500)}
 requestAnimationFrame(frame)

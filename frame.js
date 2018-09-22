@@ -8,16 +8,12 @@ function frame(ts){
     switch(mode){
         case 0:
             if($("svg")[0].children.length<1){
-                $("svg").append(svgel("style",{},""+
-                "text{font-family:Ubuntu}.title{font-size:40px}"+
-                ""
-                ))
-                $("svg").append(svgel("rect",{"x":"40vw","y":"47.5vh","width":"20vw","height":"5vh","rx":"0.2vw","ry":"0.1vh","fill":"#4444CC"}))
-                $("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"40vw\" y=\"47.5vh\" width=\"20vw\" height=\"5vh\" rx=\"0.2vw\" ry=\"0.1vh\"></rect>"))
+                $("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","fill":"#4444CC"}))
+                $("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>"))
                 if(mobile){
                     $("body").append(el("input",{"style":"position:absolute;top:50%;left:45%;z-index:15;width:10%","oninput":"name=this.value"}))
                 }else{
-                    $("svg").append(svgel("text",{"x":"50vw","y":"50vh","id":"name","text-anchor":"middle","font-size":"15px","clip-path":"url(\"#clipname\")"},"hi"))
+                    $("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},"hi"))
                 }
             }
             $("#name").text(name.slice(0,namecr)+(count<30?"|":" ")+name.slice(namecr,name.length))
@@ -50,14 +46,14 @@ function frame(ts){
             break
         case 1:
             if(ff){
-                $("svg").append(svgel("g",{"id":"sprites"},""))
+                $("svg").append(svgel("g",{"id":"sprites","transform":"translate(-100)"},""))
             }
             try{
-                for(en of entities){
+                ids=$.makeArray($("g#sprites").children()).map(a=>a.id)
+                for(en of entities.concat(buildings)){
                     ty=en.constructor.name
-                    ids=$.makeArray($("g#sprites").children()).map(a=>a.id)
                     if(!Boolean($.inArray(ty,ids)+1)){
-                        spri=$(svgel("g",{"id":ty,"stroke":"#FF0000"}))
+                        spri=$(svgel("g",{"id":ty,"class":"sprite"}))
                         sprhold=$("g#sprites")
                         for(sh of rends[ty].split(" ")){
                             st=sh[0]
@@ -78,12 +74,25 @@ function frame(ts){
                         }
                         sprhold.append(spri)
                     }
-                    allids=$.makeArray($("#svg")).map(a=>a.id)
-                    if(!allids.includes(en.id)){
-                        spr=$(svgel("use",{"href":"#"+ty,"id":en.id}))
+                    allids=$.makeArray($("#svg").children()).map(a=>a.id)
+                    if(!allids.includes(en.id+"")){
+                        spr=$(svgel("use",{"href":"#"+ty,"id":en.id,"class":"object"}))
                         $("#svg").append(spr)
                     }
-                    
+                    entdis=$("use#"+en.id)
+                    entdbox=entdis[0].getBBox()
+                    entdw=entdbox.width
+                    entdh=entdbox.height
+                    entdis.attr("x",en.pos[0])
+                    entdis.attr("y",en.pos[1])
+                    entdis.attr("transform","rotate("+en.rot+","+(en.pos[0]+entdw/2)+","+(en.pos[1]+entdh/2)+")")
+                }
+                htnts=$.makeArray($(".object"))
+                entis=entities.map(a=>a.id+"")
+                for(k of htnts){
+                    if(!entis.includes(k.id)){
+                        re(k)
+                    }
                 }
             }catch(err){console.log("play error: "+err)}
             break
