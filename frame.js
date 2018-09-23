@@ -45,7 +45,10 @@ function frame(ts){
             if(count>=60)count=0
             break
         case 1:
+            $("svg").attr("viewBox",camvb.join(" "))
+            //$("rect").attr("x",camvb[0]).attr("y",camvb[1]).attr("width",camvb[2]).attr("height",camvb[3])
             if(ff){
+                //$("svg").append(svgel("rect",{"stroke":"red","fill":"none"}))
                 $("svg").append(svgel("g",{"id":"sprites","transform":"translate(-100)"},""))
             }
             try{
