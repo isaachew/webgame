@@ -4,19 +4,14 @@ ev=undefined
 ke=undefined
 $(document).keydown(function(e){keyp=true;ev=e;ke=ev.key})
 name=""
-connects=[]
 entities=[]
 buildings=[]
-async function enter(serv,data){
-    a=await fetch(serv+"/new?data="+data,{"method":"GET"})
-    return a.json()
-}
-async function getd(serv,dat){
-    a=await fetch(serv+"?data="+dat,{"method":"GET"})
-    return a.json()
-}
-async function leave(serv,id){
-    n=await fetch(serv+"/leave?id="+id,{"method":"GET"})
+result=[]
+camvb=[0,0,500,500]
+function load(url,serv,data){
+    a=fetch(serv+"/"+url+"?data="+data,{"method":"GET"})
+    .then(function(r){return r.json()})
+    .then(function(r){result=r})
 }
 function svgel(n,attrs,content){
     if (typeof content === 'undefined') content = "";

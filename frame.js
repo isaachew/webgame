@@ -25,7 +25,7 @@ function frame(ts){
                     mode=1
                     serv=choose(servers)
                     clear=true
-                    entid=enter(serv,name)
+                    entid=load("join",serv,name)
                 }else if(!mobile){
                     if(ke==="Backspace"){
                         name=name.slice(0,namecr-1)+name.slice(namecr,name.length)
@@ -50,9 +50,10 @@ function frame(ts){
             }
             try{
                 ids=$.makeArray($("g#sprites").children()).map(a=>a.id)
+                donespri=[]
                 for(en of entities.concat(buildings)){
-                    ty=en.constructor.name
-                    if(!Boolean($.inArray(ty,ids)+1)){
+                    ty=en.type
+                    if(!($.inArray(ty,ids)+1)&&!donespri.includes(ty)){
                         spri=$(svgel("g",{"id":ty,"class":"sprite"}))
                         sprhold=$("g#sprites")
                         for(sh of rends[ty].split(" ")){
@@ -73,25 +74,31 @@ function frame(ts){
                             }
                         }
                         sprhold.append(spri)
+                        donespri.push(ty)
                     }
                     allids=$.makeArray($("#svg").children()).map(a=>a.id)
-                    if(!allids.includes(en.id+"")){
-                        spr=$(svgel("use",{"href":"#"+ty,"id":en.id,"class":"object"}))
-                        $("#svg").append(spr)
+                    if((en.pos[0]-camvb[0]>0)&&(en.pos[0]-camvb[0]<camvb[2])&&(en.pos[1]-camvb[1]>0)&&(en.pos[1]-camvb[1]<camvb[3])){
+                        if(!allids.includes(en.id+"")){
+                            spr=$(svgel("use",{"href":"#"+ty,"id":en.id,"class":"object"}))
+                            $("#svg").append(spr)
+                        }
+                        entdis=$("use#"+en.id)
+                        entdbox=entdis[0].getBBox()
+                        entdw=entdbox.width
+                        entdh=entdbox.height
+                        entdis.attr("x",en.pos[0]).attr("y",en.pos[1])
+                        entdis.attr("transform","rotate("+en.rot+","+(en.pos[0]+entdw/2)+","+(en.pos[1]+entdh/2)+")")
                     }
-                    entdis=$("use#"+en.id)
-                    entdbox=entdis[0].getBBox()
-                    entdw=entdbox.width
-                    entdh=entdbox.height
-                    entdis.attr("x",en.pos[0])
-                    entdis.attr("y",en.pos[1])
-                    entdis.attr("transform","rotate("+en.rot+","+(en.pos[0]+entdw/2)+","+(en.pos[1]+entdh/2)+")")
                 }
                 htnts=$.makeArray($(".object"))
                 entis=entities.map(a=>a.id+"")
                 for(k of htnts){
                     if(!entis.includes(k.id)){
                         re(k)
+                    }
+                    kd=[$(k).attr("x"),$(k).attr("y")]
+                    if(kd[0]-camvb[0]<0||(kd[0]-camvb[0]>camvb[2])||(kd[1]-camvb[1]<0)||(kd[1]-camvb[1]>camvb[3])){
+                        $(k).remove()
                     }
                 }
             }catch(err){console.log("play error: "+err)}
