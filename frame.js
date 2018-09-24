@@ -48,7 +48,24 @@ function frame(ts){
             $("svg").attr("viewBox",camvb.join(" "))
             //$("rect").attr("x",camvb[0]).attr("y",camvb[1]).attr("width",camvb[2]).attr("height",camvb[3])
             if(ff){
-                //$("svg").append(svgel("rect",{"stroke":"red","fill":"none"}))
+                //$("#svg").attr("viewBox","0 0 2000 2000")
+                $("svg").append(svgel("rect",{"stroke":"red","fill":"none"}))
+                if(mobile){
+                    sv=$("svg")
+                    sv.append(svgel("g",{"id":"arrs"},""))
+                    arrhdr=$("#arrs")
+                    arrhdr.append(svgel("rect",{"fill":"#777777","id":"ar10","stroke":"none"}))
+                    arrhdr.append(svgel("rect",{"fill":"#777777","id":"ar12","stroke":"none"}))
+                    arrhdr.append(svgel("rect",{"fill":"#777777","id":"ar01","stroke":"none"}))
+                    arrhdr.append(svgel("rect",{"fill":"#777777","id":"ar21","stroke":"none"}))
+                    arrhdr.children().on("touchstart",function(){
+                        i=$(this).attr("id").slice(2).split("")
+                        gdir=[parseInt(i[0])-1,parseInt(i[1])-1]
+                    })
+                    sv.on("touchend",function(){
+                        gdir=[0,0]
+                    })
+                }
                 $("svg").append(svgel("g",{"id":"sprites","transform":"translate(-100)"},""))
             }
             try{
@@ -105,6 +122,36 @@ function frame(ts){
                     }
                 }
             }catch(err){console.log("play error: "+err)}
+            if(keyp){
+                if(ke==="ArrowUp")camvb[1]-=10
+                if(ke==="ArrowDown")camvb[1]+=10
+                if(ke==="ArrowLeft")camvb[0]-=10
+                if(ke==="ArrowRight")camvb[0]+=10
+            }
+            if(result.bounds){
+                if(camvb[0]<0){
+                    camvb[0]=0
+                }else if(camvb[1]<0){
+                    camvb[1]=0
+                }else if(camvb[0]>result.bounds[0]){
+                    camvb[0]=result.bounds[0]
+                }else if(camvb[1]>result.bounds[1]){
+                    camvb[1]=result.bounds[1]
+                }
+            }
+            if(mobile){
+                for(a of $.makeArray(arrhdr.children())){
+                    s=$(a).attr("id").slice(2).split("")
+                    gnd=[parseInt(s[0])-1,parseInt(s[1])-1]
+                    $(a)
+                    .attr("x",camvb[0]+3/20*camvb[2]+gnd[0]*camvb[2]/10)
+                    .attr("y",camvb[1]+17/20*camvb[3]+gnd[1]*camvb[3]/10)
+                    .attr("width",camvb[2]/20)
+                    .attr("height",camvb[3]/20)
+                    camvb[0]+=gdir[0]
+                    camvb[1]+=gdir[1]
+                }
+            }
             break
         case 2:
             
