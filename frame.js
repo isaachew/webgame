@@ -11,7 +11,7 @@ function frame(ts){
                 $("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","fill":"#4444CC"}))
                 $("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>"))
                 if(mobile){
-                    $("body").append(el("input",{"style":"position:absolute;top:50%;left:45%;z-index:15;width:10%","oninput":"name=this.value"}))
+                    $("body").append(el("input",{"style":"position:absolute;top:47.5%;left:45%;z-index:15;width:10%","oninput":"name=this.value"}))
                 }else{
                     $("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},"hi"))
                 }
@@ -46,10 +46,7 @@ function frame(ts){
             break
         case 1:
             $("svg").attr("viewBox",camvb.join(" "))
-            //$("rect").attr("x",camvb[0]).attr("y",camvb[1]).attr("width",camvb[2]).attr("height",camvb[3])
             if(ff){
-                //$("#svg").attr("viewBox","0 0 2000 2000")
-                $("svg").append(svgel("rect",{"stroke":"red","fill":"none"}))
                 if(mobile){
                     sv=$("svg")
                     sv.append(svgel("g",{"id":"arrs"},""))
@@ -68,60 +65,58 @@ function frame(ts){
                 }
                 $("svg").append(svgel("g",{"id":"sprites","transform":"translate(-100)"},""))
             }
-            try{
-                ids=$.makeArray($("g#sprites").children()).map(a=>a.id)
-                donespri=[]
-                for(en of entities.concat(buildings)){
-                    ty=en.type
-                    if(!($.inArray(ty,ids)+1)&&!donespri.includes(ty)){
-                        spri=$(svgel("g",{"id":ty,"class":"sprite"}))
-                        sprhold=$("g#sprites")
-                        for(sh of rends[ty].split(" ")){
-                            st=sh[0]
-                            params=sh.slice(1).split(",")
-                            if(st=="R"){
-                                spri.append(svgel("rect",{
-                                    "x":params[0],
-                                    "y":params[1],
-                                    "width":params[2],
-                                    "height":params[3],
-                                    "transform":(params[4]?"rotate("+params.slice(4,7).join(",")+")":"")}
-                                    ))
-                            }else if(st=="E"){
-                                spri.append(svgel("ellipse",{"cx":params[0],"cy":params[1],"rx":params[2]/2,"ry":params[3]/2}))
-                            }else if(st=="P"){
-                                spri.append(svgel("polygon",{"points":params.join(" ")}))
-                            }
+            ids=$("g#sprites").children().toArray().map(a=>a.id)
+            donespri=[]
+            for(en of entities.concat(buildings)){
+                ty=en.type
+                if(!($.inArray(ty,ids)+1)&&!donespri.includes(ty)){
+                    spri=$(svgel("g",{"id":ty,"class":"sprite"}))
+                    sprhold=$("g#sprites")
+                    for(sh of rends[ty].split(" ")){
+                        st=sh[0]
+                        params=sh.slice(1).split(",")
+                        if(st=="R"){
+                            spri.append(svgel("rect",{
+                                "x":params[0],
+                                "y":params[1],
+                                "width":params[2],
+                                "height":params[3],
+                                "transform":(params[4]?"rotate("+params.slice(4,7).join(",")+")":"")}
+                                ))
+                        }else if(st=="E"){
+                            spri.append(svgel("ellipse",{"cx":params[0],"cy":params[1],"rx":params[2]/2,"ry":params[3]/2}))
+                        }else if(st=="P"){
+                            spri.append(svgel("polygon",{"points":params.join(" ")}))
                         }
-                        sprhold.append(spri)
-                        donespri.push(ty)
                     }
-                    allids=$.makeArray($("#svg").children()).map(a=>a.id)
-                    if((en.pos[0]-camvb[0]>0)&&(en.pos[0]-camvb[0]<camvb[2])&&(en.pos[1]-camvb[1]>0)&&(en.pos[1]-camvb[1]<camvb[3])){
-                        if(!allids.includes(en.id+"")){
-                            spr=$(svgel("use",{"href":"#"+ty,"id":en.id,"class":"object"}))
-                            $("#svg").append(spr)
-                        }
-                        entdis=$("use#"+en.id)
-                        entdbox=entdis[0].getBBox()
-                        entdw=entdbox.width
-                        entdh=entdbox.height
-                        entdis.attr("x",en.pos[0]).attr("y",en.pos[1])
-                        entdis.attr("transform","rotate("+en.rot+","+(en.pos[0]+entdw/2)+","+(en.pos[1]+entdh/2)+")")
-                    }
+                    sprhold.append(spri)
+                    donespri.push(ty,en.id)
                 }
-                htnts=$.makeArray($(".object"))
-                entis=entities.map(a=>a.id+"")
-                for(k of htnts){
-                    if(!entis.includes(k.id)){
-                        re(k)
+                allids=$("#svg").children().toArray().map(a=>a.id)
+                if((en.pos[0]-camvb[0]>0)&&(en.pos[0]-camvb[0]<camvb[2])&&(en.pos[1]-camvb[1]>0)&&(en.pos[1]-camvb[1]<camvb[3])){
+                    if(!allids.includes(en.id+"")){
+                        spr=$(svgel("use",{"href":"#"+ty,"id":en.id,"class":"object"}))
+                        $("#svg").append(spr)
                     }
-                    kd=[$(k).attr("x"),$(k).attr("y")]
-                    if(kd[0]-camvb[0]<0||(kd[0]-camvb[0]>camvb[2])||(kd[1]-camvb[1]<0)||(kd[1]-camvb[1]>camvb[3])){
-                        $(k).remove()
-                    }
+                    entdis=$("use#"+en.id)
+                    entdbox=entdis[0].getBBox()
+                    entdw=entdbox.width
+                    entdh=entdbox.height
+                    entdis.attr("x",en.pos[0]).attr("y",en.pos[1])
+                    entdis.attr("transform","rotate("+en.rot+","+(en.pos[0]+entdw/2)+","+(en.pos[1]+entdh/2)+")")
                 }
-            }catch(err){console.log("play error: "+err)}
+            }
+            htnts=$.makeArray($(".object"))
+            entis=entities.map(a=>a.id+"")
+            for(k of htnts){
+                if(!entis.includes(k.id)){
+                    re(k)
+                }
+                kd=[$(k).attr("x"),$(k).attr("y")]
+                if(kd[0]-camvb[0]<0||(kd[0]-camvb[0]>camvb[2])||(kd[1]-camvb[1]<0)||(kd[1]-camvb[1]>camvb[3])){
+                    $(k).remove()
+                }
+            }
             if(keyp){
                 if(ke==="ArrowUp")camvb[1]-=10
                 if(ke==="ArrowDown")camvb[1]+=10
@@ -140,7 +135,7 @@ function frame(ts){
                 }
             }
             if(mobile){
-                for(a of $.makeArray(arrhdr.children())){
+                for(a of arrhdr.children().toArray()){
                     s=$(a).attr("id").slice(2).split("")
                     gnd=[parseInt(s[0])-1,parseInt(s[1])-1]
                     $(a)
