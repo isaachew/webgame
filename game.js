@@ -12,14 +12,20 @@ da={}
 camvb=[0,0,500,500]
 gdir=[0,0]
 function load(url,serv){
-    a=fetch(serv+"/"+url+"?data="+JSON.stringify(da),{"method":"GET"})
-    .then(function(r){return r.json()})
+    fetch(serv+"/"+url+"?data="+JSON.stringify(da),{"method":"GET"})
+    .then((r)=>r.json(),function(r){
+        console.log(r)
+        mode=0
+        clears()
+    })
     .then(function(r){
-        result=r
-        entities=r.entities
-        buildings=r.buildings
-        players=r.players
-        load("getdata",serv)
+        if(r!=undefined){
+            result=r
+            entities=r.entities
+            buildings=r.buildings
+            players=r.players
+            load("getdata",serv)
+        }
     })
     da={}
 }
@@ -52,6 +58,7 @@ function clears(){
 namecr=0
 count=0
 mobile=/Mobi|Android/i.test(navigator.userAgent)
+mobile=true
 ff=true
 clear=false
 function choose(ch){

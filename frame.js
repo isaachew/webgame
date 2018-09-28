@@ -47,14 +47,15 @@ function frame(ts){
         case 1:
             $("svg").attr("viewBox",camvb.join(" "))
             if(ff){
+                $("svg").append(svgel("g",{"id":"objects"},""))
                 if(mobile){
                     sv=$("svg")
                     sv.append(svgel("g",{"id":"arrs"},""))
                     arrhdr=$("#arrs")
-                    arrhdr.append(svgel("rect",{"fill":"#777777","id":"ar10","stroke":"none"}))
-                    arrhdr.append(svgel("rect",{"fill":"#777777","id":"ar12","stroke":"none"}))
-                    arrhdr.append(svgel("rect",{"fill":"#777777","id":"ar01","stroke":"none"}))
-                    arrhdr.append(svgel("rect",{"fill":"#777777","id":"ar21","stroke":"none"}))
+                    arrhdr.append(svgel("rect",{"id":"ar10"}))
+                    arrhdr.append(svgel("rect",{"id":"ar12"}))
+                    arrhdr.append(svgel("rect",{"id":"ar01"}))
+                    arrhdr.append(svgel("rect",{"id":"ar21"}))
                     arrhdr.children().on("touchstart",function(){
                         i=$(this).attr("id").slice(2).split("")
                         gdir=[parseInt(i[0])-1,parseInt(i[1])-1]
@@ -92,11 +93,11 @@ function frame(ts){
                     sprhold.append(spri)
                     donespri.push(ty,en.id)
                 }
-                allids=$("#svg").children().toArray().map(a=>a.id)
+                allids=$("#objects").children().toArray().map(a=>a.id)
                 if((en.pos[0]-camvb[0]>0)&&(en.pos[0]-camvb[0]<camvb[2])&&(en.pos[1]-camvb[1]>0)&&(en.pos[1]-camvb[1]<camvb[3])){
                     if(!allids.includes(en.id+"")){
                         spr=$(svgel("use",{"href":"#"+ty,"id":en.id,"class":"object"}))
-                        $("#svg").append(spr)
+                        $("#objects").append(spr)
                     }
                     entdis=$("use#"+en.id)
                     entdbox=entdis[0].getBBox()
@@ -136,6 +137,7 @@ function frame(ts){
             }
             if(mobile){
                 for(a of arrhdr.children().toArray()){
+                    $(a).attr("fill","#808080")
                     s=$(a).attr("id").slice(2).split("")
                     gnd=[parseInt(s[0])-1,parseInt(s[1])-1]
                     $(a)
@@ -143,9 +145,9 @@ function frame(ts){
                     .attr("y",camvb[1]+17/20*camvb[3]+gnd[1]*camvb[3]/10)
                     .attr("width",camvb[2]/20)
                     .attr("height",camvb[3]/20)
-                    camvb[0]+=gdir[0]
-                    camvb[1]+=gdir[1]
                 }
+                camvb[0]+=gdir[0]*5
+                camvb[1]+=gdir[1]*5
             }
             break
         case 2:
