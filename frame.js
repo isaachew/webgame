@@ -52,19 +52,17 @@ function frame(ts){
                     sv=$("svg")
                     sv.append(svgel("g",{"id":"arrs"},""))
                     arrhdr=$("#arrs")
-                    arrhdr.append(svgel("rect",{"id":"ar10"}))
-                    arrhdr.append(svgel("rect",{"id":"ar12"}))
-                    arrhdr.append(svgel("rect",{"id":"ar01"}))
-                    arrhdr.append(svgel("rect",{"id":"ar21"}))
+                    for(g of ["10","12","01","21"]){
+                        arrhdr.append(svgel("rect",{"id":"ar"+g}))
+                    }
                     arrhdr.children().on("touchstart",function(){
                         i=$(this).attr("id").slice(2).split("")
                         gdir=[parseInt(i[0])-1,parseInt(i[1])-1]
                     })
-                    sv.on("touchend",function(){
-                        gdir=[0,0]
-                    })
+                    sv.on("touchend",function(){gdir=[0,0]})
                 }
                 $("svg").append(svgel("g",{"id":"sprites","transform":"translate(-100)"},""))
+                $("svg").append(svgel("g",{"id":"buibar"},""))
             }
             ids=$("g#sprites").children().toArray().map(a=>a.id)
             donespri=[]
