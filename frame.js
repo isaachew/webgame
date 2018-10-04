@@ -16,6 +16,9 @@ function frame(ts){
 				}else{
 					$("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},"hi"))
 				}
+				$("svg").append(svgel("g",{"id":"help"}))
+				$("#help").append(svgel("rect",{"x":"480","y":"0","width":"20","height":"20","rx":"1","ry":"1","fill":"#aaaaaa","id":"helpb"}))
+		        $("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
 			}
 			$("#name").text(name.slice(0,namecr)+(count<30?"|":" ")+name.slice(namecr,name.length))
 			if(mobile){
@@ -65,7 +68,7 @@ function frame(ts){
 					sv.on("touchend",function(){cdir=[0,0]})
 				}
 				$("svg").append(svgel("g",{"id":"sprites","transform":"translate(-100)"},""))
-				$("svg").append(svgel("g",{"id":"stats"},"<rect fill='#dddddd' opacity='0.75' id='statbar'>"))
+				$("svg").append(svgel("g",{"id":"stats"},"<rect fill='#dddddd' opacity='0.5' id='statbar'>"))
 				$("#stats").append(svgel("text",{"id":"score"},"Score: "))
 			}
 			ids=$("g#sprites").children().toArray().map(a=>a.id)
