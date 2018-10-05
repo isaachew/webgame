@@ -153,7 +153,7 @@ function frame(ts){
 			.attr("y",camvb[1]+camvb[3]/40)
 			.text("Score: "+score)
 			$("#name")
-			.attr("y",camvb[1]+camvb[3]/40)
+			.attr("y",camvb[1]+camvb[3]/20)
 			camvb[0]+=cdir[0]*5
 			camvb[1]+=cdir[1]*5
 			if(result.bounds){
