@@ -12,20 +12,29 @@ function frame(ts){
 				$("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","fill":"#4444CC"}))
 				$("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>"))
 				if(mobile){
-					$("body").append(el("input",{"style":"position:absolute;top:47.5%;left:45%;z-index:15;width:10%","oninput":"name=this.value"}))
+					$("body").append(el("input",{"style":"position:absolute;top:47.5%;left:45%;z-index:15;width:5%;font-size:1vh","oninput":"name=this.value"}))
+					$("svg").append(svgel("g",{"id":"gobtn"},""))
+					$("#gobtn").append(svgel("rect",{"x":"265","y":"240","width":"25","height":"20","fill":"white","stroke":"black"},""))
+					$("#gobtn").append(svgel("text",{"x":"277.5","y":"250","fill":"white","stroke":"black","text-anchor":"middle","alignment-baseline":"middle","font-size":"10"},"Play"))
 				}else{
 					$("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},"hi"))
 				}
 				$("svg").append(svgel("g",{"id":"help"}))
 				$("#help").append(svgel("rect",{"x":"480","y":"0","width":"20","height":"20","rx":"1","ry":"1","fill":"#aaaaaa","id":"helpb"}))
-		        $("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
-		        $("#help").click(()=>{
-		        	$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
-		        	$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>x</span>"))
-		        	$("#chelp").click(()=>{
-		        		$("#hblack,#hcont").remove()
-		        	})
-		        })
+				$("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
+				$("#gobtn").click(()=>{
+					smode(1)
+					serv=choose(servers)
+					da={"name":name}
+					load("join",serv,()=>{console.log("id set");playid=result.id})
+				})
+				$("#help").click(()=>{
+					$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
+					$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>x</span>"))
+					$("#chelp").click(()=>{
+						$("#hblack,#hcont").remove()
+					})
+				})
 			}
 			$("#name").text(name.slice(0,namecr)+(count<30?"|":" ")+name.slice(namecr,name.length))
 			if(mobile){
@@ -33,10 +42,7 @@ function frame(ts){
 			}
 			if(keyp){
 				if(ke==="Enter"){
-					smode(1)
-					serv=choose(servers)
-					da={"name":name}
-					load("join",serv,()=>{console.log("id set");playid=result.id})
+					$("#gobtn").click()
 				}else if(!mobile){
 					if(ke==="Backspace"){
 						name=name.slice(0,namecr-1)+name.slice(namecr,name.length)

@@ -63,7 +63,6 @@ function clears(){
 namecr=0
 count=0
 mobile=/Mobi|Android/i.test(navigator.userAgent)
-mobile=true
 ff=true
 clear=false
 playid=undefined
