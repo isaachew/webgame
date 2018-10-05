@@ -66,7 +66,8 @@ function frame(ts){
 				}
 				$("svg").append(svgel("g",{"id":"sprites","transform":"translate(-100)"},""))
 				$("svg").append(svgel("g",{"id":"stats"},"<rect fill='#dddddd' opacity='0.75' id='statbar'>"))
-				$("#stats").append(svgel("text",{"id":"score"},"Score: "))
+				$("#stats").append(svgel("text",{"id":"score"},"Score: 0"))
+				$("#stats").append(svgel("text",{"id":"name"},"Name: "+name))
 			}
 			ids=$("g#sprites").children().toArray().map(a=>a.id)
 			donespri=[]
@@ -145,11 +146,14 @@ function frame(ts){
 			.attr("y",camvb[1])
 			.attr("width",0.7*camvb[2])
 			.attr("height",0.1*camvb[3])
-			$("#score")
+			$("#score,#name")
 			.attr("x",camvb[0]+3/20*camvb[2])
-			.attr("y",camvb[1]+camvb[3]/40)
 			.attr("font-size",camvb[3]/40)
+			$("#score")
+			.attr("y",camvb[1]+camvb[3]/40)
 			.text("Score: "+score)
+			$("#name")
+			.attr("y",camvb[1]+camvb[3]/40)
 			camvb[0]+=cdir[0]*5
 			camvb[1]+=cdir[1]*5
 			if(result.bounds){
@@ -160,6 +164,8 @@ function frame(ts){
 				$("#statbar")
 				.attr("fill",players[playid].fill)
 				.attr("stroke",players[playid].stroke)
+				$("#name")
+				.text("Name: "+players[playid].name)
 			}
 			break
 		case 2:
