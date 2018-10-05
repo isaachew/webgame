@@ -12,11 +12,11 @@ function frame(ts){
 				$("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","fill":"#4444CC"}))
 				$("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>"))
 				if(mobile){
-					$("body").append(el("input",{"style":"position:absolute;top:47.5%;left:45%;z-index:15;width:5%;font-size:1vh","oninput":"name=this.value"}))
+					$("body").append(el("input",{"style":"position:absolute;top:48.125%;left:40%;z-index:15;width:10%;font-size:2.5vh","oninput":"name=this.value"}))
 				}else{
 					$("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},"hi"))
 				}
-				$("svg").append(svgel("g",{"id":"gobtn"},""))
+				$("svg").append(svgel("g",{"id":"gobtn","transform":mobile?"":"translate(-800,-800)"},""))
 				$("#gobtn").append(svgel("rect",{"x":"265","y":"240","width":"25","height":"20","fill":"white","stroke":"black"},""))
 				$("#gobtn").append(svgel("text",{"x":"277.5","y":"250","fill":"white","stroke":"black","text-anchor":"middle","alignment-baseline":"middle","font-size":"10"},"Play"))
 				$("svg").append(svgel("g",{"id":"help"}))
@@ -42,7 +42,7 @@ function frame(ts){
 			}
 			if(keyp){
 				if(ke==="Enter"){
-					
+					$("#gobtn").click()
 				}else if(!mobile){
 					if(ke==="Backspace"){
 						name=name.slice(0,namecr-1)+name.slice(namecr,name.length)
