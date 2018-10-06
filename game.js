@@ -74,6 +74,9 @@ function smode(mo){
     mode=mo
     clear=true
 }
+function clev(el){
+    console.log(el)
+}
 re=function(el){$(el).attr("class","remo");
 setTimeout(el.remove.bind(el),500)}
 requestAnimationFrame(frame)

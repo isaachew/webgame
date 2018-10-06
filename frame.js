@@ -100,6 +100,9 @@ function frame(ts){
 				if((en.pos[0]-camvb[0]>0)&&(en.pos[0]-camvb[0]<camvb[2])&&(en.pos[1]-camvb[1]>0)&&(en.pos[1]-camvb[1]<camvb[3])){
 					if(!allids.includes(en.id+"")){
 						spr=$(svgel("use",{"href":"#"+ty,"id":en.id,"class":"object"}))
+						.click(()=>{
+							clev(spr)
+						})
 						$("#objects").append(spr)
 					}
 					entdis=$("use#"+en.id)
