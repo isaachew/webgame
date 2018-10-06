@@ -100,8 +100,8 @@ function frame(ts){
 				if((en.pos[0]-camvb[0]>0)&&(en.pos[0]-camvb[0]<camvb[2])&&(en.pos[1]-camvb[1]>0)&&(en.pos[1]-camvb[1]<camvb[3])){
 					if(!allids.includes(en.id+"")){
 						spr=$(svgel("use",{"href":"#"+ty,"id":en.id,"class":"object"}))
-						.click(()=>{
-							clev(spr)
+						.click((n)=>{
+							clev(n.target)
 						})
 						$("#objects").append(spr)
 					}
@@ -114,14 +114,18 @@ function frame(ts){
 				}
 			}
 			htnts=$.makeArray($(".object"))
-			entis=entities.map(a=>a.id+"")
+			entis=entities.concat(buildings).map(a=>a.id+"")
 			for(k of htnts){
 				if(!entis.includes(k.id)){
 					re(k)
-				}
-				kd=[$(k).attr("x"),$(k).attr("y")]
-				if(kd[0]-camvb[0]<0||(kd[0]-camvb[0]>camvb[2])||(kd[1]-camvb[1]<0)||(kd[1]-camvb[1]>camvb[3])){
-					$(k).remove()
+				}else{
+					kd=k.id
+					ks=kd.slice(1)
+					kd=(kd[0]==="E")?entities[ks]:buildings[ks]
+					kd=kd.pos
+					if(kd[0]-camvb[0]<0||(kd[0]-camvb[0]>camvb[2])||(kd[1]-camvb[1]<0)||(kd[1]-camvb[1]>camvb[3])){
+						$(k).remove()
+					}
 				}
 			}
 			if(keyp){

@@ -29,10 +29,10 @@ function load(url,serv,func){
             players=r.players
             score=(players[playid]||0).score||0;
             (func||emfunc)(result)
-            da={}
             load("getdata",serv)
         }
     })
+    da={}
 }
 function svgel(n,attrs,content){
     if (typeof content === 'undefined') content = "";
@@ -75,7 +75,9 @@ function smode(mo){
     clear=true
 }
 function clev(el){
-    console.log(el)
+    k=el.id.slice(1)
+    en=(el.id[0]==="E")?entities[k]:buildings[k]
+    if(en.type==="collectible")da.collect=en.id
 }
 re=function(el){$(el).attr("class","remo");
 setTimeout(el.remove.bind(el),500)}
