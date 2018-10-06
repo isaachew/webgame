@@ -92,6 +92,10 @@ function frame(ts){
 						}else if(st=="P"){
 							spri.append(svgel("polygon",{"points":params.join(" ")}))
 						}
+						if(ty.slice(0,4)==="coll"){
+							cols=["#777777","#ff0000"]
+							$(spri).children().last().attr("fill",cols[ty.slice(4)]).attr("stroke","none")
+						}
 					}
 					sprhold.append(spri)
 					donespri.push(ty,en.id)

@@ -77,8 +77,7 @@ function smode(mo){
 function clev(el){
     k=el.id.slice(1)
     en=(el.id[0]==="E")?entities[k]:buildings[k]
-    if(en.type==="collectible")da.collect=en.id
+    if(["coll0","coll1"].includes(en.type))da.collect=en.id
 }
-re=function(el){$(el).attr("class","remo");
-setTimeout(el.remove.bind(el),500)}
+re=function(el){$(el).attr("class","remo");setTimeout(el.remove.bind(el),500)}
 requestAnimationFrame(frame)
