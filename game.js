@@ -33,6 +33,9 @@ function load(url,serv,func){
         }
     })
     da={}
+    if(window.playid!==undefined){
+        da.id=playid
+    }
 }
 function svgel(n,attrs,content){
     if (typeof content === 'undefined') content = "";
