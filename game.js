@@ -78,6 +78,7 @@ function smode(mo){
     clear=true
 }
 function clev(el){
+    console.log("click")
     k=el.id.slice(1)
     en=(el.id[0]==="E")?entities[k]:buildings[k]
     if(["coll0","coll1"].includes(en.type))da.collect=en.id

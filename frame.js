@@ -115,7 +115,9 @@ function frame(ts){
 					entdh=entdbox.height
 					entdis.attr("x",en.pos[0]).attr("y",en.pos[1])
 					.attr("transform","rotate("+en.rot+","+(en.pos[0]+entdw/2)+","+(en.pos[1]+entdh/2)+")")
-					.attr("href","#"+en.type)
+					if(entdis.attr("href")!=="#"+en.type){
+						entdis.remove()
+					}
 				}
 			}
 			htnts=$.makeArray($(".object"))
