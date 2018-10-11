@@ -62,7 +62,7 @@ function clears(){
 }
 namecr=0
 count=0
-mobile=/Mobi|Android/i.test(navigator.userAgent)
+mobile=/Mobi|Android/i.test(navigator.userAgent) ||!0
 ff=true
 clear=false
 playid=undefined
@@ -72,6 +72,10 @@ function choose(ch){
 function smode(mo){
     mode=mo
     clear=true
+}
+function gbb(el){
+    elu=$(el)[0].getBoundingClientRect()
+    return {"x":elu.left+scrollX,"y":elu.top+scrollY,"width":elu.width,"height":elu.height}
 }
 re=function(el){$(el).attr("class","remo");
 setTimeout(el.remove.bind(el),500)}

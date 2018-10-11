@@ -12,7 +12,8 @@ function frame(ts){
 				$("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","class":"stru"}))
 				$("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>"))
 				if(mobile){
-					$("body").append(el("input",{"style":"position:absolute;top:48.125%;left:40%;z-index:15;width:10%;font-size:2.5vh","oninput":"name=this.value"}))
+					$("body").append(el("input",{"style":"position:absolute;z-index:15;font-size:2.5vh","oninput":"name=this.value","id":"ninput"}))
+					$("svg").append(svgel("rect",{"x":"215","y":"243.75","width":"35","height":"12.5","fill":"none","stroke":"none","id":"inpos"},""))
 				}else{
 					$("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},"hi"))
 				}
@@ -39,10 +40,16 @@ function frame(ts){
 		        })
 			}
 			$("#name").text(name.slice(0,namecr)+(count<30?"|":" ")+name.slice(namecr,name.length))
-			j=$("#chlogh")[0].getBoundingClientRect()
-			$("#chlog").css("top",j.top).css("left",j.left)
+			j=gbb("#chlogh")
+			$("#chlog").css("top",j.y).css("left",j.x).css("width",j.width).css("height",j.height)
 			if(mobile){
-				name=$("input")[0].value
+				name=$("#ninput")[0].value
+				inpr=gbb("#inpos")
+				$("#ninput")
+				.css("top",inpr.y)
+				.css("height",inpr.height)
+				.css("left",inpr.x)
+				.css("width",inpr.width)
 			}
 			if(keyp){
 				if(ke==="Enter"){
