@@ -9,7 +9,7 @@ function frame(ts){
 		case 0:
 			$("svg").attr("viewBox","0 0 500 500")
 			if(ff){
-				$("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","fill":"#4444CC"}))
+				$("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","class":"stru"}))
 				$("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>"))
 				if(mobile){
 					$("body").append(el("input",{"style":"position:absolute;top:48.125%;left:40%;z-index:15;width:10%;font-size:2.5vh","oninput":"name=this.value"}))
@@ -22,6 +22,8 @@ function frame(ts){
 				$("svg").append(svgel("g",{"id":"help"}))
 				$("#help").append(svgel("rect",{"x":"480","y":"0","width":"20","height":"20","rx":"1","ry":"1","fill":"#aaaaaa","id":"helpb"}))
 		        $("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
+		        $("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
+		        $("body").append(el("div",{"style":"position:absolute","id":"chlog"},"Space for changelog"))
 		        $("#gobtn").click(()=>{
 					smode(1)
 					serv=choose(servers)
@@ -37,6 +39,8 @@ function frame(ts){
 		        })
 			}
 			$("#name").text(name.slice(0,namecr)+(count<30?"|":" ")+name.slice(namecr,name.length))
+			j=$("#chlogh")[0].getBoundingClientRect()
+			$("#chlog").css("top",j.top).css("left",j.left)
 			if(mobile){
 				name=$("input")[0].value
 			}
