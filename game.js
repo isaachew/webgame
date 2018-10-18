@@ -10,6 +10,8 @@ buildings=[]
 players=[]
 result={}
 da={}
+pres={}
+fetch("data/builpres.json").then((a)=>{return a.json()},(c)=>{console.log(c)}).then((a)=>{pres=a})
 camvb=[0,0,500,500]
 cdir=[0,0]
 score=0
@@ -81,7 +83,35 @@ function clev(el){
     console.log("click")
     k=el.id.slice(1)
     en=(el.id[0]==="E")?entities[k]:buildings[k]
-    if(["coll0","coll1"].includes(en.type))da.collect=en.id
+    if(en.type.slice(0,4)=="coll")da.collect=en.id
+}
+function crespr(ty){
+    sprhold=$("g#sprites")
+    if(!$("#"+ty,sprhold)[0]){
+        spri=$(svgel("g",{"id":ty,"class":"sprite"}))
+    	for(sh of rends[ty].split(" ")){
+    		st=sh[0]
+    		params=sh.slice(1).split(",")
+    		if(st=="R"){
+    			spri.append(svgel("rect",{
+    				"x":params[0],
+    				"y":params[1],
+    				"width":params[2],
+    				"height":params[3],
+    				"transform":(params[4]?"rotate("+params.slice(4,7).join(",")+")":"")}
+    				))
+    		}else if(st=="E"){
+    			spri.append(svgel("ellipse",{"cx":params[0],"cy":params[1],"rx":params[2]/2,"ry":params[3]/2}))
+    		}else if(st=="P"){
+    			spri.append(svgel("polygon",{"points":params.join(" ")}))
+    		}
+    		if(ty.slice(0,4)==="coll"){
+    			cols=["#777777","#ff0000"]
+    			$(spri).children().last().attr("fill",cols[ty.slice(4)]).attr("stroke","none")
+    		}
+    	}
+    	sprhold.append(spri)
+    }
 }
 re=function(el){$(el).attr("class","remo");setTimeout(el.remove.bind(el),500)}
 requestAnimationFrame(frame)
