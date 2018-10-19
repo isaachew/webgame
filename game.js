@@ -78,7 +78,6 @@ function smode(mo){
     mode=mo
     clear=true
 }
-<<<<<<< HEAD
 function clev(el){
     console.log("click")
     k=el.id.slice(1)
