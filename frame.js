@@ -91,41 +91,38 @@ function frame(ts){
 					})
 					sv.on("touchend",function(){cdir=[0,0]})
 				}
-				$("svg").append(svgel("g",{"id":"sprites","transform":"translate(-100)"},""))
-				$("svg").append(svgel("g",{"id":"stats"},"<rect fill='#dddddd' opacity='0.5' id='statbar'>"))
-				$("#stats").append(svgel("text",{"id":"score"},"Score: "))
+				$("svg").append(svgel("g",{"id":"sprites","transform":"translate(-1000,-1000)"},""))
+				$("svg").append(svgel("g",{"id":"stats"},"<rect fill='#dddddd' opacity='0.75' id='statbar'>"))
+				$("#stats").append(svgel("text",{"id":"score","clip-path":"url(#ctext)"},"Score: 0"))
+				$("#stats").append(svgel("text",{"id":"name","clip-path":"url(#ctext)"},"Name: "+name))
+				$("#stats").append(svgel("clipPath",{"id":"ctext"},"<rect y='0' id='ctrect'>"))
+				$("#stats").append(svgel("g",{"id":"builds"}))
+				for(i of pres){
+					crespr(i.type)
+					reqs=7/90*camvb[2]
+					btile=$(svgel("g",{"transform":"translate("+
+					(0.7*camvb[2]/3+
+					($("#builds").children().length+1)*reqs)+",0)"
+					}))
+					sca=(reqs*3/4)/Math.max.apply(null,i.size)
+					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0}))
+					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0},""))
+					$("#builds").append(btile)
+				}
 			}
-			ids=$("g#sprites").children().toArray().map(a=>a.id)
-			donespri=[]
 			for(en of entities.concat(buildings)){
 				ty=en.type
-				if(!($.inArray(ty,ids)+1)&&!donespri.includes(ty)){
-					spri=$(svgel("g",{"id":ty,"class":"sprite"}))
-					sprhold=$("g#sprites")
-					for(sh of rends[ty].split(" ")){
-						st=sh[0]
-						params=sh.slice(1).split(",")
-						if(st=="R"){
-							spri.append(svgel("rect",{
-								"x":params[0],
-								"y":params[1],
-								"width":params[2],
-								"height":params[3],
-								"transform":(params[4]?"rotate("+params.slice(4,7).join(",")+")":"")}
-								))
-						}else if(st=="E"){
-							spri.append(svgel("ellipse",{"cx":params[0],"cy":params[1],"rx":params[2]/2,"ry":params[3]/2}))
-						}else if(st=="P"){
-							spri.append(svgel("polygon",{"points":params.join(" ")}))
-						}
-					}
-					sprhold.append(spri)
-					donespri.push(ty,en.id)
+				ids=$("g#sprites").children().toArray().map(a=>a.id)
+				if(!($.inArray(ty,ids)+1)){
+					crespr(ty)
 				}
 				allids=$("#objects").children().toArray().map(a=>a.id)
 				if((en.pos[0]-camvb[0]>0)&&(en.pos[0]-camvb[0]<camvb[2])&&(en.pos[1]-camvb[1]>0)&&(en.pos[1]-camvb[1]<camvb[3])){
 					if(!allids.includes(en.id+"")){
 						spr=$(svgel("use",{"href":"#"+ty,"id":en.id,"class":"object"}))
+						.click((n)=>{
+							clev(n.target)
+						})
 						$("#objects").append(spr)
 					}
 					entdis=$("use#"+en.id)
@@ -133,18 +130,25 @@ function frame(ts){
 					entdw=entdbox.width
 					entdh=entdbox.height
 					entdis.attr("x",en.pos[0]).attr("y",en.pos[1])
-					entdis.attr("transform","rotate("+en.rot+","+(en.pos[0]+entdw/2)+","+(en.pos[1]+entdh/2)+")")
+					.attr("transform","rotate("+en.rot+","+(en.pos[0]+entdw/2)+","+(en.pos[1]+entdh/2)+")")
+					if(entdis.attr("href")!=="#"+en.type){
+						entdis.remove()
+					}
 				}
 			}
 			htnts=$.makeArray($(".object"))
-			entis=entities.map(a=>a.id+"")
+			entis=entities.concat(buildings).map(a=>a.id+"")
 			for(k of htnts){
 				if(!entis.includes(k.id)){
 					re(k)
-				}
-				kd=[$(k).attr("x"),$(k).attr("y")]
-				if(kd[0]-camvb[0]<0||(kd[0]-camvb[0]>camvb[2])||(kd[1]-camvb[1]<0)||(kd[1]-camvb[1]>camvb[3])){
-					$(k).remove()
+				}else{
+					kd=k.id
+					ks=kd.slice(1)
+					kd=(kd[0]==="E")?entities[ks]:buildings[ks]
+					kd=kd.pos
+					if(kd[0]-camvb[0]<0||(kd[0]-camvb[0]>camvb[2])||(kd[1]-camvb[1]<0)||(kd[1]-camvb[1]>camvb[3])){
+						$(k).remove()
+					}
 				}
 			}
 			if(keyp){
@@ -167,16 +171,24 @@ function frame(ts){
 					.attr("ry",camvb[3]/40)
 				}
 			}
+			$("#stats").attr("transform","translate("+(camvb[0]+3/20*camvb[2])+","+camvb[1]+")")
 			$("#statbar")
-			.attr("x",camvb[0]+3/20*camvb[2])
-			.attr("y",camvb[1])
+			.attr("x",0)
+			.attr("y",0)
 			.attr("width",0.7*camvb[2])
 			.attr("height",0.1*camvb[3])
-			$("#score")
-			.attr("x",camvb[0]+3/20*camvb[2])
-			.attr("y",camvb[1]+camvb[3]/40)
+			$("#score,#name")
+			.attr("x",0)
 			.attr("font-size",camvb[3]/40)
+			$("#score")
+			.attr("y",camvb[3]/40)
 			.text("Score: "+score)
+			$("#name")
+			.attr("y",camvb[3]/20)
+			$("#ctrect")
+			.attr("x",0)
+			.attr("width",camvb[2]*7/30)
+			.attr("height",0.1*camvb[3])
 			camvb[0]+=cdir[0]*5
 			camvb[1]+=cdir[1]*5
 			if(result.bounds){
@@ -187,6 +199,8 @@ function frame(ts){
 				$("#statbar")
 				.attr("fill",players[playid].fill)
 				.attr("stroke",players[playid].stroke)
+				$("#name")
+				.text("Name: "+players[playid].name)
 			}
 			break
 		case 2:
