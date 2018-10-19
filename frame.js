@@ -72,12 +72,13 @@ function frame(ts){
 				$("#stats").append(svgel("g",{"id":"builds"}))
 				for(i of pres){
 					crespr(i.type)
+					reqs=7/90*camvb[2]
 					btile=$(svgel("g",{"transform":"translate("+
-					($("#builds").children().length*0.225+0.7)*camvb[2]/3+",0)"
+					(0.7*camvb[2]/3+
+					($("#builds").children().length+1)*reqs)+",0)"
 					}))
-					reqs=0.05*camvb[2]
-					sca=reqs/Math.max.apply(null,i.size)
-					btile.append(svgel("rect",{"width":reqs*3/2,"height":reqs*3/2,"x":0,"y":0}))
+					sca=(reqs*3/4)/Math.max.apply(null,i.size)
+					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0}))
 					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0},""))
 					$("#builds").append(btile)
 				}
