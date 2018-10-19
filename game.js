@@ -67,8 +67,7 @@ function clears(){
 }
 namecr=0
 count=0
-mobile=/Mobi|Android/i.test(navigator.userAgent)
-mobile=true
+mobile=/Mobi|Android/i.test(navigator.userAgent) ||!0
 ff=true
 clear=false
 playid=undefined
@@ -79,6 +78,7 @@ function smode(mo){
     mode=mo
     clear=true
 }
+<<<<<<< HEAD
 function clev(el){
     console.log("click")
     k=el.id.slice(1)
@@ -113,5 +113,10 @@ function crespr(ty){
     	sprhold.append(spri)
     }
 }
-re=function(el){$(el).attr("class","remo");setTimeout(el.remove.bind(el),500)}
+function gbb(el){
+    elu=$(el)[0].getBoundingClientRect()
+    return {"x":elu.left+scrollX,"y":elu.top+scrollY,"width":elu.width,"height":elu.height}
+}
+re=function(el){$(el).attr("class","remo");
+setTimeout(el.remove.bind(el),500)}
 requestAnimationFrame(frame)

@@ -9,24 +9,51 @@ function frame(ts){
 		case 0:
 			$("svg").attr("viewBox","0 0 500 500")
 			if(ff){
-				$("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","fill":"#4444CC"}))
+				$("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","class":"stru"}))
 				$("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>"))
 				if(mobile){
-					$("body").append(el("input",{"style":"position:absolute;top:47.5%;left:45%;z-index:15;width:10%","oninput":"name=this.value"}))
+					$("body").append(el("input",{"style":"position:absolute;z-index:15;font-size:2.5vh","oninput":"name=this.value","id":"ninput"}))
+					$("svg").append(svgel("rect",{"x":"215","y":"243.75","width":"35","height":"12.5","fill":"none","stroke":"none","id":"inpos"},""))
 				}else{
 					$("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},"hi"))
 				}
-			}
-			$("#name").text(name.slice(0,namecr)+(count<30?"|":" ")+name.slice(namecr,name.length))
-			if(mobile){
-				name=$("input")[0].value
-			}
-			if(keyp){
-				if(ke==="Enter"){
+				$("svg").append(svgel("g",{"id":"gobtn","transform":mobile?"":"translate(-800,-800)"},""))
+				$("#gobtn").append(svgel("rect",{"x":"265","y":"240","width":"25","height":"20","fill":"white","stroke":"black"},""))
+				$("#gobtn").append(svgel("text",{"x":"277.5","y":"250","fill":"white","stroke":"black","text-anchor":"middle","alignment-baseline":"middle","font-size":"10"},"Play"))
+				$("svg").append(svgel("g",{"id":"help"}))
+				$("#help").append(svgel("rect",{"x":"480","y":"0","width":"20","height":"20","rx":"1","ry":"1","fill":"#aaaaaa","id":"helpb"}))
+		        $("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
+		        $("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
+		        $("body").append(el("div",{"style":"position:absolute","id":"chlog"},"Space for changelog"))
+		        $("#gobtn").click(()=>{
 					smode(1)
 					serv=choose(servers)
 					da={"name":name}
 					load("join",serv,()=>{console.log("id set");playid=result.id})
+		        })
+		        $("#help").click(()=>{
+		        	$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
+		        	$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>x</span>"))
+		        	$("#chelp").click(()=>{
+		        		$("#hblack,#hcont").remove()
+		        	})
+		        })
+			}
+			$("#name").text(name.slice(0,namecr)+(count<30?"|":" ")+name.slice(namecr,name.length))
+			j=gbb("#chlogh")
+			$("#chlog").css("top",j.y).css("left",j.x).css("width",j.width).css("height",j.height)
+			if(mobile){
+				name=$("#ninput")[0].value
+				inpr=gbb("#inpos")
+				$("#ninput")
+				.css("top",inpr.y)
+				.css("height",inpr.height)
+				.css("left",inpr.x)
+				.css("width",inpr.width)
+			}
+			if(keyp){
+				if(ke==="Enter"){
+					$("#gobtn").click()
 				}else if(!mobile){
 					if(ke==="Backspace"){
 						name=name.slice(0,namecr-1)+name.slice(namecr,name.length)
