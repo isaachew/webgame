@@ -67,7 +67,7 @@ function clears(){
 }
 namecr=0
 count=0
-mobile=/Mobi|Android/i.test(navigator.userAgent) ||!0
+mobile=/Mobi|Android/i.test(navigator.userAgent)//||!0
 ff=true
 clear=false
 playid=undefined

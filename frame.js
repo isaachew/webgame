@@ -33,7 +33,7 @@ function frame(ts){
 		        })
 		        $("#help").click(()=>{
 		        	$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
-		        	$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>x</span>"))
+		        	$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>&#10006;</span>"))
 		        	$("#chelp").click(()=>{
 		        		$("#hblack,#hcont").remove()
 		        	})
@@ -96,18 +96,19 @@ function frame(ts){
 				$("#stats").append(svgel("text",{"id":"score","clip-path":"url(#ctext)"},"Score: 0"))
 				$("#stats").append(svgel("text",{"id":"name","clip-path":"url(#ctext)"},"Name: "+name))
 				$("#stats").append(svgel("clipPath",{"id":"ctext"},"<rect y='0' id='ctrect'>"))
-				$("#stats").append(svgel("g",{"id":"builds"}))
+				$("#stats").append(svgel("g",{"id":"builds","transform":"translate("+0.7*camvb[2]/3+")"}))
+				reqs=7/90*camvb[2]
+				$("#builds").append(svgel("clipPath",{"id":"buiclp"},"<rect x='"+reqs+"' y='0' width='"+reqs*4+"' height='"+reqs+"'>"))
 				for(i of pres){
 					crespr(i.type)
-					reqs=7/90*camvb[2]
+					btcont=$(svgel("g",{"clip-path":"url(#buiclp)"}))
 					btile=$(svgel("g",{"transform":"translate("+
-					(0.7*camvb[2]/3+
-					($("#builds").children().length+1)*reqs)+",0)"
-					}))
+					($("#builds").children().length*reqs)+",0)"}))
 					sca=(reqs*3/4)/Math.max.apply(null,i.size)
 					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0}))
 					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0},""))
-					$("#builds").append(btile)
+					btcont.append(btile)
+					$("#builds").append(btcont)
 				}
 			}
 			for(en of entities.concat(buildings)){
