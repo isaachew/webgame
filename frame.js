@@ -96,19 +96,18 @@ function frame(ts){
 				$("#stats").append(svgel("text",{"id":"score","clip-path":"url(#ctext)"},"Score: 0"))
 				$("#stats").append(svgel("text",{"id":"name","clip-path":"url(#ctext)"},"Name: "+name))
 				$("#stats").append(svgel("clipPath",{"id":"ctext"},"<rect y='0' id='ctrect'>"))
-				$("#stats").append(svgel("g",{"id":"builds","transform":"translate("+0.7*camvb[2]/3+")"}))
+				$("#stats").append(svgel("g",{"id":"buihold","clip-path":"url(#buiclp)"}))
 				reqs=7/90*camvb[2]
-				$("#builds").append(svgel("clipPath",{"id":"buiclp"},"<rect x='"+reqs+"' y='0' width='"+reqs*4+"' height='"+reqs+"'>"))
+				$("#buihold").append(svgel("g",{"id":"builds","transform":"translate("+(14*camvb[2]/45)+")"}))
+				$("#stats").append(svgel("clipPath",{"id":"buiclp"},"<rect x='"+(14*camvb[2]/45)+"' y='0' width='"+reqs*4+"' height='"+reqs+"'>"))
 				for(i of pres){
 					crespr(i.type)
-					btcont=$(svgel("g",{"clip-path":"url(#buiclp)"}))
 					btile=$(svgel("g",{"transform":"translate("+
 					($("#builds").children().length*reqs)+",0)"}))
 					sca=(reqs*3/4)/Math.max.apply(null,i.size)
 					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0}))
 					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0},""))
-					btcont.append(btile)
-					$("#builds").append(btcont)
+					$("#builds").append(btile)
 				}
 			}
 			for(en of entities.concat(buildings)){
