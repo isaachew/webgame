@@ -98,7 +98,7 @@ function frame(ts){
 				$("#stats").append(svgel("clipPath",{"id":"ctext"},"<rect y='0' id='ctrect'>"))
 				$("#stats").append(svgel("g",{"id":"buihold","clip-path":"url(#buiclp)"}))
 				reqs=7/90*camvb[2]
-				$("#buihold").append(svgel("g",{"id":"builds","transform":"translate("+(14*camvb[2]/45)+")"}))
+				$("#buihold").append(svgel("g",{"id":"builds","transform":"translate("+Math.floor(14*camvb[2]/45)+")"}))
 				$("#stats").append(svgel("clipPath",{"id":"buiclp"},"<rect x='"+(14*camvb[2]/45)+"' y='0' width='"+reqs*4+"' height='"+reqs+"'>"))
 				for(i of pres){
 					crespr(i.type)
@@ -109,6 +109,14 @@ function frame(ts){
 					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0},""))
 					$("#builds").append(btile)
 				}
+				$("#stats").append(svgel("polygon",{"id":"larrow","points":[1+12,2,3+12,3,3+12,1].map((k)=>(reqs*k/4))}))
+				$("#larrow").click(()=>{
+					scrbar(-reqs)
+				})
+				$("#stats").append(svgel("polygon",{"id":"rarrow","points":[3+32,2,1+32,3,1+32,1].map((k)=>(reqs*k/4))}))
+				$("#rarrow").click(()=>{
+					scrbar(reqs)
+				})
 			}
 			for(en of entities.concat(buildings)){
 				ty=en.type

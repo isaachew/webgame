@@ -116,6 +116,15 @@ function gbb(el){
     elu=$(el)[0].getBoundingClientRect()
     return {"x":elu.left+scrollX,"y":elu.top+scrollY,"width":elu.width,"height":elu.height}
 }
+function scrbar(a){
+    n=$("#builds")
+    if((n.attr("transform").slice(10,-1)-a)<14*camvb[2]/45){
+        n.attr("transform","translate("+
+        (parseFloat(n.attr("transform")
+        .slice(10,-1))
+        -a)+")")
+    }
+}
 re=function(el){$(el).attr("class","remo");
 setTimeout(el.remove.bind(el),500)}
 requestAnimationFrame(frame)
