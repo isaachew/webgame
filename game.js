@@ -118,7 +118,7 @@ function gbb(el){
 }
 function scrbar(a){
     n=$("#builds")
-    if((n.attr("transform").slice(10,-1)-a)<14*camvb[2]/45){
+    if((n.attr("transform").slice(10,-1)-a)<14*camvb[2]/45&&(n.attr("transform").slice(10,-1)-(-n.children().length*reqs)-a)>=24.5*camvb[2]/45){
         n.attr("transform","translate("+
         (parseFloat(n.attr("transform")
         .slice(10,-1))
