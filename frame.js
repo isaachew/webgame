@@ -105,8 +105,12 @@ function frame(ts){
 					btile=$(svgel("g",{"transform":"translate("+
 					($("#builds").children().length*reqs)+",0)"}))
 					sca=(reqs*3/4)/Math.max.apply(null,i.size)
-					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0}))
+					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0,"rx":2,"ry":2,"class":"btrect"}))
 					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0},""))
+					btile.click((n)=>{
+						console.log(n)
+						$(".btrect",n.currentTarget).css("stroke","#ffffff")
+					})
 					$("#builds").append(btile)
 				}
 				$("#stats").append(svgel("polygon",{"id":"larrow","points":[1+12,2,3+12,3,3+12,1].map((k)=>(reqs*k/4))}))
