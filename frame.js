@@ -110,6 +110,7 @@ function frame(ts){
 					btile.click((n)=>{
 						console.log(n)
 						$(".btrect",n.currentTarget).css("stroke","#ffffff")
+						$("svg").append(svgel("rect",{"x":camvb[0],"y":camvb[1],"width":camvb[2],"height":camvb[3],"fill":"#ffffff","stroke":"none","opacity":0}))
 					})
 					$("#builds").append(btile)
 				}
