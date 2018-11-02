@@ -119,16 +119,19 @@ function frame(ts){
 							$("svg").append(svgel("use",{"id":"buiprev","href":"#"+pres[n.currentTarget.id.slice(3)].type,"x":0,"y":0,"opacity":0}))
 							$(".phrect").click((e)=>{
 								tre=e.currentTarget.getBoundingClientRect()
-								relw=tre.width
-								relh=tre.height/0.9
+								relw=tre.width/camvb[2]
+								relh=tre.height/0.9/camvb[3]
 								relx=tre.left
-								rely=tre.top-relh*0.1
-								console.log(relx,rely,relw,relh)
+								rely=tre.top-relh*camvb[3]*0.1
+								pcos=[(e.pageX-relx)/relw,(e.pageY-rely)/relh]
+								console.log(relx,rely,relw,relh,pcos)
+								prse=pres[n.currentTarget.id.slice(3)]
+								crds=[camvb[0]+pcos[0]-prse.size[0]/2,camvb[1]+pcos[1]-prse.size[1]/2]
 								$("#buiprev")
-								.css("x",camvb[0])
-								.css("y",camvb[1])
+								.css("x",crds[0])
+								.css("y",crds[1])
 								.css("opacity",0.5)
-								da.build=pres[n.currentTarget.id.slice(3)]
+								da.build=prse
 								console.log(da.build)
 							})
 						}
