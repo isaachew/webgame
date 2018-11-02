@@ -100,17 +100,38 @@ function frame(ts){
 				reqs=7/90*camvb[2]
 				$("#buihold").append(svgel("g",{"id":"builds","transform":"translate("+Math.floor(14*camvb[2]/45)+")"}))
 				$("#stats").append(svgel("clipPath",{"id":"buiclp"},"<rect x='"+(14*camvb[2]/45)+"' y='0' width='"+reqs*4+"' height='"+reqs+"'>"))
-				for(i of pres){
+				for(id=0;id<pres.length;id++){
+					i=pres[id]
 					crespr(i.type)
 					btile=$(svgel("g",{"transform":"translate("+
-					($("#builds").children().length*reqs)+",0)"}))
+					($("#builds").children().length*reqs)+",0)","id":"bui"+id}))
 					sca=(reqs*3/4)/Math.max.apply(null,i.size)
 					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0,"rx":2,"ry":2,"class":"btrect"}))
 					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0},""))
 					btile.click((n)=>{
-						console.log(n)
-						$(".btrect",n.currentTarget).css("stroke","#ffffff")
-						$("svg").append(svgel("rect",{"x":camvb[0],"y":camvb[1],"width":camvb[2],"height":camvb[3],"fill":"#ffffff","stroke":"none","opacity":0}))
+						$(".btrect").css("stroke","none")
+						if($("#re"+n.currentTarget.id+".phrect").toArray().length){
+							$(".phrect,#buiprev").remove()
+						}else{
+							$(".phrect,#buiprev").remove()
+							$(".btrect",n.currentTarget).css("stroke","#ffffff")
+							$("svg").append(svgel("rect",{"x":camvb[0],"y":camvb[1]+0.1*camvb[3],"width":camvb[2],"height":0.9*camvb[3],"fill":"#ffffff","stroke":"none","opacity":0,"class":"phrect","id":"re"+n.currentTarget.id}))
+							$("svg").append(svgel("use",{"id":"buiprev","href":"#"+pres[n.currentTarget.id.slice(3)].type,"x":0,"y":0,"opacity":0}))
+							$(".phrect").click((e)=>{
+								tre=e.currentTarget.getBoundingClientRect()
+								relw=tre.width
+								relh=tre.height/0.9
+								relx=tre.left
+								rely=tre.top-relh*0.1
+								console.log(relx,rely,relw,relh)
+								$("#buiprev")
+								.css("x",camvb[0])
+								.css("y",camvb[1])
+								.css("opacity",0.5)
+								da.build=pres[n.currentTarget.id.slice(3)]
+								console.log(da.build)
+							})
+						}
 					})
 					$("#builds").append(btile)
 				}
@@ -202,6 +223,9 @@ function frame(ts){
 			.attr("x",0)
 			.attr("width",camvb[2]*7/30)
 			.attr("height",0.1*camvb[3])
+			$(".phrect")
+			.attr("x",camvb[0])
+			.attr("y",camvb[1]+0.1*camvb[3])
 			camvb[0]+=cdir[0]*5
 			camvb[1]+=cdir[1]*5
 			if(result.bounds){
