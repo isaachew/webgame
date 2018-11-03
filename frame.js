@@ -133,8 +133,8 @@ function frame(ts){
 								.css("opacity",0.5)
 								prse.pos=crds
 								prse.rot=0
-								prse.id="B0"
-								buildings.push(prse)
+								//prse.id="B0"
+								//buildings.push(prse)
 								console.log(entities[1000])
 							})
 							$("#buiprev").click((e)=>{
