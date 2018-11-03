@@ -110,12 +110,12 @@ function frame(ts){
 					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0},""))
 					btile.click((n)=>{
 						$(".btrect").css("stroke","none")
-						if($("#re"+n.currentTarget.id+".phrect").toArray().length){
+						if($("#r"+n.currentTarget.id+".phrect").toArray().length){
 							$(".phrect,#buiprev").remove()
 						}else{
 							$(".phrect,#buiprev").remove()
 							$(".btrect",n.currentTarget).css("stroke","#ffffff")
-							$("svg").append(svgel("rect",{"x":camvb[0],"y":camvb[1]+0.1*camvb[3],"width":camvb[2],"height":0.9*camvb[3],"fill":"#ffffff","stroke":"none","opacity":0,"class":"phrect","id":"re"+n.currentTarget.id}))
+							$("svg").append(svgel("rect",{"x":camvb[0],"y":camvb[1]+0.1*camvb[3],"width":camvb[2],"height":0.9*camvb[3],"fill":"#ffffff","stroke":"none","opacity":0,"class":"phrect","id":"r"+n.currentTarget.id}))
 							$("svg").append(svgel("use",{"id":"buiprev","href":"#"+pres[n.currentTarget.id.slice(3)].type,"x":0,"y":0,"opacity":0}))
 							$(".phrect").click((e)=>{
 								tre=e.currentTarget.getBoundingClientRect()
@@ -131,8 +131,17 @@ function frame(ts){
 								.css("x",crds[0])
 								.css("y",crds[1])
 								.css("opacity",0.5)
+								prse.pos=crds
+								prse.rot=0
+								prse.id="B0"
+								buildings.push(prse)
+								console.log(entities[1000])
+							})
+							$("#buiprev").click((e)=>{
 								da.build=prse
 								console.log(da.build)
+								$(".phrect,#buiprev").remove()
+								$(".btrect").css("stroke","none")
 							})
 						}
 					})
