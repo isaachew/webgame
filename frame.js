@@ -124,7 +124,6 @@ function frame(ts){
 								relx=tre.left
 								rely=tre.top-relh*camvb[3]*0.1
 								pcos=[(e.pageX-relx)/relw,(e.pageY-rely)/relh]
-								console.log(relx,rely,relw,relh,pcos)
 								prse=pres[n.currentTarget.id.slice(3)]
 								crds=[camvb[0]+pcos[0]-prse.size[0]/2,camvb[1]+pcos[1]-prse.size[1]/2]
 								$("#buiprev")
@@ -133,13 +132,9 @@ function frame(ts){
 								.css("opacity",0.5)
 								prse.pos=crds
 								prse.rot=0
-								//prse.id="B0"
-								//buildings.push(prse)
-								console.log(entities[1000])
 							})
 							$("#buiprev").click((e)=>{
 								da.build=prse
-								console.log(da.build)
 								$(".phrect,#buiprev").remove()
 								$(".btrect").css("stroke","none")
 							})
