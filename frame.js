@@ -100,11 +100,14 @@ function frame(ts){
 				reqs=7/90*camvb[2]
 				$("#buihold").append(svgel("g",{"id":"builds","transform":"translate("+Math.floor(14*camvb[2]/45)+")"}))
 				$("#stats").append(svgel("clipPath",{"id":"buiclp"},"<rect x='"+(14*camvb[2]/45)+"' y='0' width='"+reqs*4+"' height='"+reqs+"'>"))
+				$("#stats").append(svgel("g",{"transform":"translate("+reqs*2+")","id":"buicreate"}))
+				$("#buicreate").append(svgel("rect",{"id":"reccreate","width":reqs,"height":reqs,"x":0,"y":0,"fill":"#777777"}))
+				$("#buicreate").append(svgel("text",{"id":"texcreate","x":0.5*reqs,"y":0.5*reqs,"text-anchor":"middle"},"Create"))
 				for(id=0;id<pres.length;id++){
 					i=pres[id]
 					crespr(i.type)
 					btile=$(svgel("g",{"transform":"translate("+
-					($("#builds").children().length*reqs)+",0)","id":"bui"+id}))
+					id*reqs+",0)","id":"bui"+id}))
 					sca=(reqs*3/4)/Math.max.apply(null,i.size)
 					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0,"rx":2,"ry":2,"class":"btrect"}))
 					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0},""))
@@ -124,7 +127,7 @@ function frame(ts){
 								relx=tre.left
 								rely=tre.top-relh*camvb[3]*0.1
 								pcos=[(e.pageX-relx)/relw,(e.pageY-rely)/relh]
-								prse=pres[n.currentTarget.id.slice(3)]
+								prse=Object.assign({},pres[n.currentTarget.id.slice(3)])
 								crds=[camvb[0]+pcos[0]-prse.size[0]/2,camvb[1]+pcos[1]-prse.size[1]/2]
 								$("#buiprev")
 								.css("x",crds[0])
@@ -228,11 +231,24 @@ function frame(ts){
 			.attr("y",camvb[3]/20)
 			$("#ctrect")
 			.attr("x",0)
-			.attr("width",camvb[2]*7/30)
+			.attr("width",camvb[2]*7/45)
 			.attr("height",0.1*camvb[3])
 			$(".phrect")
 			.attr("x",camvb[0])
 			.attr("y",camvb[1]+0.1*camvb[3])
+			reqs=7/90*camvb[2]
+			$("#buicreate")
+			.attr("x",reqs*2)
+			.attr("y",0)
+			$("#reccreate")
+			.attr("x",0)
+			.attr("y",0)
+			.attr("width",reqs)
+			.attr("height",reqs)
+			$("#texcreate")
+			.attr("x",0.5*reqs)
+			.attr("y",0.5*reqs)
+			.attr("font-size",camvb[2]/75)
 			camvb[0]+=cdir[0]*5
 			camvb[1]+=cdir[1]*5
 			if(result.bounds){
