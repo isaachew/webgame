@@ -98,11 +98,11 @@ function frame(ts){
 				$("#stats").append(svgel("clipPath",{"id":"ctext"},"<rect y='0' id='ctrect'>"))
 				$("#stats").append(svgel("g",{"id":"buihold","clip-path":"url(#buiclp)"}))
 				reqs=7/90*camvb[2]
-				$("#buihold").append(svgel("g",{"id":"builds","transform":"translate("+Math.floor(14*camvb[2]/45)+")"}))
+				$("#buihold").append(svgel("g",{"id":"builds","scrl":0}))
 				$("#stats").append(svgel("clipPath",{"id":"buiclp"},"<rect x='"+(14*camvb[2]/45)+"' y='0' width='"+reqs*4+"' height='"+reqs+"'>"))
-				$("#stats").append(svgel("g",{"transform":"translate("+reqs*2+")","id":"buicreate"}))
-				$("#buicreate").append(svgel("rect",{"id":"reccreate","width":reqs,"height":reqs,"x":0,"y":0,"fill":"#777777"}))
-				$("#buicreate").append(svgel("text",{"id":"texcreate","x":0.5*reqs,"y":0.5*reqs,"text-anchor":"middle"},"Create"))
+				$("#stats").append(svgel("g",{"transform":"translate("+reqs*2+")","id":"more"}))
+				$("#more").append(svgel("rect",{"id":"recmore","width":reqs,"height":reqs,"x":0,"y":0,"fill":"#777777"}))
+				$("#more").append(svgel("text",{"id":"texmore","x":0.5*reqs,"y":0.5*reqs,"text-anchor":"middle"},"More..."))
 				for(id=0;id<pres.length;id++){
 					i=pres[id]
 					crespr(i.type)
@@ -110,7 +110,8 @@ function frame(ts){
 					id*reqs+",0)","id":"bui"+id}))
 					sca=(reqs*3/4)/Math.max.apply(null,i.size)
 					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0,"rx":2,"ry":2,"class":"btrect"}))
-					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0},""))
+					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0,"class":"buitile"},""))
+					
 					btile.click((n)=>{
 						$(".btrect").css("stroke","none")
 						if($("#r"+n.currentTarget.id+".phrect").toArray().length){
@@ -145,11 +146,11 @@ function frame(ts){
 					})
 					$("#builds").append(btile)
 				}
-				$("#stats").append(svgel("polygon",{"id":"larrow","points":[1+12,2,3+12,3,3+12,1].map((k)=>(reqs*k/4))}))
+				$("#stats").append(svgel("polygon",{"id":"larrow"}))
 				$("#larrow").click(()=>{
 					scrbar(-reqs)
 				})
-				$("#stats").append(svgel("polygon",{"id":"rarrow","points":[3+32,2,1+32,3,1+32,1].map((k)=>(reqs*k/4))}))
+				$("#stats").append(svgel("polygon",{"id":"rarrow"}))
 				$("#rarrow").click(()=>{
 					scrbar(reqs)
 				})
@@ -237,20 +238,39 @@ function frame(ts){
 			.attr("x",camvb[0])
 			.attr("y",camvb[1]+0.1*camvb[3])
 			reqs=7/90*camvb[2]
-			$("#buicreate")
-			.attr("x",reqs*2)
-			.attr("y",0)
-			$("#reccreate")
+			$("#more")
+			.attr("transform","translate("+reqs*2+")")
+			$("#recmore")
 			.attr("x",0)
 			.attr("y",0)
 			.attr("width",reqs)
 			.attr("height",reqs)
-			$("#texcreate")
+			$("#texmore")
 			.attr("x",0.5*reqs)
 			.attr("y",0.5*reqs)
 			.attr("font-size",camvb[2]/75)
-			camvb[0]+=cdir[0]*5
-			camvb[1]+=cdir[1]*5
+			$("#larrow")
+			.attr("points",[1+12,2,3+12,3,3+12,1].map((k)=>(reqs*k/4)))
+			$("#rarrow")
+			.attr("points",[3+32,2,1+32,3,1+32,1].map((k)=>(reqs*k/4)))
+			$("#builds")
+			.attr("transform","translate("+Math.floor(14*camvb[2]/45-reqs*$("#builds").attr("scrl"))+")")
+			$("#builds").children().each((id,elem)=>{
+				$(elem)
+				.attr("transform","translate("+id*reqs+")")
+				$(".buitile",elem)
+				.attr("transform","scale("+reqs*3/4/Math.max.apply(null,pres[id].size)+")")
+			})
+			$("rect","#buiclp")
+			.attr("x",(14*camvb[2]/45))
+			.attr("y",0)
+			.attr("width",4*reqs)
+			.attr("height",reqs)
+			$(".btrect")
+			.attr("width",reqs)
+			.attr("heig",reqs)
+			camvb[0]+=cdir[0]*camvb[2]/100
+			camvb[1]+=cdir[1]*camvb[3]/100
 			if(result.bounds){
 				if(camvb[0]<0)camvb[0]=0
 				if(camvb[1]<0)camvb[1]=0

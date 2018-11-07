@@ -1,7 +1,7 @@
 Web Game
--
-The code is in `index.html`.
+=
+(Server can be found at isaachew/webgameserver.)
 
 How to play
--
+=
 Anything with a square base is a *troop*.

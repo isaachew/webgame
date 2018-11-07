@@ -118,11 +118,8 @@ function gbb(el){
 }
 function scrbar(a){
     n=$("#builds")
-    if((n.attr("transform").slice(10,-1)-a)<14*camvb[2]/45&&(n.attr("transform").slice(10,-1)-(-n.children().length*reqs)-a)>=24.5*camvb[2]/45){
-        n.attr("transform","translate("+
-        (parseFloat(n.attr("transform")
-        .slice(10,-1))
-        -a)+")")
+    if((n.attr("scrl")-(-a/reqs))>=0&&(n.attr("scrl")-(-a/reqs))<=(n.children().length-4)){
+        n.attr("scrl",n.attr("scrl")-(-a/reqs))
     }
 }
 re=function(el){$(el).attr("class","remo");
