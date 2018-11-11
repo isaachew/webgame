@@ -11,7 +11,6 @@ players=[]
 result={}
 da={}
 pres={}
-fetch("data/builpres.json").then((a)=>{return a.json()},(c)=>{console.log(c)}).then((a)=>{pres=a})
 camvb=[0,0,500,500]
 cdir=[0,0]
 score=0
@@ -29,7 +28,8 @@ function load(url,serv,func){
             entities=r.entities
             buildings=r.buildings
             players=r.players
-            score=(players[playid]||0).score||0;
+            score=(players[playid]||0).score||0
+            pres=r.presets;
             (func||emfunc)(result)
             load("getdata",serv)
         }

@@ -26,10 +26,13 @@ function frame(ts){
 		        $("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
 		        $("body").append(el("div",{"style":"position:absolute","id":"chlog"},"Space for changelog"))
 		        $("#gobtn").click(()=>{
-					smode(1)
 					serv=choose(servers)
 					da={"name":name}
-					load("join",serv,()=>{console.log("id set");playid=result.id})
+					load("join",serv,()=>{
+						console.log("id set")
+						smode(1)
+						playid=result.id
+					})
 		        })
 		        $("#help").click(()=>{
 		        	$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
@@ -112,8 +115,8 @@ function frame(ts){
 					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0,"rx":2,"ry":2,"class":"btrect"}))
 					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0,"class":"buitile"},""))
 				    btile.append(svgel("text",{"fill":"#ffffff","y":reqs/16,"x":0,"alignment-baseline":"middle","text-anchor":"start","font-size":reqs/8},i.name))
-				    btile.append(svgel("text",{"fill":"#ffffff","y":5*reqs/8,"x":0,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},1000000000))
-				    btile.append(svgel("text",{"fill":"#ffffff","y":7*reqs/8,"x":0,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},1000000000))
+				    btile.append(svgel("text",{"fill":"#ffffff","y":5*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},1000000000))
+				    btile.append(svgel("text",{"fill":"#ffffff","y":7*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},1000000000))
 					btile.click((n)=>{
 						$(".btrect").css("stroke","none")
 						if($("#r"+n.currentTarget.id+".phrect").toArray().length){
