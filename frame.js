@@ -108,10 +108,12 @@ function frame(ts){
 					crespr(i.type)
 					btile=$(svgel("g",{"transform":"translate("+
 					id*reqs+",0)","id":"bui"+id}))
-					sca=(reqs*3/4)/Math.max.apply(null,i.size)
+					sca=(reqs/2)/Math.max.apply(null,i.size)
 					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0,"rx":2,"ry":2,"class":"btrect"}))
 					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0,"class":"buitile"},""))
-					
+				    btile.append(svgel("text",{"fill":"#ffffff","y":reqs/16,"x":0,"alignment-baseline":"middle","text-anchor":"start","font-size":reqs/8},i.name))
+				    btile.append(svgel("text",{"fill":"#ffffff","y":5*reqs/8,"x":0,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},1000000000))
+				    btile.append(svgel("text",{"fill":"#ffffff","y":7*reqs/8,"x":0,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},1000000000))
 					btile.click((n)=>{
 						$(".btrect").css("stroke","none")
 						if($("#r"+n.currentTarget.id+".phrect").toArray().length){
@@ -224,12 +226,12 @@ function frame(ts){
 			.attr("height",0.1*camvb[3])
 			$("#score,#name")
 			.attr("x",0)
-			.attr("font-size",camvb[3]/40)
+			.attr("font-size",camvb[3]/60)
 			$("#score")
-			.attr("y",camvb[3]/40)
+			.attr("y",camvb[3]/60)
 			.text("Score: "+score)
 			$("#name")
-			.attr("y",camvb[3]/20)
+			.attr("y",camvb[3]/30)
 			$("#ctrect")
 			.attr("x",0)
 			.attr("width",camvb[2]*7/45)
@@ -259,7 +261,7 @@ function frame(ts){
 				$(elem)
 				.attr("transform","translate("+id*reqs+")")
 				$(".buitile",elem)
-				.attr("transform","scale("+reqs*3/4/Math.max.apply(null,pres[id].size)+")")
+				.attr("transform","scale("+reqs/2/Math.max.apply(null,pres[id].size)+")")
 			})
 			$("rect","#buiclp")
 			.attr("x",(14*camvb[2]/45))
@@ -268,7 +270,7 @@ function frame(ts){
 			.attr("height",reqs)
 			$(".btrect")
 			.attr("width",reqs)
-			.attr("heig",reqs)
+			.attr("height",reqs)
 			camvb[0]+=cdir[0]*camvb[2]/100
 			camvb[1]+=cdir[1]*camvb[3]/100
 			if(result.bounds){
