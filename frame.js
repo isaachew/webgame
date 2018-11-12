@@ -106,6 +106,7 @@ function frame(ts){
 				$("#stats").append(svgel("g",{"transform":"translate("+reqs*2+")","id":"more"}))
 				$("#more").append(svgel("rect",{"id":"recmore","width":reqs,"height":reqs,"x":0,"y":0,"fill":"#777777"}))
 				$("#more").append(svgel("text",{"id":"texmore","x":0.5*reqs,"y":0.5*reqs,"text-anchor":"middle"},"More..."))
+				crespr("coll0");crespr("coll1")
 				for(id=0;id<pres.length;id++){
 					i=pres[id]
 					crespr(i.type)
@@ -117,6 +118,8 @@ function frame(ts){
 				    btile.append(svgel("text",{"fill":"#ffffff","y":reqs/16,"x":0,"alignment-baseline":"middle","text-anchor":"start","font-size":reqs/8},i.name))
 				    btile.append(svgel("text",{"fill":"#ffffff","y":5*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},1000000000))
 				    btile.append(svgel("text",{"fill":"#ffffff","y":7*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},1000000000))
+				    btile.append(svgel("use",{"x":(reqs/4-5)/2,"y":reqs/2+2.5,"href":"#coll0"}))
+				    btile.append(svgel("use",{"x":(reqs/4-5)/2,"y":3*reqs/4+2.5,"href":"#coll1"}))
 					btile.click((n)=>{
 						$(".btrect").css("stroke","none")
 						if($("#r"+n.currentTarget.id+".phrect").toArray().length){
