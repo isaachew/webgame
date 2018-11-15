@@ -7,4 +7,4 @@ alpha 0.6'"'Added "Go" button for mobile
 alpha 0.7'"'Added two things to play screen
 alpha 0.8'"'Added colours for collectibles
 alpha 0.9'"'More minor changes
-alpha 1.0'"'Added few things to title screen
+alpha 1.0'"'Added changelog and help button to title screen

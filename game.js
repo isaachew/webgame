@@ -28,7 +28,7 @@ function load(url,serv,func){
             entities=r.entities
             buildings=r.buildings
             players=r.players
-            score=(players[playid]||0).score||0
+            score=(players[playid]||{"score":0}).score||0
             pres=r.presets;
             (func||emfunc)(result)
             load("getdata",serv)
@@ -67,7 +67,7 @@ function clears(){
 }
 namecr=0
 count=0
-mobile=/Mobi|Android/i.test(navigator.userAgent)//||!0
+mobile=/Mobi|Android/i.test(navigator.userAgent) ||!0
 ff=true
 clear=false
 playid=undefined
@@ -115,12 +115,6 @@ function crespr(ty){
 function gbb(el){
     elu=$(el)[0].getBoundingClientRect()
     return {"x":elu.left+scrollX,"y":elu.top+scrollY,"width":elu.width,"height":elu.height}
-}
-function scrbar(a){
-    n=$("#builds")
-    if((n.attr("scrl")-(-a/reqs))>=0&&(n.attr("scrl")-(-a/reqs))<=(n.children().length-4)){
-        n.attr("scrl",n.attr("scrl")-(-a/reqs))
-    }
 }
 re=function(el){$(el).attr("class","remo");
 setTimeout(el.remove.bind(el),500)}
