@@ -106,6 +106,9 @@ function frame(ts){
 				$("#stats").append(svgel("g",{"transform":"translate("+reqs*2+")","id":"more"}))
 				$("#more").append(svgel("rect",{"id":"recmore","width":reqs,"height":reqs,"x":0,"y":0,"fill":"#777777"}))
 				$("#more").append(svgel("text",{"id":"texmore","x":0.5*reqs,"y":0.5*reqs,"text-anchor":"middle"},"More..."))
+				$("#recmore").click(()=>{
+					$("svg").append(svgel("rect",{"x":0,"y":0,"width":camvb[2],"height":camvb[3],"id":"morerect","opacity":"0.5"}))
+				})
 				crespr("coll0");crespr("coll1")
 				for(id=0;id<pres.length;id++){
 					i=pres[id]
@@ -277,6 +280,9 @@ function frame(ts){
 			$(".btrect")
 			.attr("width",reqs)
 			.attr("height",reqs)
+			$("#morerect")
+			.attr("x",camvb[0])
+			.attr("y",camvb[1])
 			camvb[0]+=cdir[0]*camvb[2]/100
 			camvb[1]+=cdir[1]*camvb[3]/100
 			if(result.bounds){

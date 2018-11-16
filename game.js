@@ -10,12 +10,13 @@ buildings=[]
 players=[]
 result={}
 da={}
-pres={}
+pres=[]
+npres=[]
 camvb=[0,0,500,500]
 cdir=[0,0]
 score=0
 function load(url,serv,func){
-    fetch(serv+"/"+url+"?data="+JSON.stringify(da),{"method":"GET"})
+    fetch(serv+"/"+url+"?data="+encodeURIComponent(JSON.stringify(da)),{"method":"GET"})
     .then((r)=>r.json(),function(r){
         console.log(r)
         mode=0
@@ -28,7 +29,8 @@ function load(url,serv,func){
             entities=r.entities
             buildings=r.buildings
             players=r.players
-            score=players[playid].score||0;
+            pres=r.presets
+            score=(players[playid]||{"score":0}).score||0;
             (func||emfunc)(result)
             load("getdata",serv)
         }
