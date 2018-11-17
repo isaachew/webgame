@@ -107,7 +107,8 @@ function frame(ts){
 				$("#more").append(svgel("rect",{"id":"recmore","width":reqs,"height":reqs,"x":0,"y":0,"fill":"#777777"}))
 				$("#more").append(svgel("text",{"id":"texmore","x":0.5*reqs,"y":0.5*reqs,"text-anchor":"middle"},"More..."))
 				$("#recmore").click(()=>{
-					$("svg").append(svgel("rect",{"x":0,"y":0,"width":camvb[2],"height":camvb[3],"id":"morerect","opacity":"0.5"}))
+					$("svg").append(svgel("rect",{"width":camvb[2],"height":camvb[3],"id":"morerect","opacity":"0.5","fill":"#000000"}))
+					$("svg").append(svgel("rect",{"width":camvb[2]*3/4,"height":camvb[3]*3/4,"id":"morecont","fill":"#c0c0c0"}))
 				})
 				crespr("coll0");crespr("coll1")
 				for(id=0;id<pres.length;id++){
@@ -283,6 +284,13 @@ function frame(ts){
 			$("#morerect")
 			.attr("x",camvb[0])
 			.attr("y",camvb[1])
+			.attr("width",camvb[2])
+			.attr("height",camvb[3])
+			$("#morecont")
+			.attr("x",camvb[0]+camvb[2]/8)
+			.attr("y",camvb[1]+camvb[3]/8)
+			.attr("width",camvb[2]*3/4)
+			.attr("height",camvb[3]*3/4)
 			camvb[0]+=cdir[0]*camvb[2]/100
 			camvb[1]+=cdir[1]*camvb[3]/100
 			if(result.bounds){
