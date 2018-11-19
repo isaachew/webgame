@@ -110,6 +110,8 @@ function frame(ts){
 					$("svg").append(svgel("rect",{"width":camvb[2],"height":camvb[3],"id":"morerect","opacity":"0.5","fill":"#000000"}))
 					$("svg").append(svgel("rect",{"width":camvb[2]*3/4,"height":camvb[3]*3/4,"id":"morecont","fill":"#c0c0c0"}))
 					$("svg").append(svgel("g",{"id":"morecontent"}))
+					$("svg").append(svgel("text",{"x":camvb[0]+camvb[2]/2,"y":camvb[1]+camvb[3]/30,"font-size":camvb[3]/30,"text-anchor":"middle"}))
+					
 				})
 				crespr("coll0");crespr("coll1")
 				for(id=0;id<pres.length;id++){
@@ -237,7 +239,7 @@ function frame(ts){
 			.attr("height",0.1*camvb[3])
 			$("#score,#name")
 			.attr("x",0)
-			.attr("font-size",camvb[3]/60)
+			.attr("font-size",camvb[2]/60)
 			$("#score")
 			.attr("y",camvb[3]/60)
 			.text("Score: "+score)

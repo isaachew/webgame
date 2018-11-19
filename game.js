@@ -92,18 +92,22 @@ function crespr(ty){
     	for(sh of rends[ty].split(" ")){
     		st=sh[0]
     		params=sh.slice(1).split(",")
-    		if(st=="R"){
-    			spri.append(svgel("rect",{
-    				"x":params[0],
-    				"y":params[1],
-    				"width":params[2],
-    				"height":params[3],
-    				"transform":(params[4]?"rotate("+params.slice(4,7).join(",")+")":"")}
-    				))
-    		}else if(st=="E"){
-    			spri.append(svgel("ellipse",{"cx":params[0],"cy":params[1],"rx":params[2]/2,"ry":params[3]/2}))
-    		}else if(st=="P"){
-    			spri.append(svgel("polygon",{"points":params.join(" ")}))
+    		switch(st){
+        		case "R":
+        			spri.append(svgel("rect",{
+        				"x":params[0],
+        				"y":params[1],
+        				"width":params[2],
+        				"height":params[3],
+        				"transform":(params[4]?"rotate("+params.slice(4,7).join(",")+")":"")}
+        				))
+        			break
+        		case "E":
+        			spri.append(svgel("ellipse",{"cx":params[0],"cy":params[1],"rx":params[2]/2,"ry":params[3]/2}))
+        			break
+        		case "P":
+        			spri.append(svgel("polygon",{"points":params.join(" ")}))
+        			break
     		}
     		if(ty.slice(0,4)==="coll"){
     			cols=["#777777","#ff0000"]
