@@ -136,6 +136,7 @@ function frame(ts){
 							$(".btrect",n.currentTarget).css("stroke","#ffffff")
 							$("svg").append(svgel("rect",{"x":camvb[0],"y":camvb[1]+0.1*camvb[3],"width":camvb[2],"height":0.9*camvb[3],"fill":"#ffffff","stroke":"none","opacity":0,"class":"phrect","id":"r"+n.currentTarget.id}))
 							$("svg").append(svgel("use",{"id":"buiprev","href":"#"+pres[n.currentTarget.id.slice(3)].type,"x":0,"y":0,"opacity":0}))
+							$("svg").prepend(svgel("circle",{"id":"buirange","r":pres[n.currentTarget.id.slice(3)].radius,"cx":0,"cy":0,"opacity":0,"fill":"#ff7700","stroke":"#ffff00","stroke-width":camvb[2]/100}))
 							$(".phrect").click((e)=>{
 								tre=e.currentTarget.getBoundingClientRect()
 								relw=tre.width/camvb[2]
@@ -145,16 +146,20 @@ function frame(ts){
 								pcos=[(e.pageX-relx)/relw,(e.pageY-rely)/relh]
 								prse=Object.assign({},pres[n.currentTarget.id.slice(3)])
 								crds=[camvb[0]+pcos[0]-prse.size[0]/2,camvb[1]+pcos[1]-prse.size[1]/2]
+								$("#buiprev,#buirange")
+								.css("opacity",0.5)
 								$("#buiprev")
 								.css("x",crds[0])
 								.css("y",crds[1])
-								.css("opacity",0.5)
+								$("#buirange")
+								.css("cx",crds[0])
+								.css("cy",crds[1])
 								prse.pos=crds
 								prse.rot=0
 							})
 							$("#buiprev").click((e)=>{
 								da.build=prse
-								$(".phrect,#buiprev").remove()
+								$(".phrect,#buiprev,#buirange").remove()
 								$(".btrect").css("stroke","none")
 							})
 						}
