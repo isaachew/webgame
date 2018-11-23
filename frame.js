@@ -30,6 +30,8 @@ function frame(ts){
 					da={"name":name}
 					load("join",serv,()=>{
 						console.log("id set")
+						camvb[0]=Math.random()*result.bounds[0]
+						camvb[1]=Math.random()*result.bounds[1]
 						smode(1)
 						playid=result.id
 					})
@@ -149,11 +151,11 @@ function frame(ts){
 								$("#buiprev,#buirange")
 								.css("opacity",0.5)
 								$("#buiprev")
-								.css("x",crds[0])
-								.css("y",crds[1])
+								.attr("x",crds[0])
+								.attr("y",crds[1])
 								$("#buirange")
-								.css("cx",crds[0])
-								.css("cy",crds[1])
+								.attr("cx",pcos[0]+camvb[0])
+								.attr("cy",pcos[1]+camvb[1])
 								prse.pos=crds
 								prse.rot=0
 							})
