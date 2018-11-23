@@ -113,9 +113,14 @@ function frame(ts){
 					$("svg").append(svgel("rect",{"width":camvb[2]*3/4,"height":camvb[3]*3/4,"id":"morecont","fill":"#c0c0c0"}))
 					$("svg").append(svgel("g",{"id":"morecontent"}))
 					$("#morecontent").append(svgel("text",{"x":camvb[0]+camvb[2]/2,"y":camvb[1]+19*camvb[3]/120,"font-size":camvb[3]/30,"text-anchor":"middle"},"Create Defensive Building"))
-					
+					$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},""))
+					$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},""))
+					$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},""))
+					$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},""))
+					$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},""))
 				})
-				crespr("coll0");crespr("coll1")
+				crespr("coll0")
+				crespr("coll1")
 				for(id=0;id<pres.length;id++){
 					i=pres[id]
 					crespr(i.type)
@@ -178,6 +183,10 @@ function frame(ts){
 				})
 			}
 			for(en of entities.concat(buildings)){
+				if(en.id[0]==="E"){
+					en.pos[0]+=en.vel[0]/60
+					en.pos[1]+=en.vel[1]/60
+				}
 				ty=en.type
 				ids=$("g#sprites").children().toArray().map(a=>a.id)
 				if(!($.inArray(ty,ids)+1)){
