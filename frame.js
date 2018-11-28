@@ -3,6 +3,9 @@ function frame(ts){
 	if(clear){
 		clears()
 		clear=false
+	}
+	if(newmode){
+		newmode=false
 		ff=true
 	}
 	switch(mode){
@@ -78,7 +81,31 @@ function frame(ts){
 			if(count>=60)count=0
 			break
 		case 1:
-			$("svg").attr("viewBox",camvb.join(" "))
+			mode1()
+			break
+		case 2:
+			if(ff){
+				$("svg").append(svgel("g",{"id":"statsmodal"}))
+				$("#statsmodal").append(svgel("rect",{"x":camvb[0],"y":camvb[1],"width":camvb[2],"height":camvb[3],"opacity":0.5}))
+			}
+			if(keyp){
+				smode(0)
+			}
+	}
+	if(keyp){
+		keyp=false
+	}
+	ff=false
+	requestAnimationFrame(frame)
+}
+function mode1(){
+	if(players[playid]==undefined){
+		console.log("player undefined")
+		mode=2
+		newmode=true
+		return
+	}
+	$("svg").attr("viewBox",camvb.join(" "))
 			if(ff){
 				$("svg").append(svgel("g",{"id":"objects"},""))
 				if(mobile){
@@ -113,12 +140,15 @@ function frame(ts){
 					$("svg").append(svgel("rect",{"width":camvb[2]*3/4,"height":camvb[3]*3/4,"id":"morecont","fill":"#c0c0c0"}))
 					$("svg").append(svgel("g",{"id":"morecontent"}))
 					$("#morecontent").append(svgel("text",{"x":camvb[2]*3/8,"y":camvb[3]/30,"font-size":camvb[3]/30,"text-anchor":"middle"},"Create Defensive Building"))
-					$("#morecontent").append(svgel("text",{"x":camvb[2]*88/120,"y":camvb[2]/60,"font-size":camvb[2]/60},"&#10006;"))
+					$("#morecontent").append(svgel("text",{"x":camvb[2]*88/120,"y":camvb[2]/60,"font-size":camvb[2]/60,"id":"closemore"},"&#10006;"))
 					$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},"Type of projectile:"))
 					$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},"Fire rate"))
 					$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},"Damage per second"))
 					$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},"Ground/air:"))
 					$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},"Cost:"))
+					$("#closemore").click(()=>{
+						$("#morecont,#morerect,#morecontent").remove()
+					})
 				})
 				crespr("coll0")
 				crespr("coll1")
@@ -131,8 +161,8 @@ function frame(ts){
 					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0,"rx":2,"ry":2,"class":"btrect"}))
 					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0,"class":"buitile"},""))
 				    btile.append(svgel("text",{"fill":"#ffffff","y":reqs/16,"x":0,"alignment-baseline":"middle","text-anchor":"start","font-size":reqs/8},i.name))
-				    btile.append(svgel("text",{"fill":"#ffffff","y":5*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},1000000000))
-				    btile.append(svgel("text",{"fill":"#ffffff","y":7*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},1000000000))
+				    btile.append(svgel("text",{"fill":"#ffffff","y":5*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},i.cost[0]))
+				    btile.append(svgel("text",{"fill":"#ffffff","y":7*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},i.cost[1]))
 				    btile.append(svgel("use",{"x":(reqs/4-5)/2,"y":reqs/2+2.5,"href":"#coll0"}))
 				    btile.append(svgel("use",{"x":(reqs/4-5)/2,"y":3*reqs/4+2.5,"href":"#coll1"}))
 					btile.click((n)=>{
@@ -316,24 +346,13 @@ function frame(ts){
 			.attr("height",camvb[3]*3/4)
 			camvb[0]+=cdir[0]*camvb[2]/100
 			camvb[1]+=cdir[1]*camvb[3]/100
-			if(result.bounds){
-				if(camvb[0]<0)camvb[0]=0
-				if(camvb[1]<0)camvb[1]=0
-				if(camvb[0]>result.bounds[0]-camvb[2])camvb[0]=result.bounds[0]-camvb[2]
-				if(camvb[1]>result.bounds[1]-camvb[3])camvb[1]=result.bounds[1]-camvb[3]
-				$("#statbar")
-				.attr("fill",players[playid].fill)
-				.attr("stroke",players[playid].stroke)
-				$("#name")
-				.text("Name: "+players[playid].name)
-			}
-			break
-		case 2:
-			
-	}
-	if(keyp){
-		keyp=false
-	}
-	ff=false
-	requestAnimationFrame(frame)
+			if(camvb[0]<0)camvb[0]=0
+			if(camvb[1]<0)camvb[1]=0
+			if(camvb[0]>result.bounds[0]-camvb[2])camvb[0]=result.bounds[0]-camvb[2]
+			if(camvb[1]>result.bounds[1]-camvb[3])camvb[1]=result.bounds[1]-camvb[3]
+			$("#statbar")
+			.attr("fill",players[playid].fill)
+			.attr("stroke",players[playid].stroke)
+			$("#name")
+			.text("Name: "+players[playid].name)
 }

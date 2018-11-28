@@ -18,12 +18,12 @@ score=0
 function load(url,serv,func){
     fetch(serv+"/"+url+"?data="+encodeURIComponent(JSON.stringify(da)),{"method":"GET"})
     .then((r)=>r.json(),function(r){
-        console.log(r)
+        console.log(r,"fetch error")
         mode=0
         clear=true
     })
     .then(function(r){
-        if(r!=undefined){
+        if(r!=undefined&&mode!==2){
             emfunc=(a)=>null
             result=r
             entities=r.entities
@@ -72,12 +72,14 @@ mobile=/Mobi|Android/i.test(navigator.userAgent)//||!0
 ff=true
 clear=false
 playid=undefined
+newmode=false
 function choose(ch){
     return ch[Math.floor(Math.random()*ch.length)]
 }
 function smode(mo){
     mode=mo
     clear=true
+    newmode=true
 }
 function clev(el){
     console.log("click")
