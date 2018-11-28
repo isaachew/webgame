@@ -19,8 +19,7 @@ function load(url,serv,func){
     fetch(serv+"/"+url+"?data="+encodeURIComponent(JSON.stringify(da)),{"method":"GET"})
     .then((r)=>r.json(),function(r){
         console.log(r,"fetch error")
-        mode=0
-        clear=true
+        smode(0)
     })
     .then(function(r){
         if(r!=undefined&&mode!==2){
@@ -44,7 +43,7 @@ function svgel(n,attrs,content){
     if (typeof content === 'undefined') content = "";
     d=document.createElementNS("http://www.w3.org/2000/svg",n)
     for(k in attrs){
-        if(attrs.hasOwnProperty(k)){
+        if(attrs.hasOwnProperty(k)&&attrs[k]!=undefined){
             d.setAttribute(k,attrs[k])
         }
     }
@@ -55,7 +54,7 @@ function el(n,attrs,content){
     if (typeof content === 'undefined') content = ""
     d=document.createElement(n)
     for(k in attrs){
-        if(attrs.hasOwnProperty(k)){
+        if(attrs.hasOwnProperty(k)&&attrs[k]!=undefined){
             d.setAttribute(k,attrs[k])
         }
     }

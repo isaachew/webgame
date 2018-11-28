@@ -159,7 +159,7 @@ function mode1(){
 					id*reqs+",0)","id":"bui"+id}))
 					sca=(reqs/2)/Math.max.apply(null,i.size)
 					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0,"rx":2,"ry":2,"class":"btrect"}))
-					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0,"class":"buitile"},""))
+					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0,"class":"buitile","stroke":"#808080","fill":"#404040"},""))
 				    btile.append(svgel("text",{"fill":"#ffffff","y":reqs/16,"x":0,"alignment-baseline":"middle","text-anchor":"start","font-size":reqs/8},i.name))
 				    btile.append(svgel("text",{"fill":"#ffffff","y":5*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},i.cost[0]))
 				    btile.append(svgel("text",{"fill":"#ffffff","y":7*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},i.cost[1]))
@@ -171,10 +171,10 @@ function mode1(){
 							$(".phrect,#buiprev,#buirange").remove()
 						}else{
 							buiobj=pres[n.currentTarget.id.slice(3)]
-							$(".phrect,#buiprev").remove()
+							$(".phrect,#buiprev,#buirange").remove()
 							$(".btrect",n.currentTarget).css("stroke","#ffffff")
 							$("svg").append(svgel("rect",{"x":camvb[0],"y":camvb[1]+0.1*camvb[3],"width":camvb[2],"height":0.9*camvb[3],"fill":"#ffffff","stroke":"none","opacity":0,"class":"phrect","id":"r"+n.currentTarget.id}))
-							$("svg").append(svgel("use",{"id":"buiprev","href":"#"+buiobj.type,"x":0,"y":0,"opacity":0}))
+							$("svg").append(svgel("use",{"id":"buiprev","href":"#"+buiobj.type,"x":0,"y":0,"opacity":0,"stroke":"#808080","fill":"#404040"}))
 							$("svg").prepend(svgel("circle",{"id":"buirange","r":buiobj.radius,"cx":0,"cy":0,"opacity":0,"fill":"#ff7700","stroke":"#ffff00","stroke-width":camvb[2]/100}))
 							$(".phrect").click((e)=>{
 								tre=e.currentTarget.getBoundingClientRect()
@@ -221,13 +221,13 @@ function mode1(){
 				}
 				ty=en.type
 				ids=$("g#sprites").children().toArray().map(a=>a.id)
-				if(!($.inArray(ty,ids)+1)){
+				if(!ids.includes(ty)){
 					crespr(ty)
 				}
 				allids=$("#objects").children().toArray().map(a=>a.id)
 				if((en.pos[0]-camvb[0]>0)&&(en.pos[0]-camvb[0]<camvb[2])&&(en.pos[1]-camvb[1]>0)&&(en.pos[1]-camvb[1]<camvb[3])){
 					if(!allids.includes(en.id+"")){
-						spr=$(svgel("use",{"href":"#"+ty,"id":en.id,"class":"object"}))
+						spr=$(svgel("use",{"href":"#"+ty,"id":en.id,"class":"object","stroke":en.player?en.player.stroke:undefined,"fill":en.player?en.player.fill:undefined}))
 						.click((n)=>{
 							clev(n.target)
 						})
