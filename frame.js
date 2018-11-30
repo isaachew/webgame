@@ -1,5 +1,4 @@
 function frame(ts){
-	mode=window.mode||0
 	if(clear){
 		clears()
 		clear=false
@@ -304,7 +303,8 @@ function mode1(){
 			$("#res1")
 			.attr("y",camvb[3]/15)
 			.text(": "+players[playid].resources[1])
-			colwid=gbb($("#coll0")).width*(camvb[2]/gbb("#svg").width)
+			bbsv=gbb("#svg")
+			colwid=gbb($("#coll0")).width*(camvb[2]/Math.min(bbsv.width,bbsv.height))
 			$("#resspr0")
 			.attr("y",camvb[3]/24-colwid/2)
 			$("#resspr1")
