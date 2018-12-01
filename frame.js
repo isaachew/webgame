@@ -156,7 +156,7 @@ function mode1(){
 					})
 				})
 				for(id=0;id<pres.length;id++){
-					i=pres[id]
+					i=pres[id][0]
 					crespr(i.type)
 					btile=$(svgel("g",{"transform":"translate("+
 					id*reqs+",0)","id":"bui"+id}))
@@ -173,7 +173,7 @@ function mode1(){
 						if($("#r"+n.currentTarget.id+".phrect").toArray().length){
 							$(".phrect,#buiprev,#buirange").remove()
 						}else{
-							buiobj=pres[n.currentTarget.id.slice(3)]
+							buiobj=pres[n.currentTarget.id.slice(3)][0]
 							$(".phrect,#buiprev,#buirange").remove()
 							$(".btrect",n.currentTarget).css("stroke","#ffffff")
 							$("svg").append(svgel("rect",{"x":camvb[0],"y":camvb[1]+0.1*camvb[3],"width":camvb[2],"height":0.9*camvb[3],"fill":"#ffffff","stroke":"none","opacity":0,"class":"phrect","id":"r"+n.currentTarget.id}))
@@ -186,7 +186,7 @@ function mode1(){
 								relx=tre.left
 								rely=tre.top-relh*camvb[3]*0.1
 								pcos=[(e.pageX-relx)/relw,(e.pageY-rely)/relh]
-								prse=Object.assign({},pres[n.currentTarget.id.slice(3)])
+								prse=Object.assign({},pres[n.currentTarget.id.slice(3)][0])
 								crds=[camvb[0]+pcos[0]-prse.size[0]/2,camvb[1]+pcos[1]-prse.size[1]/2]
 								$("#buiprev,#buirange")
 								.css("opacity",0.5)
@@ -342,7 +342,7 @@ function mode1(){
 				$(elem)
 				.attr("transform","translate("+id*reqs+")")
 				$(".buitile",elem)
-				.attr("transform","scale("+reqs/2/Math.max.apply(null,pres[id].size)+")")
+				.attr("transform","scale("+reqs/2/Math.max.apply(null,pres[id][0].size)+")")
 			})
 			$("#morecontent")
 			.attr("transform","translate("+(camvb[0]+camvb[2]/8)+","+(camvb[1]+camvb[3]/8)+")")
