@@ -25,6 +25,10 @@ function frame(ts){
 		        $("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
 		        $("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
 		        $("body").append(el("div",{"style":"position:absolute","id":"chlog"},"Space for changelog"))
+		        $("svg").append(svgel("text",{"x":500,"y":20,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlink"},"GitHub"))
+		        $("#ghlink").click(()=>{
+		        	document.location.href="https://github.com/isaachew/webgame"
+		        })
 		        $("#gobtn").click(()=>{
 					smode(1)
 					serv=choose(servers)
@@ -33,7 +37,7 @@ function frame(ts){
 		        })
 		        $("#help").click(()=>{
 		        	$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
-		        	$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>x</span>"))
+		        	$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1;z-index:30000","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>x</span>"))
 		        	$("#chelp").click(()=>{
 		        		$("#hblack,#hcont").remove()
 		        	})
