@@ -81,12 +81,6 @@ function smode(mo){
     clear=true
     newmode=true
 }
-function clev(el){
-    console.log("click")
-    k=el.id.slice(1)
-    en=(el.id[0]==="E")?entities[k]:buildings[k]
-    if(en.type.slice(0,4)=="coll")da.collect=en.id
-}
 function crespr(ty){
     sprhold=$("g#sprites")
     if(!$("#"+ty,sprhold)[0]){
