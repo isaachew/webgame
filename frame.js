@@ -377,8 +377,12 @@ function mode1(){
 			.text("Name: "+players[playid].name)
 }
 function clev(el){
-    console.log("click")
-    k=el.id.slice(1)
-    en=(el.id[0]==="E")?entities[k]:buildings[k]
-    if(en.type.slice(0,4)=="coll")da.collect=en.id
+	k=el.id.slice(1)
+	en=(el.id[0]==="E")?entities[k]:buildings[k]
+	console.log("click")
+	if(en.type.slice(0,4)=="coll")da.collect=en.id
+	if(en.constructor.name==="building"){
+		$("#buildgui;").remove()
+    	$("svg").append(svgel("g",{"id":"buildgui;"}))
+    }
 }
