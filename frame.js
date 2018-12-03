@@ -379,10 +379,10 @@ function mode1(){
 function clev(el){
 	k=el.id.slice(1)
 	en=(el.id[0]==="E")?entities[k]:buildings[k]
-	console.log("click")
+	console.log("click",en)
 	if(en.type.slice(0,4)=="coll")da.collect=en.id
-	if(en.constructor.name==="building"){
-		$("#buildgui;").remove()
-    	$("svg").append(svgel("g",{"id":"buildgui;"}))
+	if(en.id[0]==="B"){
+		$("#buildgui").remove()
+    	$("svg").append(svgel("g",{"id":"buildgui"}))
     }
 }
