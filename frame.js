@@ -161,7 +161,7 @@ function mode1(){
 					btile=$(svgel("g",{"transform":"translate("+
 					id*reqs+",0)","id":"bui"+id}))
 					sca=(reqs/2)/Math.max.apply(null,i.size)
-					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0,"rx":2,"ry":2,"class":"btrect"}))
+					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0,"rx":camvb[2]/250,"ry":camvb[3]/250,"class":"btrect"}))
 					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0,"class":"buitile","stroke":"#808080","fill":"#404040"},""))
 				    btile.append(svgel("text",{"fill":"#ffffff","y":reqs/16,"x":0,"alignment-baseline":"middle","text-anchor":"start","font-size":reqs/8},i.name))
 				    btile.append(svgel("text",{"fill":"#ffffff","y":5*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},i.cost[0]))
@@ -354,6 +354,9 @@ function mode1(){
 			$(".btrect")
 			.attr("width",reqs)
 			.attr("height",reqs)
+			$("#stats>rect,#recmore")
+			.attr("rx",camvb[2]/250)
+			.attr("ry",camvb[3]/250)
 			$("#morerect")
 			.attr("x",camvb[0])
 			.attr("y",camvb[1])
@@ -384,6 +387,11 @@ function clev(el){
 	if(en.id[0]==="B"){
 		$("#buildgui").remove()
     	$("svg").append(svgel("g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"}))
-    	$("#buildgui").append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3}))
+    	$("#buildgui").append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3,"fill":"#777777"}))
+    	$("#buildgui").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"sstart"},en.name+" Level "+en.level))
+    	$("#buildgui").mouseleave((ev)=>{
+    		console.log(ev.currentTarget)
+    		$("#buildgui").remove()
+    	})
     }
 }
