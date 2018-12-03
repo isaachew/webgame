@@ -383,6 +383,7 @@ function clev(el){
 	if(en.type.slice(0,4)=="coll")da.collect=en.id
 	if(en.id[0]==="B"){
 		$("#buildgui").remove()
-    	$("svg").append(svgel("g",{"id":"buildgui"}))
+    	$("svg").append(svgel("g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"}))
+    	$("#buildgui").append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3}))
     }
 }
