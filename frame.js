@@ -395,7 +395,7 @@ function clev(el){
     		$("#buildgui").mouseleave()
     		da.upgrade=en.id
     	})
-    	$("#buildgui").append(svgel("text",{"x":camvb[2]/12,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff"},"Some"))
+    	$("#buildgui").append(svgel("text",{"x":camvb[2]/12,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff"},"Upgrade"))
     	$("#buildgui").mouseleave((ev)=>{
     		console.log(ev.currentTarget)
     		$("#buildgui").remove()
