@@ -398,6 +398,9 @@ function clev(el){
     		$("#buildgui").mouseleave()
     		da.upgrade=en.id
     	})
+    	$("#buildbtn2,#buildbtntx2").click(()=>{
+    		
+    	})
     	$("#buildgui").mouseleave((ev)=>{
     		console.log(ev.currentTarget)
     		$("#buildgui").remove()
