@@ -399,7 +399,9 @@ function clev(el){
     		da.upgrade=en.id
     	})
     	$("#buildbtn2,#buildbtntx2").click(()=>{
-    		
+    		console.log("button 2",en.id)
+    		$("#buildgui").mouseleave()
+    		da.sell=en.id
     	})
     	$("#buildgui").mouseleave((ev)=>{
     		console.log(ev.currentTarget)
