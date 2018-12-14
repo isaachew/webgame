@@ -394,7 +394,8 @@ function clev(el){
     	$("#buildgui").append(svgel("rect",{"x":9*camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn2"}))
     	$("#buildgui").append(svgel("text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2"},"Sell"))
     	if(en.troops){
-    		$("#brect").attr("width",camvb[2]*2/3)
+    		l=en.troops.length
+    		$("#brect").attr("width",camvb[2]/12*Math.ceil(l/2+4))
     	}
     	$("#buildbtn1,#buildbtntx1").click(()=>{
     		console.log("this")
