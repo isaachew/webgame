@@ -396,6 +396,13 @@ function clev(el){
     	if(en.troops){
     		l=en.troops.length
     		$("#brect").attr("width",camvb[2]/12*Math.ceil(l/2+4))
+    		$("#buildgui").append(svgel("g",{"id":"troopgui"}))
+    		debugger
+    		for(f=0;f<l;f++){
+    			console.log(f)
+    			$("#troopgui").append(svgel("g",{"id":"trppr"+f}))
+    			console.log(f,"for loop troops",l)
+    		}
     	}
     	$("#buildbtn1,#buildbtntx1").click(()=>{
     		console.log("this")
