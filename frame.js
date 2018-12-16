@@ -217,7 +217,7 @@ function mode1(){
 					scrbar(reqs)
 				})
 			}
-			for(en of entities.concat(buildings)){
+			for(var en of entities.concat(buildings)){
 				if(en.id[0]==="E"){
 					en.pos[0]+=en.vel[0]/60
 					en.pos[1]+=en.vel[1]/60
@@ -400,7 +400,7 @@ function clev(el){
     		for(f=0;f<l;f++){
     			console.log(f)
     			$("#troopgui").append(svgel("g",{"id":"trppr"+f}))
-    			$("#trppr"+f).append(svgel("rect",{"x":(f%Math.ceil(l/2))*camvb[2]/12+camvb[2]/3,"y":Math.floor(f/l*2)*camvb[3]/6,"width":camvb[2]/12,"height":camvb[3]/6}))
+    			$("#trppr"+f).append(svgel("rect",{"x":(f%Math.ceil(l/2))*camvb[2]/12+camvb[2]/3,"y":Math.floor(f/l*2)*camvb[3]/6,"width":camvb[2]/12,"height":camvb[3]/6,"rx":camvb[2]/200,"ry":camvb[2]/200,"fill":"#c08000"}))
     			console.log(f,"for loop troops",l)
     		}
     	}
