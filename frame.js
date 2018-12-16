@@ -397,10 +397,10 @@ function clev(el){
     		l=en.troops.length
     		$("#brect").attr("width",camvb[2]/12*Math.ceil(l/2+4))
     		$("#buildgui").append(svgel("g",{"id":"troopgui"}))
-    		debugger
     		for(f=0;f<l;f++){
     			console.log(f)
     			$("#troopgui").append(svgel("g",{"id":"trppr"+f}))
+    			$("#trppr"+f).append(svgel("rect",{"x":(f%Math.ceil(l/2))*camvb[2]/12+camvb[2]/3,"y":Math.floor(f/l*2)*camvb[3]/6,"width":camvb[2]/12,"height":camvb[3]/6}))
     			console.log(f,"for loop troops",l)
     		}
     	}
