@@ -399,8 +399,10 @@ function clev(el){
     		$("#buildgui").append(svgel("g",{"id":"troopgui"}))
     		for(f=0;f<l;f++){
     			console.log(f)
-    			$("#troopgui").append(svgel("g",{"id":"trppr"+f}))
-    			$("#trppr"+f).append(svgel("rect",{"x":(f%Math.ceil(l/2))*camvb[2]/12+camvb[2]/3,"y":Math.floor(f/l*2)*camvb[3]/6,"width":camvb[2]/12,"height":camvb[3]/6,"rx":camvb[2]/200,"ry":camvb[2]/200,"fill":"#c08000"}))
+    			$("#troopgui").append(svgel("g",{"id":"trppr"+f,"transform":"translate("+((f%Math.ceil(l/2))*camvb[2]/12+camvb[2]/3)+","+(Math.floor(f/l*2)*camvb[3]/6)+")"}))
+    			$("#trppr"+f).append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/12,"height":camvb[3]/6,"rx":camvb[2]/200,"ry":camvb[2]/200,"fill":"#c08000"}))
+    			crespr(en.troops[f].type)
+    			$("#trppr"+f).append(svgel("use",{"x":camvb[2]/48,"y":0,"href":"#"+en.troops[f].type,"transform":"scale("+camvb[2]/24/en.troops[f].size+","+camvb[2]/48+",0)","stroke":"#808080","fill":"#404040"}))
     			console.log(f,"for loop troops",l)
     		}
     	}
