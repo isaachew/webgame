@@ -416,6 +416,11 @@ function clev(el){
     			$("#trppr"+f).append(svgel("use",{"href":"#coll0","class":"trpcspr0"}))
     			$("#trppr"+f).append(svgel("use",{"href":"#coll1","class":"trpcspr1"}))
     			console.log(f,"for loop troops",l)
+    			$("#trppr"+f).click((ev)=>{
+    				t=ev.currentTarget
+    				t=t.id.slice(6)
+    				console.log(t)
+    			})
     		}
     	}
     	$("#buildbtn1,#buildbtntx1").click(()=>{
