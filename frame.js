@@ -418,8 +418,9 @@ function clev(el){
     			console.log(f,"for loop troops",l)
     			$("#trppr"+f).click((ev)=>{
     				t=ev.currentTarget
-    				t=t.id.slice(6)
-    				console.log(t)
+    				t=t.id.slice(5)
+    				da.troop=en.troops[t]
+    				console.log(en,t,en.troops[t])
     			})
     		}
     	}
