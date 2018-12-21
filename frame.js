@@ -419,8 +419,14 @@ function clev(el){
     			$("#trppr"+f).click((ev)=>{
     				t=ev.currentTarget
     				t=t.id.slice(5)
-    				da.troop=en.troops[t]
-    				console.log(en,t,en.troops[t])
+    				dt=Object.assign({},en.troops[t])
+    				dt.pos=en.pos.concat([])
+    				dist=Math.random()+2
+    				ang=Math.random()*2*Math.PI
+    				dt.pos[0]+=en.size[0]*dist*Math.cos(ang)
+    				dt.pos[1]+=en.size[1]*dist*Math.sin(ang)
+    				da.troop=dt
+    				console.log(en,t,dt)
     			})
     		}
     	}
