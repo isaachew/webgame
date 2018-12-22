@@ -389,12 +389,12 @@ function mode1(){
 			.text("Name: "+players[playid].name)
 }
 function clev(el){
+	$("#buildgui").remove()
 	k=el.id.slice(1)
 	en=(el.id[0]==="E")?entities[k]:buildings[k]
 	console.log("click",en)
 	if(en.type.slice(0,4)=="coll")da.collect=en.id
 	if(en.id[0]==="B"){
-		$("#buildgui").remove()
     	$("svg").append(svgel("g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"}))
     	$("#buildgui").append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3,"fill":"#777777","id":"brect"}))
     	$("#buildgui").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},en.name+" Level "+en.level))
@@ -415,6 +415,8 @@ function clev(el){
     			collbox=gbb("#coll0")
     			$("#trppr"+f).append(svgel("use",{"href":"#coll0","class":"trpcspr0"}))
     			$("#trppr"+f).append(svgel("use",{"href":"#coll1","class":"trpcspr1"}))
+    			$("#trppr"+f).append(svgel("text",{"class":"trpctx0"},en.troops[f].cost[0]))
+    			$("#trppr"+f).append(svgel("text",{"class":"trpctx1"},en.troops[f].cost[1]))
     			console.log(f,"for loop troops",l)
     			$("#trppr"+f).click((ev)=>{
     				t=ev.currentTarget
