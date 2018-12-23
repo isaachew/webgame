@@ -415,8 +415,8 @@ function clev(el){
     			collbox=gbb("#coll0")
     			$("#trppr"+f).append(svgel("use",{"href":"#coll0","class":"trpcspr0"}))
     			$("#trppr"+f).append(svgel("use",{"href":"#coll1","class":"trpcspr1"}))
-    			$("#trppr"+f).append(svgel("text",{"class":"trpctx0"},en.troops[f].cost[0]))
-    			$("#trppr"+f).append(svgel("text",{"class":"trpctx1"},en.troops[f].cost[1]))
+    			$("#trppr"+f).append(svgel("text",{"class":"trpctx0","x":camvb[2]/50,"y":camvb[3]/8,"alignment-baseline":"middle","font-size":camvb[2]/60},en.troops[f].cost[0]))
+    			$("#trppr"+f).append(svgel("text",{"class":"trpctx1","x":camvb[2]/50,"y":camvb[3]*7/48,"alignment-baseline":"middle","font-size":camvb[2]/60},en.troops[f].cost[1]))
     			console.log(f,"for loop troops",l)
     			$("#trppr"+f).click((ev)=>{
     				t=ev.currentTarget
