@@ -402,6 +402,11 @@ function clev(el){
     	$("#buildgui").append(svgel("text",{"x":camvb[2]/12,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx1"},"Upgrade"))
     	$("#buildgui").append(svgel("rect",{"x":9*camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn2"}))
     	$("#buildgui").append(svgel("text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2"},"Sell"))
+    	$("#buildgui").append(svgel("g",{"id":"upstats"}))
+    	nl=pres.find((a)=>a[0].type===en.type)[en.level]
+    	for(i in nl){
+    		console.log(i,nl[i])
+    	}
     	if(en.troops){
     		l=en.troops.length
     		$("#brect").attr("width",camvb[2]/12*Math.ceil(l/2+4))
