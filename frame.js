@@ -24,27 +24,26 @@ function frame(ts){
 				$("#gobtn").append(svgel("text",{"x":"277.5","y":"250","fill":"white","stroke":"black","text-anchor":"middle","alignment-baseline":"middle","font-size":"10"},"Play"))
 				$("svg").append(svgel("g",{"id":"help"}))
 				$("#help").append(svgel("rect",{"x":"480","y":"0","width":"20","height":"20","rx":"1","ry":"1","fill":"#aaaaaa","id":"helpb"}))
-		        $("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
-		        $("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
-		        $("body").append(el("div",{"style":"position:absolute","id":"chlog"},"Space for changelog"))
-		        $("#gobtn").click(()=>{
+				$("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
+				$("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
+				$("body").append(el("div",{"style":"position:absolute","id":"chlog"},"Space for changelog"))
+				$("#gobtn").click(()=>{
 					serv=choose(servers)
 					da={"name":name}
 					load("join",serv,()=>{
-						console.log("id set")
 						camvb[0]=Math.random()*result.bounds[0]
 						camvb[1]=Math.random()*result.bounds[1]
 						smode(1)
 						playid=result.id
 					})
-		        })
-		        $("#help").click(()=>{
-		        	$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
-		        	$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>&#10006;</span>"))
-		        	$("#chelp").click(()=>{
-		        		$("#hblack,#hcont").remove()
-		        	})
-		        })
+				})
+				$("#help").click(()=>{
+					$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
+					$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>&#10006;</span>"))
+					$("#chelp").click(()=>{
+						$("#hblack,#hcont").remove()
+					})
+				})
 			}
 			$("#name").text(name.slice(0,namecr)+(count<30?"|":" ")+name.slice(namecr,name.length))
 			j=gbb("#chlogh")
@@ -99,7 +98,6 @@ function frame(ts){
 }
 function mode1(){
 	if(players[playid]==undefined){
-		console.log("player undefined")
 		mode=2
 		newmode=true
 		return
@@ -163,11 +161,11 @@ function mode1(){
 					sca=(reqs/2)/Math.max.apply(null,i.size)
 					btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0,"rx":camvb[2]/250,"ry":camvb[3]/250,"class":"btrect"}))
 					btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0,"class":"buitile","stroke":"#808080","fill":"#404040"},""))
-				    btile.append(svgel("text",{"fill":"#ffffff","y":reqs/16,"x":0,"alignment-baseline":"middle","text-anchor":"start","font-size":reqs/8},i.name))
-				    btile.append(svgel("text",{"fill":"#ffffff","y":5*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},i.cost[0]))
-				    btile.append(svgel("text",{"fill":"#ffffff","y":7*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},i.cost[1]))
-				    btile.append(svgel("use",{"href":"#coll0","class":"collbds0"}))
-				    btile.append(svgel("use",{"href":"#coll1","class":"collbds1"}))
+					btile.append(svgel("text",{"fill":"#ffffff","y":reqs/16,"x":0,"alignment-baseline":"middle","text-anchor":"start","font-size":reqs/8},i.name))
+					btile.append(svgel("text",{"fill":"#ffffff","y":5*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},i.cost[0]))
+					btile.append(svgel("text",{"fill":"#ffffff","y":7*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},i.cost[1]))
+					btile.append(svgel("use",{"href":"#coll0","class":"collbds0"}))
+					btile.append(svgel("use",{"href":"#coll1","class":"collbds1"}))
 					btile.click((n)=>{
 						$(".btrect").css("stroke","none")
 						if($("#r"+n.currentTarget.id+".phrect").toArray().length){
@@ -263,7 +261,6 @@ function mode1(){
 				}
 			}
 			if(keyp){
-				console.log(ke)
 				if(ke==="ArrowUp")cdir[1]=-1
 				if(ke==="ArrowDown")cdir[1]=1
 				if(ke==="ArrowLeft")cdir[0]=-1
@@ -392,65 +389,68 @@ function clev(el){
 	$("#buildgui").remove()
 	k=el.id.slice(1)
 	en=(el.id[0]==="E")?entities[k]:buildings[k]
-	console.log("click",en)
 	if(en.type.slice(0,4)=="coll")da.collect=en.id
-	if(en.id[0]==="B"){
-    	$("svg").append(svgel("g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"}))
-    	$("#buildgui").append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3,"fill":"#777777","id":"brect"}))
-    	$("#buildgui").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},en.name+" Level "+en.level))
-    	$("#buildgui").append(svgel("rect",{"x":camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn1"}))
-    	$("#buildgui").append(svgel("text",{"x":camvb[2]/12,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx1"},"Upgrade"))
-    	$("#buildgui").append(svgel("rect",{"x":9*camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn2"}))
-    	$("#buildgui").append(svgel("text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2"},"Sell"))
-    	$("#buildgui").append(svgel("g",{"id":"upstats"}))
-    	nl=pres.find((a)=>a[0].type===en.type)[en.level]
-    	for(i in nl){
-    		console.log(i,nl[i])
-    	}
-    	if(en.troops){
-    		l=en.troops.length
-    		$("#brect").attr("width",camvb[2]/12*Math.ceil(l/2+4))
-    		$("#buildgui").append(svgel("g",{"id":"troopgui"}))
-    		for(f=0;f<l;f++){
-    			console.log(f)
-    			$("#trppr"+f).append(svgel("text",{"name":"trpnam"+f,"alignment-baseline":"middle","font-size":camvb[2]/60},en.troops[f].name))
-    			$("#troopgui").append(svgel("g",{"id":"trppr"+f,"transform":"translate("+((f%Math.ceil(l/2))*camvb[2]/12+camvb[2]/3)+","+(Math.floor(f/l*2)*camvb[3]/6)+")"}))
-    			$("#trppr"+f).append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/12,"height":camvb[3]/6,"rx":camvb[2]/200,"ry":camvb[2]/200,"fill":"#c08000"}))
-    			crespr(en.troops[f].type)
-    			$("#trppr"+f).append(svgel("use",{"href":"#"+en.troops[f].type,"transform":"translate("+camvb[2]/48+",0) scale("+camvb[2]/24/en.troops[f].size+")","stroke":"#808080","fill":"#404040"}))
-    			collbox=gbb("#coll0")
-    			$("#trppr"+f).append(svgel("use",{"href":"#coll0","class":"trpcspr0"}))
-    			$("#trppr"+f).append(svgel("use",{"href":"#coll1","class":"trpcspr1"}))
-    			$("#trppr"+f).append(svgel("text",{"class":"trpctx0","x":camvb[2]/50,"y":camvb[3]/8,"alignment-baseline":"middle","font-size":camvb[2]/60},en.troops[f].cost[0]))
-    			$("#trppr"+f).append(svgel("text",{"class":"trpctx1","x":camvb[2]/50,"y":camvb[3]*7/48,"alignment-baseline":"middle","font-size":camvb[2]/60},en.troops[f].cost[1]))
-    			console.log(f,"for loop troops",l)
-    			$("#trppr"+f).click((ev)=>{
-    				t=ev.currentTarget
-    				t=t.id.slice(5)
-    				dt=Object.assign({},en.troops[t])
-    				dt.pos=en.pos.concat([])
-    				dist=Math.random()+2
-    				ang=Math.random()*2*Math.PI
-    				dt.pos[0]+=en.size[0]*dist*Math.cos(ang)
-    				dt.pos[1]+=en.size[1]*dist*Math.sin(ang)
-    				da.troop=dt
-    				console.log(en,t,dt)
-    			})
-    		}
-    	}
-    	$("#buildbtn1,#buildbtntx1").click(()=>{
-    		console.log("this")
-    		$("#buildgui").mouseleave()
-    		da.upgrade=en.id
-    	})
-    	$("#buildbtn2,#buildbtntx2").click(()=>{
-    		console.log("button 2",en.id)
-    		$("#buildgui").mouseleave()
-    		da.sell=en.id
-    	})
-    	$("#buildgui").mouseleave((ev)=>{
-    		console.log(ev.currentTarget)
-    		$("#buildgui").remove()
-    	})
-    }
+	if(en.id[0]==="B"&&en.player.id===playid){
+		$("svg").append(svgel("g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"}))
+		nl=pres.find((a)=>a[0].type===en.type)[en.level]
+		$("#buildgui").append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3,"fill":"#777777","id":"brect"}))
+		$("#buildgui").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},en.name+" Level "+en.level))
+		if(nl!=undefined){
+			$("#buildgui").append(svgel("rect",{"x":camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn1"}))
+			$("#buildgui").append(svgel("text",{"x":camvb[2]/12,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx1"},"Upgrade"))
+		}
+		$("#buildgui").append(svgel("rect",{"x":9*camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn2"}))
+		$("#buildgui").append(svgel("text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2"},"Sell"))
+		$("#buildgui").append(svgel("g",{"id":"upstats"}))
+		nl=pres.find((a)=>a[0].type===en.type)[en.level]
+		for(i in nl){
+			k=nl[i]
+			if(i==="shoot"){
+				k="s: "
+				k+=nl[i]?"Yes":"No"
+			}
+			if(!["update","ty"].includes(nl)){
+				$("#buildgui").append(svgel("text",{},i[0].toUpperCase()+i.slice(1)+k))
+			}
+		}
+		if(en.troops){
+			l=en.troops.length
+			$("#brect").attr("width",camvb[2]/12*Math.ceil(l/2+4))
+			$("#buildgui").append(svgel("g",{"id":"troopgui"}))
+			for(f=0;f<l;f++){
+				$("#trppr"+f).append(svgel("text",{"name":"trpnam"+f,"alignment-baseline":"middle","font-size":camvb[2]/60},en.troops[f].name))
+				$("#troopgui").append(svgel("g",{"id":"trppr"+f,"transform":"translate("+((f%Math.ceil(l/2))*camvb[2]/12+camvb[2]/3)+","+(Math.floor(f/l*2)*camvb[3]/6)+")"}))
+				$("#trppr"+f).append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/12,"height":camvb[3]/6,"rx":camvb[2]/200,"ry":camvb[2]/200,"fill":"#c08000"}))
+				crespr(en.troops[f].type)
+				$("#trppr"+f).append(svgel("use",{"href":"#"+en.troops[f].type,"transform":"translate("+camvb[2]/48+",0) scale("+camvb[2]/24/en.troops[f].size+")","stroke":"#808080","fill":"#404040"}))
+				collbox=gbb("#coll0")
+				$("#trppr"+f).append(svgel("use",{"href":"#coll0","class":"trpcspr0"}))
+				$("#trppr"+f).append(svgel("use",{"href":"#coll1","class":"trpcspr1"}))
+				$("#trppr"+f).append(svgel("text",{"class":"trpctx0","x":camvb[2]/50,"y":camvb[3]/8,"alignment-baseline":"middle","font-size":camvb[2]/60},en.troops[f].cost[0]))
+				$("#trppr"+f).append(svgel("text",{"class":"trpctx1","x":camvb[2]/50,"y":camvb[3]*7/48,"alignment-baseline":"middle","font-size":camvb[2]/60},en.troops[f].cost[1]))
+				$("#trppr"+f).click((ev)=>{
+					t=ev.currentTarget
+					t=t.id.slice(5)
+					dt=Object.assign({},en.troops[t])
+					dt.pos=en.pos.concat([])
+					dist=Math.random()+2
+					ang=Math.random()*2*Math.PI
+					dt.pos[0]+=en.size[0]*dist*Math.cos(ang)
+					dt.pos[1]+=en.size[1]*dist*Math.sin(ang)
+					da.troop=dt
+				})
+			}
+		}
+		$("#buildbtn1,#buildbtntx1").click(()=>{
+			$("#buildgui").mouseleave()
+			da.upgrade=en.id
+		})
+		$("#buildbtn2,#buildbtntx2").click(()=>{
+			$("#buildgui").mouseleave()
+			da.sell=en.id
+		})
+		$("#buildgui").mouseleave((ev)=>{
+			$("#buildgui").remove()
+		})
+	}
 }
