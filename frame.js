@@ -247,7 +247,7 @@ function mode1(){
 							$("#objects").append(svgel("g",{"id":en.id+"hb"}))
 						}
 					}else if($("#"+en.id+"hb").length){
-						
+						$("#"+en.id+"hb").remove()
 					}
 					if(entdis.attr("href")!=="#"+en.type){
 						entdis.remove()
