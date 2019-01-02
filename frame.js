@@ -31,8 +31,8 @@ function frame(ts){
 					serv=choose(servers)
 					da={"name":name}
 					load("join",serv,()=>{
-						camvb[0]=Math.random()*result.bounds[0]
-						camvb[1]=Math.random()*result.bounds[1]
+						camvb[0]=Math.random()*(result.bounds[0]-camvb[2])
+						camvb[1]=Math.random()*(result.bounds[1]-camvb[3])
 						smode(1)
 						playid=result.id
 					})
@@ -245,6 +245,8 @@ function mode1(){
 							
 						}else{
 							$("#objects").append(svgel("g",{"id":en.id+"hb"}))
+							$("#"+en.id+"hb").append(svgel("rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*0.75,"height":en.size[0]/5*0.75,"fill":"#ff0000"}))
+							$("#"+en.id+"hb").append(svgel("rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*en.hp/en.maxhp*0.75,"height":en.size[0]/5*0.75,"fill":"#00ff00"}))
 						}
 					}else if($("#"+en.id+"hb").length){
 						$("#"+en.id+"hb").remove()
