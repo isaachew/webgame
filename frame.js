@@ -323,7 +323,7 @@ function mode1(){
 			$(".collbds0")
 			.attr("transform","translate("+(reqs/8-camvb[2]/200)+","+(reqs/2+camvb[2]/200)+")")
 			$(".collbds1")
-			.attr("transform","translate("+(reqs/8-camvb[2]/200)+","+(reqs/2+camvb[2]/200)+")")
+			.attr("transform","translate("+(reqs/8-camvb[2]/200)+","+(reqs*3/4+camvb[2]/200)+")")
 			$(".trpcspr0")
 			.attr("transform","translate("+camvb[2]/200+","+96*camvb[2]/800+")")
 			$(".trpcspr1")
