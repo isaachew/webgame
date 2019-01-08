@@ -26,8 +26,12 @@ function frame(ts){
 		        $("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
 		        $("body").append(el("div",{"style":"position:absolute","id":"chlog"},"Space for changelog"))
 		        $("svg").append(svgel("text",{"x":500,"y":20,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlink"},"GitHub"))
+		        $("svg").append(svgel("text",{"x":500,"y":30,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlinks"},"GitHub Server"))
 		        $("#ghlink").click(()=>{
 		        	document.location.href="https://github.com/isaachew/webgame"
+		        })
+		        $("#ghlinks").click(()=>{
+		        	document.location.href="https://github.com/isaachew/webgameserver"
 		        })
 		        $("#gobtn").click(()=>{
 					smode(1)
