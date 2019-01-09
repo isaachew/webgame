@@ -24,7 +24,16 @@ function frame(ts){
 				$("#help").append(svgel("rect",{"x":"480","y":"0","width":"20","height":"20","rx":"1","ry":"1","fill":"#aaaaaa","id":"helpb"}))
 		        $("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
 		        $("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
-		        $("body").append(el("div",{"style":"position:absolute","id":"chlog"},"Space for changelog"))
+		        $("body").append(el("div",{"style":"position:absolute","id":"chlog"}))
+		        fetch("data/changelog.txt")
+		        .then((v)=>(v.text()))
+		        .then((v)=>{
+		        	for(i of v.split("\n")){
+		        		n=i.split("'\"'")
+		        		$("#chlog").append(el("h2",{},n[0]))
+		        		$("#chlog").append(el("ul",{},n.slice(1).map((k)=>("<li>"+k+"<li>"))))
+		        	}
+		        })
 		        $("svg").append(svgel("text",{"x":500,"y":20,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlink"},"GitHub"))
 		        $("svg").append(svgel("text",{"x":500,"y":30,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlinks"},"GitHub Server"))
 		        $("#ghlink").click(()=>{
