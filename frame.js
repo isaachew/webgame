@@ -31,7 +31,7 @@ function frame(ts){
 		        	for(i of v.split("\n")){
 		        		n=i.split("'\"'")
 		        		$("#chlog").append(el("h2",{},n[0]))
-		        		$("#chlog").append(el("ul",{},n.slice(1).map((k)=>("<li>"+k+"</li>"))))
+		        		$("#chlog").append(el("ul",{},n.slice(1).map((k)=>("<li>"+k.replace(/</g,"&lt;").replace(/>/g,"&gt;")+"</li>"))))
 		        	}
 		        })
 		        $("svg").append(svgel("text",{"x":500,"y":20,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlink"},"GitHub"))
