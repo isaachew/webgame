@@ -242,11 +242,16 @@ function mode1(){
 					.attr("transform","rotate("+en.rot+","+(en.pos[0]+entdw/2)+","+(en.pos[1]+entdh/2)+")")
 					if(en.hp<en.maxhp){
 						if($("#"+en.id+"hb").length){
-							
+							console.log("hb update",en.hp/en.maxhp)
+							$("#"+en.id+"hb .hebg")
+							.attr("x",en.pos[0]+en.size[0]*0.125)
+							.attr("y",en.pos[1]-en.size[1]*0.3)
+							.attr("width",en.size[0]*en.hp/en.maxhp*0.75)
+							.attr("height",en.size[0]/5*0.75)
 						}else{
 							$("#objects").append(svgel("g",{"id":en.id+"hb"}))
-							$("#"+en.id+"hb").append(svgel("rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*0.75,"height":en.size[0]/5*0.75,"fill":"#ff0000"}))
-							$("#"+en.id+"hb").append(svgel("rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*en.hp/en.maxhp*0.75,"height":en.size[0]/5*0.75,"fill":"#00ff00"}))
+							$("#"+en.id+"hb").append(svgel("rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*0.75,"height":en.size[0]/5*0.75,"fill":"#ff0000","class":"hebr"}))
+							$("#"+en.id+"hb").append(svgel("rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*en.hp/en.maxhp*0.75,"height":en.size[0]/5*0.75,"fill":"#00ff00","class":"hebg"}))
 						}
 					}else if($("#"+en.id+"hb").length){
 						$("#"+en.id+"hb").remove()
