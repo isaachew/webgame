@@ -1,4 +1,4 @@
-alpha 0.1'"'Created game!
+alpha 0.1'"'<b>Created game!</b>
 alpha 0.2'"'Minor changes
 alpha 0.3'"'Added arrow pad for mobile users.
 alpha 0.4'"'Tweaked code slightly

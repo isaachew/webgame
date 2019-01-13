@@ -26,7 +26,7 @@ function frame(ts){
 				$("#help").append(svgel("rect",{"x":"480","y":"0","width":"20","height":"20","rx":"1","ry":"1","fill":"#aaaaaa","id":"helpb"}))
 				$("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
 				$("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
-				$("body").append(el("div",{"style":"position:absolute","id":"chlog"},"Space for changelog"))
+				$("body").append(el("div",{"style":"position:absolute","id":"chlog"}))
 				$("#gobtn").click(()=>{
 					serv=choose(servers)
 					da={"name":name}
@@ -44,6 +44,40 @@ function frame(ts){
 						$("#hblack,#hcont").remove()
 					})
 				})
+				$("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
+		        $("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
+		        fetch("data/changelog.txt")
+		        .then((v)=>(v.text()))
+		        .then((v)=>{
+		        	allfl=v.split("\n")
+		        	allfl.reverse()
+		        	for(i of allfl){
+		        		n=i.split("'\"'")
+		        		$("#chlog").append(el("h2",{},n[0]))
+		        		$("#chlog").append(el("ul",{},n.slice(1).map((k)=>("<li>"+k.replace(/</g,"&lt;").replace(/>/g,"&gt;")+"</li>"))))
+		        	}
+		        })
+		        $("svg").append(svgel("text",{"x":500,"y":20,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlink"},"GitHub"))
+		        $("svg").append(svgel("text",{"x":500,"y":30,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlinks"},"GitHub Server"))
+		        $("#ghlink").click(()=>{
+		        	document.location.href="https://github.com/isaachew/webgame"
+		        })
+		        $("#ghlinks").click(()=>{
+		        	document.location.href="https://github.com/isaachew/webgameserver"
+		        })
+		        $("#gobtn").click(()=>{
+					smode(1)
+					serv=choose(servers)
+					da={"name":name}
+					load("join",serv,()=>{console.log("id set");playid=result.id})
+		        })
+		        $("#help").click(()=>{
+		        	$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
+		        	$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1;z-index:30000","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>x</span>"))
+		        	$("#chelp").click(()=>{
+		        		$("#hblack,#hcont").remove()
+		        	})
+		        })
 			}
 			$("#name").text(name.slice(0,namecr)+(count<30?"|":" ")+name.slice(namecr,name.length))
 			j=gbb("#chlogh")
@@ -85,6 +119,7 @@ function frame(ts){
 			if(ff){
 				$("svg").append(svgel("g",{"id":"statsmodal"}))
 				$("#statsmodal").append(svgel("rect",{"x":camvb[0],"y":camvb[1],"width":camvb[2],"height":camvb[3],"opacity":0.5}))
+				$("#statsmodal").append(svgel("text",{"x":camvb[2]/2+camvb[0],"y":camvb[3]/2+camvb[1],"color":"#ffffff"},"Text"))
 			}
 			if(keyp){
 				smode(0)
@@ -120,8 +155,6 @@ function mode1(){
 					})
 					sv.on("touchend",function(){cdir=[0,0]})
 				}
-				crespr("coll0")
-				crespr("coll1")
 				$("svg").append(svgel("g",{"id":"sprites","transform":"translate(-1000,-1000)"},""))
 				$("svg").append(svgel("g",{"id":"stats"},"<rect fill='#dddddd' opacity='0.75' id='statbar'>"))
 				$("#stats").append(svgel("text",{"id":"score","clip-path":"url(#ctext)"},"Score: 0"))
