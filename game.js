@@ -22,8 +22,9 @@ function load(url,serv,func){
         smode(0)
     })
     .then(function(r){
+        console.log("r",r)
         if(r!=undefined&&mode!==2){
-            emfunc=(a)=>null
+            emfunc=()=>null
             result=r
             entities=r.entities
             buildings=r.buildings

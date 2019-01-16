@@ -65,12 +65,6 @@ function frame(ts){
 		        $("#ghlinks").click(()=>{
 		        	document.location.href="https://github.com/isaachew/webgameserver"
 		        })
-		        $("#gobtn").click(()=>{
-					smode(1)
-					serv=choose(servers)
-					da={"name":name}
-					load("join",serv,()=>{console.log("id set");playid=result.id})
-		        })
 		        $("#help").click(()=>{
 		        	$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
 		        	$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1;z-index:30000","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>x</span>"))
@@ -119,7 +113,8 @@ function frame(ts){
 			if(ff){
 				$("svg").append(svgel("g",{"id":"statsmodal"}))
 				$("#statsmodal").append(svgel("rect",{"x":camvb[0],"y":camvb[1],"width":camvb[2],"height":camvb[3],"opacity":0.5}))
-				$("#statsmodal").append(svgel("text",{"x":camvb[2]/2+camvb[0],"y":camvb[3]/2+camvb[1],"color":"#ffffff"},"Text"))
+				$("#statsmodal").append(svgel("text",{"x":camvb[2]/2+camvb[0],"y":camvb[3]/2+camvb[1],"color":"#ffffff","font-size":camvb[2]/50,"text-align":"center"},"Score:"+players[playid]))
+				$("#statsmodal").append(svgel("text",{"x":camvb[2]/2+camvb[0],"y":3*camvb[3]/4+camvb[1],"color":"#ffffff","font-size":camvb[2]/30,"text-align":"center"},"Press a key to continue"))
 			}
 			if(keyp){
 				smode(0)
