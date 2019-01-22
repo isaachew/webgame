@@ -256,6 +256,7 @@ function mode1(){
 				allids=$("#objects").children().toArray().map(a=>a.id)
 				if((en.pos[0]-camvb[0]>0)&&(en.pos[0]-camvb[0]<camvb[2])&&(en.pos[1]-camvb[1]>0)&&(en.pos[1]-camvb[1]<camvb[3])){
 					if(!allids.includes(en.id+"")){
+						console.log(en.player,en.player?en.player.stroke:undefined,en.player?en.player.fill:undefined,ty,"entity spawn")
 						spr=$(svgel("use",{"href":"#"+ty,"id":en.id,"class":"object","stroke":en.player?en.player.stroke:undefined,"fill":en.player?en.player.fill:undefined}))
 						.click((n)=>{
 							clev(n.target)
