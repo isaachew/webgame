@@ -435,6 +435,7 @@ function clev(el){
 	k=el.id.slice(1)
 	en=(el.id[0]==="E")?entities[k]:buildings[k]
 	if(en.type.slice(0,4)=="coll")da.collect=en.id
+	console.log("clicked",en.player.id,playid,en.player,players[playid])
 	if(en.id[0]==="B"&&en.player.id===playid){
 		$("svg").append(svgel("g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"}))
 		nl=pres.find((a)=>a[0].type===en.type)[en.level]

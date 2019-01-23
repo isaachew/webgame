@@ -114,12 +114,6 @@ function crespr(ty){
     	sprhold.append(spri)
     }
 }
-function clev(el){
-    console.log("click")
-    k=el.id.slice(1)
-    en=(el.id[0]==="E")?entities[k]:buildings[k]
-    if(en.type.slice(0,4)=="coll")da.collect=en.id
-}
 function gbb(el){
     elu=$(el)[0].getBoundingClientRect()
     return {"x":elu.left+scrollX,"y":elu.top+scrollY,"width":elu.width,"height":elu.height}
