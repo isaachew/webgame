@@ -26,7 +26,7 @@ function frame(ts){
 				$("#help").append(svgel("rect",{"x":"480","y":"0","width":"20","height":"20","rx":"1","ry":"1","fill":"#aaaaaa","id":"helpb"}))
 				$("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
 				$("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
-				$("body").append(el("div",{"style":"position:absolute","id":"chlog"}))
+				$("body").append(el("div",{"style":"position:absolute;overflow:auto","id":"chlog"}))
 				$("#gobtn").click(()=>{
 					serv=choose(servers)
 					da={"name":name}
