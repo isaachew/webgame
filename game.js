@@ -30,6 +30,7 @@ function load(url,serv,func){
             buildings=r.buildings
             players=r.players
             pres=r.presets
+            trps=r.trps
             score=(players[playid]||{"score":0}).score||0;
             (func||emfunc)(result)
             load("getdata",serv)

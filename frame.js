@@ -26,7 +26,7 @@ function frame(ts){
 				$("#help").append(svgel("rect",{"x":"480","y":"0","width":"20","height":"20","rx":"1","ry":"1","fill":"#aaaaaa","id":"helpb"}))
 				$("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
 				$("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
-				$("body").append(el("div",{"style":"position:absolute","id":"chlog"}))
+				$("body").append(el("div",{"style":"position:absolute;overflow:scroll","id":"chlog"}))
 				$("#gobtn").click(()=>{
 					serv=choose(servers)
 					da={"name":name}
@@ -464,25 +464,38 @@ function clev(el){
 			$("#brect").attr("width",camvb[2]/12*Math.ceil(l/2+4))
 			$("#buildgui").append(svgel("g",{"id":"troopgui"}))
 			for(f=0;f<l;f++){
-				$("#trppr"+f).append(svgel("text",{"name":"trpnam"+f,"alignment-baseline":"middle","font-size":camvb[2]/60},en.troops[f].name))
+				trp={}
+				for(i=0;i<players[playid].trlev[f];i++){
+					for(j in trps[en.troops[f]][i]){
+						trp[j]=trps[en.troops[f]][i][j]
+					}
+				}
+				console.log(trp)
+				$("#trppr"+f).append(svgel("text",{"name":"trpnam"+f,"alignment-baseline":"middle","font-size":camvb[2]/60},trps[en.troops[f]][0].name))
 				$("#troopgui").append(svgel("g",{"id":"trppr"+f,"transform":"translate("+((f%Math.ceil(l/2))*camvb[2]/12+camvb[2]/3)+","+(Math.floor(f/l*2)*camvb[3]/6)+")"}))
 				$("#trppr"+f).append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/12,"height":camvb[3]/6,"rx":camvb[2]/200,"ry":camvb[2]/200,"fill":"#c08000"}))
-				crespr(en.troops[f].type)
-				$("#trppr"+f).append(svgel("use",{"href":"#"+en.troops[f].type,"transform":"translate("+camvb[2]/48+",0) scale("+camvb[2]/24/en.troops[f].size+")","stroke":"#808080","fill":"#404040"}))
+				crespr(en.troops[f])
+				$("#trppr"+f).append(svgel("use",{"href":"#"+en.troops[f],"transform":"translate("+camvb[2]/48+",0) scale("+camvb[2]/24/trp.size+")","stroke":"#808080","fill":"#404040"}))
 				collbox=gbb("#coll0")
 				$("#trppr"+f).append(svgel("use",{"href":"#coll0","class":"trpcspr0"}))
 				$("#trppr"+f).append(svgel("use",{"href":"#coll1","class":"trpcspr1"}))
-				$("#trppr"+f).append(svgel("text",{"class":"trpctx0","x":camvb[2]/50,"y":camvb[3]/8,"alignment-baseline":"middle","font-size":camvb[2]/60},en.troops[f].cost[0]))
-				$("#trppr"+f).append(svgel("text",{"class":"trpctx1","x":camvb[2]/50,"y":camvb[3]*7/48,"alignment-baseline":"middle","font-size":camvb[2]/60},en.troops[f].cost[1]))
+				$("#trppr"+f).append(svgel("text",{"class":"trpctx0","x":camvb[2]/50,"y":camvb[3]/8,"alignment-baseline":"middle","font-size":camvb[2]/60},trp.cost[0]))
+				$("#trppr"+f).append(svgel("text",{"class":"trpctx1","x":camvb[2]/50,"y":camvb[3]*7/48,"alignment-baseline":"middle","font-size":camvb[2]/60},trp.cost[1]))
 				$("#trppr"+f).click((ev)=>{
 					t=ev.currentTarget
 					t=t.id.slice(5)
-					dt=Object.assign({},en.troops[t])
+					dt={}
+					for(i=0;i<players[playid].trlev[t];i++){
+						for(j in trps[en.troops[t]][i]){
+							dt[j]=trps[en.troops[t]][i][j]
+						}
+					}
 					dt.pos=en.pos.concat([])
 					dist=Math.random()+2
 					ang=Math.random()*2*Math.PI
 					dt.pos[0]+=en.size[0]*dist*Math.cos(ang)
 					dt.pos[1]+=en.size[1]*dist*Math.sin(ang)
+					dt.type=en.troops[t]
 					da.troop=dt
 				})
 			}
