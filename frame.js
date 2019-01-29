@@ -500,6 +500,10 @@ function clev(el){
 				})
 			}
 		}
+		if(en.uptrp){
+			wid=$("#buildgui").attr("width")
+			$("#buildgui").append(svgel("g",{"id":"upgtrp"}))
+		}
 		$("#buildbtn1,#buildbtntx1").click(()=>{
 			$("#buildgui").mouseleave()
 			da.upgrade=en.id
