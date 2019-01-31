@@ -502,9 +502,12 @@ function clev(el){
 		}
 		if(en.uptrp){
 			console.log("troop upgrade gui")
-			wid=$("#buildgui").attr("width")
-			$("#buildgui").append(svgel("g",{"id":"upgtrp"}))
-			$("#buildgui").attr("width",(i,a)=>(parseInt(a)+Math.ceil(en.uptrp.length/2)*camvb[2]/12))
+			wid=$("#brect").attr("width")
+			$("#buildgui").append(svgel("g",{"id":"upgtrp","transform":"translate("+wid+",0)"}))
+			$("#brect").attr("width",(i,a)=>(parseInt(a)+Math.ceil(en.uptrp.length/2)*camvb[2]/12))
+			for(i=0;i<en.uptrp.length;i++){
+				$("#upgtrp")
+			}
 		}
 		$("#buildbtn1,#buildbtntx1").click(()=>{
 			$("#buildgui").mouseleave()
