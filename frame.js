@@ -506,7 +506,8 @@ function clev(el){
 			$("#buildgui").append(svgel("g",{"id":"upgtrp","transform":"translate("+wid+",0)"}))
 			$("#brect").attr("width",(i,a)=>(parseInt(a)+Math.ceil(en.uptrp.length/2)*camvb[2]/12))
 			for(i=0;i<en.uptrp.length;i++){
-				$("#upgtrp")
+				$("#upgtrp").append(svgel("g",{"id":"uptrp"+i,"transform":"translate("+camvb[2]/12*Math.floor(i/2)+","+camvb[3]/6*(i&1)+")"}))
+				$("#uptrp"+i).append(svgel("rect",{"width":"35","height":"35"}))
 			}
 		}
 		$("#buildbtn1,#buildbtntx1").click(()=>{
