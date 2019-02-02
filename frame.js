@@ -465,7 +465,7 @@ function clev(el){
 			$("#buildgui").append(svgel("g",{"id":"troopgui"}))
 			for(f=0;f<l;f++){
 				trp={}
-				for(i=0;i<players[playid].trlev[f];i++){
+				for(i=0;i<players[playid].trlev[en.troops[f]];i++){
 					for(j in trps[en.troops[f]][i]){
 						trp[j]=trps[en.troops[f]][i][j]
 					}
@@ -485,7 +485,7 @@ function clev(el){
 					t=ev.currentTarget
 					t=t.id.slice(5)
 					dt={}
-					for(i=0;i<players[playid].trlev[t];i++){
+					for(i=0;i<players[playid].trlev[en.troops[t]];i++){
 						for(j in trps[en.troops[t]][i]){
 							dt[j]=trps[en.troops[t]][i][j]
 						}
@@ -506,8 +506,8 @@ function clev(el){
 			$("#buildgui").append(svgel("g",{"id":"upgtrp","transform":"translate("+wid+",0)"}))
 			$("#brect").attr("width",(i,a)=>(parseInt(a)+Math.ceil(en.uptrp.length/2)*camvb[2]/12))
 			for(i=0;i<en.uptrp.length;i++){
-				$("#upgtrp").append(svgel("g",{"id":"uptrp"+i,"transform":"translate("+camvb[2]/12*Math.floor(i/2)+","+camvb[3]/6*(i&1)+")"}))
-				$("#uptrp"+i).append(svgel("rect",{"width":"35","height":"35"}))
+				$("#upgtrp").append(svgel("g",{"id":"uptrp"+i,"transform":"translate("+camvb[2]/12*(i%Math.floor(en.uptrp.length/2))+","+camvb[3]/6*Math.floor(i/en.uptrp.length*2)+")"}))
+				$("#uptrp"+i).append(svgel("rect",{"width":camvb[0]/12,"height":camvb[1]/6,"fill":"#8040c0"}))
 			}
 		}
 		$("#buildbtn1,#buildbtntx1").click(()=>{
