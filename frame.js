@@ -263,7 +263,7 @@ function mode1(){
 						})
 						$("#objects").append(spr)
 					}
-					entdis=$("use#"+en.id)
+					entdis=$("#"+en.id)
 					entdbox=entdis[0].getBBox()
 					entdw=entdbox.width
 					entdh=entdbox.height
