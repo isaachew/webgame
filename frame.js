@@ -9,15 +9,17 @@ function frame(ts){
 	}
 	switch(mode){
 		case 0:
-			$("svg").attr("viewBox","0 0 500 500")
 			if(ff){
+				if(!$("#svg").length){
+					$("body").append(svgel("svg",{"id":"svg"}))
+				}
 				$("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","class":"stru"}))
 				$("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>"))
 				if(mobile){
 					$("body").append(el("input",{"style":"position:absolute;z-index:15;font-size:2.5vh","oninput":"name=this.value","id":"ninput"}))
 					$("svg").append(svgel("rect",{"x":"215","y":"243.75","width":"35","height":"12.5","fill":"none","stroke":"none","id":"inpos"},""))
 				}else{
-					$("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},"hi"))
+					$("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},""))
 				}
 				$("svg").append(svgel("g",{"id":"gobtn","transform":mobile?"":"translate(-800,-800)"},""))
 				$("#gobtn").append(svgel("rect",{"x":"265","y":"240","width":"25","height":"20","fill":"white","stroke":"black"},""))
@@ -45,34 +47,35 @@ function frame(ts){
 					})
 				})
 				$("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
-		        $("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
-		        fetch("data/changelog.txt")
-		        .then((v)=>(v.text()))
-		        .then((v)=>{
-		        	allfl=v.split("\n")
-		        	allfl.reverse()
-		        	for(i of allfl){
-		        		n=i.split("'\"'")
-		        		$("#chlog").append(el("h2",{},n[0]))
-		        		$("#chlog").append(el("ul",{},n.slice(1).map((k)=>("<li>"+k.replace(/</g,"&lt;").replace(/>/g,"&gt;")+"</li>"))))
-		        	}
-		        })
-		        $("svg").append(svgel("text",{"x":500,"y":20,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlink"},"GitHub"))
-		        $("svg").append(svgel("text",{"x":500,"y":30,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlinks"},"GitHub Server"))
-		        $("#ghlink").click(()=>{
-		        	document.location.href="https://github.com/isaachew/webgame"
-		        })
-		        $("#ghlinks").click(()=>{
-		        	document.location.href="https://github.com/isaachew/webgameserver"
-		        })
-		        $("#help").click(()=>{
-		        	$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
-		        	$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1;z-index:30000","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>x</span>"))
-		        	$("#chelp").click(()=>{
-		        		$("#hblack,#hcont").remove()
-		        	})
-		        })
+				$("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
+				fetch("data/changelog.txt")
+				.then((v)=>(v.text()))
+				.then((v)=>{
+					allfl=v.split("\n")
+					allfl.reverse()
+					for(i of allfl){
+						n=i.split("'\"'")
+						$("#chlog").append(el("h2",{},n[0]))
+						$("#chlog").append(el("ul",{},n.slice(1).map((k)=>("<li>"+k.replace(/</g,"&lt;").replace(/>/g,"&gt;")+"</li>"))))
+					}
+				})
+				$("svg").append(svgel("text",{"x":500,"y":20,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlink"},"GitHub"))
+				$("svg").append(svgel("text",{"x":500,"y":30,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlinks"},"GitHub Server"))
+				$("#ghlink").click(()=>{
+					document.location.href="https://github.com/isaachew/webgame"
+				})
+				$("#ghlinks").click(()=>{
+					document.location.href="https://github.com/isaachew/webgameserver"
+				})
+				$("#help").click(()=>{
+					$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
+					$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1;z-index:30000","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>x</span>"))
+					$("#chelp").click(()=>{
+						$("#hblack,#hcont").remove()
+					})
+				})
 			}
+			$("svg").attr("viewBox","0 0 500 500")
 			$("#name").text(name.slice(0,namecr)+(count<30?"|":" ")+name.slice(namecr,name.length))
 			j=gbb("#chlogh")
 			$("#chlog").css("top",j.y).css("left",j.x).css("width",j.width).css("height",j.height)
@@ -435,7 +438,6 @@ function clev(el){
 	k=el.id.slice(1)
 	en=(el.id[0]==="E")?entities[k]:buildings[k]
 	if(en.type.slice(0,4)=="coll")da.collect=en.id
-	console.log("clicked",en.player.id,playid,en.player,players[playid])
 	if(en.id[0]==="B"&&en.player.id===playid){
 		$("svg").append(svgel("g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"}))
 		nl=pres.find((a)=>a[0].type===en.type)[en.level]
@@ -508,6 +510,9 @@ function clev(el){
 			for(i=0;i<en.uptrp.length;i++){
 				$("#upgtrp").append(svgel("g",{"id":"uptrp"+i,"transform":"translate("+camvb[2]/12*(i%Math.floor(en.uptrp.length/2))+","+camvb[3]/6*Math.floor(i/en.uptrp.length*2)+")"}))
 				$("#uptrp"+i).append(svgel("rect",{"width":camvb[0]/12,"height":camvb[1]/6,"fill":"#8040c0"}))
+				$("#uptrp"+i).click(()=>{
+					
+				})
 			}
 		}
 		$("#buildbtn1,#buildbtntx1").click(()=>{
