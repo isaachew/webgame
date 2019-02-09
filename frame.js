@@ -508,8 +508,10 @@ function clev(el){
 			$("#buildgui").append(svgel("g",{"id":"upgtrp","transform":"translate("+wid+",0)"}))
 			$("#brect").attr("width",(i,a)=>(parseInt(a)+Math.ceil(en.uptrp.length/2)*camvb[2]/12))
 			for(i=0;i<en.uptrp.length;i++){
+				crespr(en.uptrp[i])
 				$("#upgtrp").append(svgel("g",{"id":"uptrp"+i,"transform":"translate("+camvb[2]/12*(i%Math.floor(en.uptrp.length/2))+","+camvb[3]/6*Math.floor(i/en.uptrp.length*2)+")"}))
-				$("#uptrp"+i).append(svgel("rect",{"width":camvb[0]/12,"height":camvb[1]/6,"fill":"#8040c0"}))
+				$("#uptrp"+i).append(svgel("rect",{"width":camvb[2]/12,"height":camvb[2]/6,"fill":"#8040c0"}))
+				$("#uptrp"+i).append(svgel("use",{"href":"#"+en.uptrp[i],"stroke":"#808080","fill":"#404040"}))
 				$("#uptrp"+i).click(()=>{
 					
 				})
