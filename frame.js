@@ -513,7 +513,7 @@ function clev(el){
 				$("#uptrp"+i).append(svgel("rect",{"width":camvb[2]/12,"height":camvb[2]/6,"fill":"#8040c0"}))
 				$("#uptrp"+i).append(svgel("use",{"href":"#"+en.uptrp[i],"stroke":"#808080","fill":"#404040"}))
 				$("#uptrp"+i).click(()=>{
-					
+					da.uptrp=en.uptrp[i]
 				})
 			}
 		}
