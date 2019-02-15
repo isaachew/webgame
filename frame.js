@@ -512,6 +512,8 @@ function clev(el){
 				$("#upgtrp").append(svgel("g",{"id":"uptrp"+i,"transform":"translate("+camvb[2]/12*(i%Math.floor(en.uptrp.length/2))+","+camvb[3]/6*Math.floor(i/en.uptrp.length*2)+")"}))
 				$("#uptrp"+i).append(svgel("rect",{"width":camvb[2]/12,"height":camvb[2]/6,"fill":"#8040c0"}))
 				$("#uptrp"+i).append(svgel("use",{"href":"#"+en.uptrp[i],"stroke":"#808080","fill":"#404040"}))
+				$("#uptrp"+i).append(svgel("use",{"href":"#coll0"}))
+				$("#uptrp"+i).append(svgel("use",{"href":"#coll1"}))
 				$("#uptrp"+i).append(svgel("text",{"fill":"white","font-size":camvb[2]/60},trps[en.uptrp[i]].name))
 				$("#uptrp"+i).click(()=>{
 					da.uptrp=en.uptrp[i]
