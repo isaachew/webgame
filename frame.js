@@ -12,6 +12,7 @@ function frame(ts){
 			if(ff){
 				if(!$("#svg").length){
 					$("body").append(svgel("svg",{"id":"svg"}))
+					$("svg").append("rect",{"id":"bbrect","x":0,"y":0,"width":camvb[2],"height":camvb[3]})
 				}
 				$("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","class":"stru"}))
 				$("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>"))
