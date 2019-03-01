@@ -180,7 +180,7 @@ function mode1(){
 					$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},"Damage per second"))
 					$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},"Ground/air:"))
 					$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},"Cost:"))
-					$("#morecontent").append(svgel("text",{"id":"fbt","x":0,"y":0,"font-size":camvb[2]/50},"Don"))
+					$("#morecontent").append(svgel("text",{"id":"fbt","x":0,"y":0,"font-size":camvb[2]/50},"Done"))
 					$("#closemore").click(()=>{
 						$("#morecont,#morerect,#morecontent").remove()
 					})

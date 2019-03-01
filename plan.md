@@ -14,3 +14,6 @@ shoot function (stored as array) (shoot)
 Troops
 -
 Troops order is reading order: left-to-right and top-to-bottom
+Troop upgrading
+-
+There is a special building for upgrading troops, and the troop upgrading screen has purple boxes with troops in them.
