@@ -11,7 +11,8 @@ function frame(ts){
 		case 0:
 			if(ff){
 				if(!$("#svg").length){
-					$("body").append(svgel("svg",{"id":"svg"}))
+					$("body").append(svgel("svg",{"id":"svg","background-color":"#c0c0c0"}))
+					$("svg").append(svgel("rect",{"id":"erct","width":500,"height":500,"fill":"#ffffff"}))
 				}
 				$("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","class":"stru"}))
 				$("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>"))
