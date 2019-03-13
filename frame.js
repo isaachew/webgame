@@ -438,6 +438,8 @@ function mode1(){
 	$("#erct")
 	.attr("x",camvb[0])
 	.attr("y",camvb[1])
+	.attr("width",camvb[2])
+	.attr("height",camvb[3])
 }
 function clev(el){
 	$("#buildgui").remove()
