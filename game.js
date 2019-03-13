@@ -65,7 +65,7 @@ function el(n,attrs,content){
 function clears(){
 	$("svg").children().not("style").remove()
 	$("body").children().not("svg").remove()
-	$("svg").append(svgel("rect",{"id":"bbrect","x":0,"y":0,"width":camvb[2],"height":camvb[3],"fill":"white"}))
+	$("svg").append(svgel("rect",{"id":"erct","width":500,"height":500,"fill":"#ffffff"}))
 }
 namecr=0
 count=0
