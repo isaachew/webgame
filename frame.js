@@ -170,25 +170,6 @@ function mode1(){
 		reqs=7/90*camvb[2]
 		$("#buihold").append(svgel("g",{"id":"builds","scrl":0}))
 		$("#stats").append(svgel("clipPath",{"id":"buiclp"},"<rect x='"+(14*camvb[2]/45)+"' y='0' width='"+reqs*4+"' height='"+reqs+"'>"))
-		$("#stats").append(svgel("g",{"transform":"translate("+reqs*2+")","id":"more"}))
-		$("#more").append(svgel("rect",{"id":"recmore","width":reqs,"height":reqs,"x":0,"y":0,"fill":"#777777"}))
-		$("#more").append(svgel("text",{"id":"texmore","x":0.5*reqs,"y":0.5*reqs,"text-anchor":"middle"},"More..."))
-		$("#recmore").click(()=>{
-			$("svg").append(svgel("rect",{"width":camvb[2],"height":camvb[3],"id":"morerect","opacity":"0.5","fill":"#000000"}))
-			$("svg").append(svgel("rect",{"width":camvb[2]*3/4,"height":camvb[3]*3/4,"id":"morecont","fill":"#c0c0c0"}))
-			$("svg").append(svgel("g",{"id":"morecontent"}))
-			$("#morecontent").append(svgel("text",{"x":camvb[2]*3/8,"y":camvb[3]/30,"font-size":camvb[3]/30,"text-anchor":"middle"},"Create Defensive Building"))
-			$("#morecontent").append(svgel("text",{"x":camvb[2]*88/120,"y":camvb[2]/60,"font-size":camvb[2]/60,"id":"closemore"},"&#10006;"))
-			$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},"Type of projectile:"))
-			$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},"Fire rate"))
-			$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},"Damage per second"))
-			$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},"Ground/air:"))
-			$("#morecontent").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/50},"Cost:"))
-			$("#morecontent").append(svgel("text",{"id":"fbt","x":0,"y":0,"font-size":camvb[2]/50},"Done"))
-			$("#closemore").click(()=>{
-				$("#morecont,#morerect,#morecontent").remove()
-			})
-		})
 		for(id=0;id<pres.length;id++){
 			i=pres[id][0]
 			crespr(i.type)
