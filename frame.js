@@ -159,7 +159,7 @@ function mode1(){
 		}
 		$("svg").append(svgel("g",{"id":"sprites","transform":"translate(-1000,-1000)"},""))
 		$("svg").append(svgel("g",{"id":"stats"},"<rect fill='#dddddd' opacity='0.75' id='statbar'>"))
-		$("svg").append(svgel("g",{"id":"scb"},""))
+		$("svg").append(svgel("g",{"id":"scb","transform":"translate(400,320)"},""))
 		$("#stats").append(svgel("text",{"id":"score","clip-path":"url(#ctext)"},"Score: 0"))
 		$("#stats").append(svgel("text",{"id":"name","clip-path":"url(#ctext)"},"Name: "+name))
 		$("#stats").append(svgel("text",{"id":"res0","clip-path":"url(#ctext)"},": 0"))
