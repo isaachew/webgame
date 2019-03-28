@@ -159,7 +159,7 @@ function mode1(){
 		}
 		$("svg").append(svgel("g",{"id":"sprites","transform":"translate(-1000,-1000)"},""))
 		$("svg").append(svgel("g",{"id":"stats"},"<rect fill='#dddddd' opacity='0.75' id='statbar'>"))
-		$("svg").append(svgel("g",{"id":"scb","transform":"translate(400,380)"},"<text>a</text>"))
+		$("svg").append(svgel("g",{"id":"scb","transform":"translate(400,380)"},"<rect width='100' height='10' fill='#ffffff' stroke='#808080'></rect>"))
 		$("#stats").append(svgel("text",{"id":"score","clip-path":"url(#ctext)"},"Score: 0"))
 		$("#stats").append(svgel("text",{"id":"name","clip-path":"url(#ctext)"},"Name: "+name))
 		$("#stats").append(svgel("text",{"id":"res0","clip-path":"url(#ctext)"},": 0"))
@@ -395,6 +395,8 @@ function mode1(){
 	$(".btrect")
 	.attr("width",reqs)
 	.attr("height",reqs)
+	$("#scb")
+	.attr("transform","translate("+(camvb[0]+camvb[2]*0.8)+","+(camvb[1]+camvb[3]*0.76)+")")
 	camvb[0]+=cdir[0]*camvb[2]/100
 	camvb[1]+=cdir[1]*camvb[3]/100
 	if(camvb[0]<0)camvb[0]=0
