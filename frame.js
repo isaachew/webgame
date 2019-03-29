@@ -159,7 +159,8 @@ function mode1(){
 		}
 		$("svg").append(svgel("g",{"id":"sprites","transform":"translate(-1000,-1000)"},""))
 		$("svg").append(svgel("g",{"id":"stats"},"<rect fill='#dddddd' opacity='0.75' id='statbar'>"))
-		$("svg").append(svgel("g",{"id":"scb","transform":"translate(400,380)"},"<rect width='100' height='10' fill='#ffffff' stroke='#808080'></rect>"))
+		$("svg").append(svgel("g",{"id":"scb","transform":"translate(400,380)","fl":"0"}))
+		$("#scb").append(svgel("rect",{"fill":"#808080","width":0.24*camvb[0],"height":camvb[1]/50}))
 		$("#stats").append(svgel("text",{"id":"score","clip-path":"url(#ctext)"},"Score: 0"))
 		$("#stats").append(svgel("text",{"id":"name","clip-path":"url(#ctext)"},"Name: "+name))
 		$("#stats").append(svgel("text",{"id":"res0","clip-path":"url(#ctext)"},": 0"))
