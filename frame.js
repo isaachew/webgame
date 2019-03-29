@@ -162,6 +162,7 @@ function mode1(){
 		$("svg").append(svgel("g",{"id":"scb","transform":"translate(400,380)","fl":"0"}))
 		$("#scb").append(svgel("rect",{"fill":"#808080","width":0.24*camvb[0],"height":camvb[1]/50}))
 		$("#scb").append(svgel("rect",{"fill":"#808080","y":0.22*camvb[1],"width":0.24*camvb[0],"height":camvb[1]/50}))
+		$("scb").append(svgel("text",{"x":0.12*camvb[0],"y":camvb[1]/100,"fill":"#ffffff"},"Up"))
 		$("#stats").append(svgel("text",{"id":"score","clip-path":"url(#ctext)"},"Score: 0"))
 		$("#stats").append(svgel("text",{"id":"name","clip-path":"url(#ctext)"},"Name: "+name))
 		$("#stats").append(svgel("text",{"id":"res0","clip-path":"url(#ctext)"},": 0"))
