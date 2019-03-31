@@ -198,7 +198,7 @@ function mode1(){
 					$(".btrect",n.currentTarget).css("stroke","#ffffff")
 					$("svg").append(svgel("rect",{"x":camvb[0],"y":camvb[1]+0.1*camvb[3],"width":camvb[2],"height":0.9*camvb[3],"fill":"#ffffff","stroke":"none","opacity":0,"class":"phrect","id":"r"+n.currentTarget.id}))
 					$("svg").append(svgel("use",{"id":"buiprev","href":"#"+buiobj.type,"x":0,"y":0,"opacity":0,"stroke":"#808080","fill":"#404040"}))
-					$("svg").prepend(svgel("circle",{"id":"buirange","r":buiobj.radius,"cx":0,"cy":0,"opacity":0,"fill":"#ff7700","stroke":"#ffff00","stroke-width":camvb[2]/100}))
+					$("#objects").append(svgel("circle",{"id":"buirange","r":buiobj.radius,"cx":0,"cy":0,"opacity":0,"fill":"#ff7700","stroke":"#ffff00","stroke-width":camvb[2]/100}))
 					$(".phrect").click((e)=>{
 						tre=e.currentTarget.getBoundingClientRect()
 						relw=tre.width/camvb[2]
@@ -297,6 +297,14 @@ function mode1(){
 			if(kd[0]-camvb[0]<0||(kd[0]-camvb[0]>camvb[2])||(kd[1]-camvb[1]<0)||(kd[1]-camvb[1]>camvb[3])){
 				$(k).remove()
 			}
+		}
+	}
+	plss=result.playerss
+	for(i=0;i<5;i++){
+		if($("#scbg"+i).length){
+			
+		}else{
+			$("#scb").append(svgel("g",{"id":"scbg"+i}))
 		}
 	}
 	if(keyp){
