@@ -303,8 +303,9 @@ function mode1(){
 	for(i=0;i<5;i++){
 		if($("#scbg"+i).length){
 			
-		}else{
+		}else if(plss.length>i){
 			$("#scb").append(svgel("g",{"id":"scbg"+i}))
+			$("#scbg"+i).append(svgel("rect",{"y":(i+1)*camvb[3]/50,"width":camvb[2]/5,"height":camvb[3]/50,"fill":plss[i].fill,"stroke":plss[i].stroke}))
 		}
 	}
 	if(keyp){
