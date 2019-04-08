@@ -302,10 +302,11 @@ function mode1(){
 	plss=result.playerss
 	for(i=0;i<5;i++){
 		if($("#scbg"+i).length){
+			f=plss[i]
 			
 		}else if(plss.length>i){
 			$("#scb").append(svgel("g",{"id":"scbg"+i}))
-			$("#scbg"+i).append(svgel("rect",{"y":(i+1)*camvb[3]/50,"width":camvb[2]/5,"height":camvb[3]/50,"fill":plss[i].fill,"stroke":plss[i].stroke}))
+			$("#scbg"+i).append(svgel("rect",{"y":(i+1)*camvb[3]/50,"width":camvb[2]/5,"height":camvb[3]/50,"fill":plss[i].fill,"stroke":plss[i].stroke,"id":"scbr"+i}))
 		}
 	}
 	if(keyp){
