@@ -309,6 +309,7 @@ function mode1(){
 		}else if(plss.length>i){
 			$("#scb").append(svgel("g",{"id":"scbg"+i}))
 			$("#scbg"+i).append(svgel("rect",{"y":(i+1)*camvb[3]/50,"width":camvb[2]/5,"height":camvb[3]/50,"fill":plss[i].fill,"stroke":plss[i].stroke,"id":"scbr"+i}))
+			$("#scbg"+i).append(svgel("text",{"y":(i+1.5)*camvb[3]/50,"x":camvb[2]/10,"text-anchor":"middle","alignment-baseline":"middle","font-size":camvb[3]/75},plss[i].name))
 		}
 	}
 	if(keyp){
