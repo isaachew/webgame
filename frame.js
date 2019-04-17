@@ -306,6 +306,8 @@ function mode1(){
 			$("#scbr"+i)
 			.attr("fill",f.fill)
 			.attr("stroke",f.stroke)
+			$("#scbt"+i)
+			.text(plss[i].name)
 		}else if(plss.length>i){
 			$("#scb").append(svgel("g",{"id":"scbg"+i}))
 			$("#scbg"+i).append(svgel("rect",{"y":(i+1)*camvb[3]/50,"width":camvb[2]/5,"height":camvb[3]/50,"fill":plss[i].fill,"stroke":plss[i].stroke,"id":"scbr"+i}))
