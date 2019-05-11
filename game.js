@@ -1,5 +1,5 @@
 keyp=false
-servers=["https://webgameserver-isaachew.c9users.io"]
+servers=["http://127.0.0.1:8080"]
 ev=undefined
 ke=undefined
 $(document).keydown(function(e){keyp=!0;ev=e;ke=ev.key})
@@ -16,7 +16,7 @@ camvb=[0,0,500,500]
 cdir=[0,0]
 score=0
 function load(url,serv,func){
-	fetch(serv+"/"+url+"?data="+encodeURIComponent(JSON.stringify(da)),{"method":"GET"})
+	fetch(serv+"/"+url+"?data="+encodeURIComponent(JSON.stringify(da)),{"method":"GET","mode":"cors"})
 	.then((r)=>r.json(),function(r){
 		console.log(r,"fetch error")
 		smode(0)
