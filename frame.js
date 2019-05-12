@@ -296,6 +296,7 @@ function mode1(){
 			kd=kd.pos
 			if(kd[0]-camvb[0]<0||(kd[0]-camvb[0]>camvb[2])||(kd[1]-camvb[1]<0)||(kd[1]-camvb[1]>camvb[3])){
 				$(k).remove()
+				$("#"+k.id+"hb").remove()
 			}
 		}
 	}
