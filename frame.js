@@ -442,7 +442,7 @@ function clev(el){
 	if(en.id[0]==="B"&&en.player.id===playid){
 		$("svg").append(svgel("g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"}))
 		nl=pres.find((a)=>a[0].type===en.type)[en.level]
-		$("#buildgui").append(svgel("ellipse",{"cx":0,"cy":0,"rx":en.radius,"ry":en.radius,"fill":"#777777","id":"rangec"}))
+		$("#buildgui").append(svgel("ellipse",{"cx":0,"cy":0,"rx":en.radius,"ry":en.radius,"fill":"#ff8000","stroke":"#ffff00","stroke-width":camvb[2]/100,"opacity":"0.5","id":"rangec"}))
 		$("#buildgui").append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3,"fill":"#777777","id":"brect"}))
 		$("#buildgui").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},en.name+" Level "+en.level))
 		if(nl!=undefined){
