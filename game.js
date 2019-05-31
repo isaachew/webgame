@@ -15,6 +15,14 @@ npres=[]
 camvb=[0,0,500,500]
 cdir=[0,0]
 score=0
+fetch("/data/renders.txt").then((v)=>(v.text())).then(
+(v)=>{
+nn=v.split("\n").map((y)=>y.split(";"))
+rends={}
+for(i of nn){
+rends[i[0]]=i[1]
+}
+})
 function load(url,serv,func){
 	fetch(serv+"/"+url+"?data="+encodeURIComponent(JSON.stringify(da)),{"method":"GET","mode":"cors"})
 	.then((r)=>r.json(),function(r){
