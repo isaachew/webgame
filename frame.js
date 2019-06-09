@@ -440,8 +440,10 @@ function clev(el){
 	en=(el.id[0]==="E")?entities[k]:buildings[k]
 	if(en.type.slice(0,4)=="coll")da.collect=en.id
 	if(en.id[0]==="B"&&en.player.id===playid){
+		tt=pres.find((a)=>a[0].type===en.type)
+		nl=tt[en.level]
+		npl=tt[en.level-1]
 		$("svg").append(svgel("g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"}))
-		nl=pres.find((a)=>a[0].type===en.type)[en.level]
 		$("#buildgui").append(svgel("ellipse",{"cx":0,"cy":0,"rx":en.radius,"ry":en.radius,"fill":"#ff8000","stroke":"#ffff00","stroke-width":camvb[2]/100,"opacity":"0.5","id":"rangec"}))
 		$("#buildgui").append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3,"fill":"#777777","id":"brect"}))
 		$("#buildgui").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},en.name+" Level "+en.level))
@@ -452,16 +454,19 @@ function clev(el){
 		$("#buildgui").append(svgel("rect",{"x":9*camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn2"}))
 		$("#buildgui").append(svgel("text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2","font-size":camvb[2]/60},"Sell for 75%"))
 		$("#buildgui").append(svgel("g",{"id":"upstats"}))
-		nl=pres.find((a)=>a[0].type===en.type)[en.level]
+		c=0
 		for(i in nl){
 			k=nl[i]
 			if(i==="shoot"){
-				k="s: "
-				k+=nl[i]?"Yes":"No"
+				k=(i==="shoot")?("s: "+nl[i]?"Yes":"No"):k
 			}
-			if(!["update","ty"].includes(nl)){
-				$("#buildgui").append(svgel("text",{},i[0].toUpperCase()+i.slice(1)+k))
+			if(!["update","ty"].includes(i)){
+				$("#buildgui").append(svgel("text",{"x":100,"y":c*16},i[0].toUpperCase()+i.slice(1)+": "+k))
+				if(npl[i]){
+					$("#buildgui").append(svgel("text",{"y":c*16},i[0].toUpperCase()+i.slice(1)+": "+((i==="shoot")?("s: "+(npl[i]?"Yes":"No")):npl[i])))
+				}
 			}
+			c+=1
 		}
 		if(en.troops){
 			l=en.troops.length
