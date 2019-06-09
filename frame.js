@@ -17,11 +17,13 @@ function frame(ts){
 				}
 				$("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","class":"stru"}))
 				$("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>"))
+				x=document.cookie.match(/(^| )(nam=(.*?)($|;))/)
+				name=x?x[3]:""
 				if(mobile){
 					$("body").append(el("input",{"style":"position:absolute;z-index:15;font-size:2.5vh","oninput":"name=this.value","id":"ninput"}))
 					$("svg").append(svgel("rect",{"x":"215","y":"243.75","width":"35","height":"12.5","fill":"none","stroke":"none","id":"inpos"},""))
 				}else{
-					$("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},""))
+					$("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},x))
 				}
 				$("svg").append(svgel("g",{"id":"gobtn","transform":mobile?"":"translate(-800,-800)"},""))
 				$("svg").append(svgel("text",{"x":250,"y":150,"text-anchor":"middle","alignment-baseline":"middle","font-size":25},"Title"))
@@ -36,6 +38,7 @@ function frame(ts){
 				$("#gobtn").click(()=>{
 					serv=choose(servers)
 					da={"name":name}
+					document.cookie="nam="+name
 					load("join",serv,()=>{
 						camvb[0]=Math.random()*(result.bounds[0]-camvb[2])
 						camvb[1]=Math.random()*(result.bounds[1]-camvb[3])

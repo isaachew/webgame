@@ -4,7 +4,6 @@ ev=undefined
 ke=undefined
 $(document).keydown(function(e){keyp=!0;ev=e;ke=ev.key})
 $(document).keyup(function(e){keyp=!0;ev=e;ke="keyup"})
-name=""
 entities=[]
 buildings=[]
 players=[]
