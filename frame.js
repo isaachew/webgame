@@ -458,15 +458,16 @@ function clev(el){
 		$("#buildgui").append(svgel("text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2","font-size":camvb[2]/60},"Sell for 75%"))
 		$("#buildgui").append(svgel("g",{"id":"upstats"}))
 		c=0
+		$("#buildgui").append(svgel("line",{"x1":camvb[2]/6,"x2":camvb[2]/6,"y1":camvb[3]/60,"y2":camvb[3]*25/96,"stroke":"#ffffff"}))
 		for(i in nl){
 			k=nl[i]
 			if(i==="shoot"){
 				k=(i==="shoot")?("s: "+nl[i]?"Yes":"No"):k
 			}
 			if(!["update","ty"].includes(i)){
-				$("#buildgui").append(svgel("text",{"x":100,"y":c*16},i[0].toUpperCase()+i.slice(1)+": "+k))
+				$("#buildgui").append(svgel("text",{"x":camvb[2]/6,"y":(c+0.5)*camvb[3]/30,"font-size":camvb[3]/30},i[0].toUpperCase()+i.slice(1)+": "+k))
 				if(npl[i]){
-					$("#buildgui").append(svgel("text",{"y":c*16},i[0].toUpperCase()+i.slice(1)+": "+((i==="shoot")?("s: "+(npl[i]?"Yes":"No")):npl[i])))
+					$("#buildgui").append(svgel("text",{"y":(c+0.5)*camvb[3]/30,"font-size":camvb[3]/30},i[0].toUpperCase()+i.slice(1)+": "+((i==="shoot")?("s: "+(npl[i]?"Yes":"No")):npl[i])))
 				}
 			}
 			c+=1
