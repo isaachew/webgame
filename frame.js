@@ -17,11 +17,13 @@ function frame(ts){
 				}
 				$("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","class":"stru"}))
 				$("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>"))
+				x=document.cookie.match(/(^| )(nam=(.*?)($|;))/)
+				name=x?x[3]:""
 				if(mobile){
 					$("body").append(el("input",{"style":"position:absolute;z-index:15;font-size:2.5vh","oninput":"name=this.value","id":"ninput"}))
 					$("svg").append(svgel("rect",{"x":"215","y":"243.75","width":"35","height":"12.5","fill":"none","stroke":"none","id":"inpos"},""))
 				}else{
-					$("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},""))
+					$("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},x))
 				}
 				$("svg").append(svgel("g",{"id":"gobtn","transform":mobile?"":"translate(-800,-800)"},""))
 				$("svg").append(svgel("text",{"x":250,"y":150,"text-anchor":"middle","alignment-baseline":"middle","font-size":25},"Title"))
@@ -37,6 +39,7 @@ function frame(ts){
 				$("#gobtn").click(()=>{
 					serv=choose(servers)
 					da={"name":name}
+					document.cookie="nam="+name
 					load("join",serv,()=>{
 						camvb[0]=Math.random()*(result.bounds[0]-camvb[2])
 						camvb[1]=Math.random()*(result.bounds[1]-camvb[3])
@@ -160,6 +163,11 @@ function mode1(){
 		}
 		$("svg").append(svgel("g",{"id":"sprites","transform":"translate(-1000,-1000)"},""))
 		$("svg").append(svgel("g",{"id":"stats"},"<rect fill='#dddddd' opacity='0.75' id='statbar'>"))
+		$("svg").append(svgel("g",{"id":"scb","transform":"translate(400,380)","fl":"0"}))
+		$("#scb").append(svgel("rect",{"fill":"#808080","width":0.2*camvb[2],"height":camvb[3]/50,"id":"scbu"}))
+		$("#scb").append(svgel("rect",{"fill":"#808080","y":0.22*camvb[3],"width":0.2*camvb[2],"height":camvb[3]/50,"id":"scbd"}))
+		$("#scb").append(svgel("text",{"x":0.1*camvb[2],"y":camvb[3]/100,"fill":"#ffffff","font-size":camvb[2]/75},"Up"))
+		$("#scb").append(svgel("text",{"x":0.1*camvb[2],"y":0.23*camvb[3],"fill":"#ffffff","font-size":camvb[3]/75},"Down"))
 		$("#stats").append(svgel("text",{"id":"score","clip-path":"url(#ctext)"},"Score: 0"))
 		$("#stats").append(svgel("text",{"id":"name","clip-path":"url(#ctext)"},"Name: "+name))
 		$("#stats").append(svgel("text",{"id":"res0","clip-path":"url(#ctext)"},": 0"))
@@ -194,7 +202,7 @@ function mode1(){
 					$(".btrect",n.currentTarget).css("stroke","#ffffff")
 					$("svg").append(svgel("rect",{"x":camvb[0],"y":camvb[1]+0.1*camvb[3],"width":camvb[2],"height":0.9*camvb[3],"fill":"#ffffff","stroke":"none","opacity":0,"class":"phrect","id":"r"+n.currentTarget.id}))
 					$("svg").append(svgel("use",{"id":"buiprev","href":"#"+buiobj.type,"x":0,"y":0,"opacity":0,"stroke":"#808080","fill":"#404040"}))
-					$("svg").prepend(svgel("circle",{"id":"buirange","r":buiobj.radius,"cx":0,"cy":0,"opacity":0,"fill":"#ff7700","stroke":"#ffff00","stroke-width":camvb[2]/100}))
+					$("#objects").append(svgel("circle",{"id":"buirange","r":buiobj.radius,"cx":0,"cy":0,"opacity":0,"fill":"#ff7700","stroke":"#ffff00","stroke-width":camvb[2]/100}))
 					$(".phrect").click((e)=>{
 						tre=e.currentTarget.getBoundingClientRect()
 						relw=tre.width/camvb[2]
@@ -292,7 +300,23 @@ function mode1(){
 			kd=kd.pos
 			if(kd[0]-camvb[0]<0||(kd[0]-camvb[0]>camvb[2])||(kd[1]-camvb[1]<0)||(kd[1]-camvb[1]>camvb[3])){
 				$(k).remove()
+				$("#"+k.id+"hb").remove()
 			}
+		}
+	}
+	plss=result.playerss
+	for(i=0;i<5;i++){
+		if($("#scbg"+i).length){
+			f=plss[i]
+			$("#scbr"+i)
+			.attr("fill",f.fill)
+			.attr("stroke",f.stroke)
+			$("#scbt"+i)
+			.text(plss[i].name)
+		}else if(plss.length>i){
+			$("#scb").append(svgel("g",{"id":"scbg"+i}))
+			$("#scbg"+i).append(svgel("rect",{"y":(i+1)*camvb[3]/50,"width":camvb[2]/5,"height":camvb[3]/50,"fill":plss[i].fill,"stroke":plss[i].stroke,"id":"scbr"+i}))
+			$("#scbg"+i).append(svgel("text",{"y":(i+1.5)*camvb[3]/50,"x":camvb[2]/10,"text-anchor":"middle","alignment-baseline":"middle","font-size":camvb[3]/75,"id":"scbt"+i},plss[i].name))
 		}
 	}
 	if(keyp){
@@ -395,19 +419,8 @@ function mode1(){
 	$(".btrect")
 	.attr("width",reqs)
 	.attr("height",reqs)
-	$("#stats>rect,#recmore")
-	.attr("rx",camvb[2]/250)
-	.attr("ry",camvb[3]/250)
-	$("#morerect")
-	.attr("x",camvb[0])
-	.attr("y",camvb[1])
-	.attr("width",camvb[2])
-	.attr("height",camvb[3])
-	$("#morecont")
-	.attr("x",camvb[0]+camvb[2]/8)
-	.attr("y",camvb[1]+camvb[3]/8)
-	.attr("width",camvb[2]*3/4)
-	.attr("height",camvb[3]*3/4)
+	$("#scb")
+	.attr("transform","translate("+(camvb[0]+camvb[2]*0.8)+","+(camvb[1]+camvb[3]*0.76)+")")
 	camvb[0]+=cdir[0]*camvb[2]/100
 	camvb[1]+=cdir[1]*camvb[3]/100
 	if(camvb[0]<0)camvb[0]=0
@@ -431,8 +444,11 @@ function clev(el){
 	en=(el.id[0]==="E")?entities[k]:buildings[k]
 	if(en.type.slice(0,4)=="coll")da.collect=en.id
 	if(en.id[0]==="B"&&en.player.id===playid){
+		tt=pres.find((a)=>a[0].type===en.type)
+		nl=tt[en.level]
+		npl=tt[en.level-1]
 		$("svg").append(svgel("g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"}))
-		nl=pres.find((a)=>a[0].type===en.type)[en.level]
+		$("#buildgui").append(svgel("ellipse",{"cx":0,"cy":0,"rx":en.radius,"ry":en.radius,"fill":"#ff8000","stroke":"#ffff00","stroke-width":camvb[2]/100,"opacity":"0.5","id":"rangec"}))
 		$("#buildgui").append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3,"fill":"#777777","id":"brect"}))
 		$("#buildgui").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},en.name+" Level "+en.level))
 		if(nl!=undefined){
@@ -442,16 +458,20 @@ function clev(el){
 		$("#buildgui").append(svgel("rect",{"x":9*camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn2"}))
 		$("#buildgui").append(svgel("text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2","font-size":camvb[2]/60},"Sell for 75%"))
 		$("#buildgui").append(svgel("g",{"id":"upstats"}))
-		nl=pres.find((a)=>a[0].type===en.type)[en.level]
+		c=0
+		$("#buildgui").append(svgel("line",{"x1":camvb[2]/6,"x2":camvb[2]/6,"y1":camvb[3]/60,"y2":camvb[3]*25/96,"stroke":"#ffffff"}))
 		for(i in nl){
 			k=nl[i]
 			if(i==="shoot"){
-				k="s: "
-				k+=nl[i]?"Yes":"No"
+				k=(i==="shoot")?("s: "+nl[i]?"Yes":"No"):k
 			}
-			if(!["update","ty"].includes(nl)){
-				$("#buildgui").append(svgel("text",{},i[0].toUpperCase()+i.slice(1)+k))
+			if(!["update","ty"].includes(i)){
+				$("#buildgui").append(svgel("text",{"x":camvb[2]/6,"y":(c+0.5)*camvb[3]/30,"font-size":camvb[3]/30},i[0].toUpperCase()+i.slice(1)+": "+k))
+				if(npl[i]){
+					$("#buildgui").append(svgel("text",{"y":(c+0.5)*camvb[3]/30,"font-size":camvb[3]/30},i[0].toUpperCase()+i.slice(1)+": "+((i==="shoot")?("s: "+(npl[i]?"Yes":"No")):npl[i])))
+				}
 			}
+			c+=1
 		}
 		if(en.troops){
 			l=en.troops.length
