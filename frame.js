@@ -520,16 +520,24 @@ function clev(el){
 			$("#buildgui").append(svgel("g",{"id":"upgtrp","transform":"translate("+wid+",0)"}))
 			$("#brect").attr("width",(i,a)=>(parseInt(a)+Math.ceil(en.uptrp.length/2)*camvb[2]/12))
 			for(i=0;i<en.uptrp.length;i++){
+				tae=trps[en.uptrp[i]]
+				le=players[playid].trlev[en.uptrp[i]]
 				crespr(en.uptrp[i])
 				$("#upgtrp").append(svgel("g",{"id":"uptrp"+i,"transform":"translate("+camvb[2]/12*(i%Math.floor(en.uptrp.length/2))+","+camvb[3]/6*Math.floor(i/en.uptrp.length*2)+")"}))
-				$("#uptrp"+i).append(svgel("rect",{"width":camvb[2]/12,"height":camvb[2]/6,"fill":"#8040c0"}))
-				$("#uptrp"+i).append(svgel("use",{"href":"#"+en.uptrp[i],"stroke":"#808080","fill":"#404040"}))
-				$("#uptrp"+i).append(svgel("use",{"href":"#coll0"}))
-				$("#uptrp"+i).append(svgel("use",{"href":"#coll1"}))
-				$("#uptrp"+i).append(svgel("text",{"fill":"white","font-size":camvb[2]/60},trps[en.uptrp[i]].name))
-				$("#uptrp"+i).click(()=>{
-					da.uptrp=en.uptrp[i]
-				})
+				$("#uptrp"+i).append(svgel("rect",{"width":camvb[2]/12,"height":camvb[2]/6,"fill":tae.length>le?"#8040c0":"#808080"}))
+				$("#uptrp"+i).append(svgel("use",{"href":"#"+en.uptrp[i],"transform":"translate("+camvb[2]/48+") scale("+camvb[2]/tae[le-1].size/24+")","id":"uptr"+i,"stroke":"#808080","fill":"#404040"}))
+				$("#uptrp"+i).append(svgel("text",{"fill":"white","font-size":camvb[2]/60},tae.name))
+				if(tae.length>le){
+					$("#uptr"+i).attr("transform","translate("+camvb[2]/48+") scale("+camvb[24]/tae[le].size/24+")")
+					$("#uptrp"+i).append(svgel("use",{"href":"#coll0","x":camvb[2]/36-colwid/2,"y":camvb[3]/8}))
+					$("#uptrp"+i).append(svgel("use",{"href":"#coll1","x":camvb[2]/36-colwid/2,"y":camvb[3]*7/48}))
+					$("#uptrp"+i).append(svgel("text",{"fill":"black","font-size":camvb[2]/60},tae[le].cost[0]))
+					$("#uptrp"+i).append(svgel("text",{"fill":"black","font-size":camvb[2]/60},tae[le].cost[1]))
+					$("#uptrp"+i).append(svgel("text",{"fill":"white","font-size":camvb[2]/60},tae.name))
+					$("#uptrp"+i).click(()=>{
+						da.uptrp=en.uptrp[i]
+					})
+				}	
 			}
 		}
 		$("#buildbtn1,#buildbtntx1").click(()=>{
