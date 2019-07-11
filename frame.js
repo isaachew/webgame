@@ -305,7 +305,7 @@ function mode1(){
 		}
 	}
 	plss=result.playerss
-	for(i=0;i<5;i++){
+	for(i=0;i<10;i++){
 		if($("#scbg"+i).length){
 			f=plss[i]
 			$("#scbr"+i)
