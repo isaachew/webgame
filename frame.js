@@ -522,7 +522,6 @@ function clev(el){
 			for(i=0;i<en.uptrp.length;i++){
 				tae=trps[en.uptrp[i]]
 				le=players[playid].trlev[en.uptrp[i]]
-				console.log(tae,le,tae[le-1].size)
 				crespr(en.uptrp[i])
 				$("#upgtrp").append(svgel("g",{"id":"uptrp"+i,"transform":"translate("+camvb[2]/12*(i%Math.floor(en.uptrp.length/2))+","+camvb[3]/6*Math.floor(i/en.uptrp.length*2)+")"}))
 				$("#uptrp"+i).append(svgel("rect",{"width":camvb[2]/12,"height":camvb[2]/6,"fill":tae.length>le?"#8040c0":"#808080"}))
