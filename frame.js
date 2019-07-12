@@ -163,9 +163,18 @@ function mode1(){
 		}
 		$("svg").append(svgel("g",{"id":"sprites","transform":"translate(-1000,-1000)"},""))
 		$("svg").append(svgel("g",{"id":"stats"},"<rect fill='#dddddd' opacity='0.75' id='statbar'>"))
-		$("svg").append(svgel("g",{"id":"scb","transform":"translate(400,380)","fl":"0"}))
+		$("svg").append(svgel("g",{"id":"scb","transform":"translate(400,380)","dn":"0"}))
 		$("#scb").append(svgel("rect",{"fill":"#808080","width":0.2*camvb[2],"height":camvb[3]/50,"id":"scbu"}))
+		$("#scbu").click(()=>{
+			if($("#scb").attr("dn")<=0){return}
+			$("#scb")
+			.attr("dn",(i,a)=>(parseInt(a)-1))
+		})
 		$("#scb").append(svgel("rect",{"fill":"#808080","y":0.22*camvb[3],"width":0.2*camvb[2],"height":camvb[3]/50,"id":"scbd"}))
+		$("#scbd").click(()=>{
+			$("#scb")
+			.attr("dn",(i,a)=>(parseInt(a)+1))
+		})
 		$("#scb").append(svgel("text",{"x":0.1*camvb[2],"y":camvb[3]/100,"fill":"#ffffff","font-size":camvb[2]/75},"Up"))
 		$("#scb").append(svgel("text",{"x":0.1*camvb[2],"y":0.23*camvb[3],"fill":"#ffffff","font-size":camvb[3]/75},"Down"))
 		$("#stats").append(svgel("text",{"id":"score","clip-path":"url(#ctext)"},"Score: 0"))
@@ -305,18 +314,23 @@ function mode1(){
 		}
 	}
 	plss=result.playerss
+	tf=parseInt($("#scb").attr("dn"))
 	for(i=0;i<10;i++){
+		f=plss[i+tf]
 		if($("#scbg"+i).length){
-			f=plss[i]
-			$("#scbr"+i)
-			.attr("fill",f.fill)
-			.attr("stroke",f.stroke)
-			$("#scbt"+i)
-			.text(plss[i].name)
-		}else if(plss.length>i){
+			if(plss.length-i-tf>0){
+				$("#scbr"+i)
+				.attr("fill",f.fill)
+				.attr("stroke",f.stroke)
+				$("#scbt"+i)
+				.text((i+tf+1)+". "+f.name)
+			}else{
+				$("#scbg"+i).remove()			
+			}
+		}else if(plss.length>i+tf){
 			$("#scb").append(svgel("g",{"id":"scbg"+i}))
 			$("#scbg"+i).append(svgel("rect",{"y":(i+1)*camvb[3]/50,"width":camvb[2]/5,"height":camvb[3]/50,"fill":plss[i].fill,"stroke":plss[i].stroke,"id":"scbr"+i}))
-			$("#scbg"+i).append(svgel("text",{"y":(i+1.5)*camvb[3]/50,"x":camvb[2]/10,"text-anchor":"middle","alignment-baseline":"middle","font-size":camvb[3]/75,"id":"scbt"+i},plss[i].name))
+			$("#scbg"+i).append(svgel("text",{"y":(i+1.5)*camvb[3]/50,"x":camvb[2]/10,"text-anchor":"middle","alignment-baseline":"middle","font-size":camvb[3]/75,"id":"scbt"+i}))
 		}
 	}
 	if(keyp){
