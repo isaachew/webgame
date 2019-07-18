@@ -468,8 +468,8 @@ function clev(el){
 		if(nl!=undefined){
 			$("#buildgui").append(svgel("rect",{"x":camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"font-size":camvb[2]/30,"id":"buildbtn1"}))
 			$("#buildgui").append(svgel("text",{"x":camvb[2]/12,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx1"},"Upgrade"))
-			$("#buildgui").append(svgel("text",{"x":camvb[2]/36+colwid/2,"y":camvb[3]*5/24,"alignment-baseline":"middle","text-anchor":"start","fill":"#ffffff","id":"bucsta"},"X"))
-			$("#buildgui").append(svgel("text",{"x":camvb[2]*7/36+colwid/2,"y":camvb[3]*5/24,"alignment-baseline":"middle","text-anchor":"start","fill":"#ffffff","id":"bucstb"},"Y"))
+			$("#buildgui").append(svgel("text",{"x":camvb[2]/36+colwid/2,"y":camvb[3]*5/24,"alignment-baseline":"middle","text-anchor":"start","fill":"#ffffff","id":"bucsta"},nl.cost[0]))
+			$("#buildgui").append(svgel("text",{"x":camvb[2]*7/36+colwid/2,"y":camvb[3]*5/24,"alignment-baseline":"middle","text-anchor":"start","fill":"#ffffff","id":"bucstb"},nl.cost[1]))
 			$("#buildgui").append(svgel("use",{"href":"#coll0","x":camvb[2]/36-colwid/2,"y":camvb[3]*5/24-colwid/2}))
 			$("#buildgui").append(svgel("use",{"href":"#coll1","x":camvb[2]*7/36-colwid/2,"y":camvb[3]*5/24-colwid/2}))
 		}
