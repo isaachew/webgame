@@ -468,6 +468,10 @@ function clev(el){
 		if(nl!=undefined){
 			$("#buildgui").append(svgel("rect",{"x":camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"font-size":camvb[2]/30,"id":"buildbtn1"}))
 			$("#buildgui").append(svgel("text",{"x":camvb[2]/12,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx1"},"Upgrade"))
+			$("#buildgui").append(svgel("text",{"x":camvb[2]/36+colwid/2,"y":camvb[3]*5/24,"alignment-baseline":"middle","text-anchor":"start","fill":"#ffffff","id":"bucsta"},"X"))
+			$("#buildgui").append(svgel("text",{"x":camvb[2]*7/36+colwid/2,"y":camvb[3]*5/24,"alignment-baseline":"middle","text-anchor":"start","fill":"#ffffff","id":"bucstb"},"Y"))
+			$("#buildgui").append(svgel("use",{"href":"#coll0","x":camvb[2]/36-colwid/2,"y":camvb[3]*5/24-colwid/2}))
+			$("#buildgui").append(svgel("use",{"href":"#coll1","x":camvb[2]*7/36-colwid/2,"y":camvb[3]*5/24-colwid/2}))
 		}
 		$("#buildgui").append(svgel("rect",{"x":9*camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn2"}))
 		$("#buildgui").append(svgel("text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2","font-size":camvb[2]/60},"Sell for 75%"))
@@ -480,9 +484,9 @@ function clev(el){
 				k=(i==="shoot")?("s: "+nl[i]?"Yes":"No"):k
 			}
 			if(!["update","ty"].includes(i)){
-				$("#buildgui").append(svgel("text",{"x":camvb[2]/6,"y":(c+0.5)*camvb[3]/30,"font-size":camvb[3]/30},i[0].toUpperCase()+i.slice(1)+": "+k))
+				$("#buildgui").append(svgel("text",{"x":camvb[2]/6,"y":(c+0.5)*camvb[3]/60,"font-size":camvb[3]/60,"alignment-baseline":"middle"},i[0].toUpperCase()+i.slice(1)+": "+k))
 				if(npl[i]){
-					$("#buildgui").append(svgel("text",{"y":(c+0.5)*camvb[3]/30,"font-size":camvb[3]/30},i[0].toUpperCase()+i.slice(1)+": "+((i==="shoot")?("s: "+(npl[i]?"Yes":"No")):npl[i])))
+					$("#buildgui").append(svgel("text",{"y":(c+0.5)*camvb[3]/60,"font-size":camvb[3]/60,"alignment-baseline":"middle"},i[0].toUpperCase()+i.slice(1)+": "+((i==="shoot")?("s: "+(npl[i]?"Yes":"No")):npl[i])))
 				}
 			}
 			c+=1
