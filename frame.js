@@ -483,7 +483,7 @@ function clev(el){
 			if(i==="shoot"){
 				k=(i==="shoot")?("s: "+nl[i]?"Yes":"No"):k
 			}
-			if(!["update","ty"].includes(i)){
+			if(!["update","ty","cost"].includes(i)){
 				$("#buildgui").append(svgel("text",{"x":camvb[2]/6,"y":(c+0.5)*camvb[3]/60,"font-size":camvb[3]/60,"alignment-baseline":"middle"},i[0].toUpperCase()+i.slice(1)+": "+k))
 				if(npl[i]){
 					$("#buildgui").append(svgel("text",{"y":(c+0.5)*camvb[3]/60,"font-size":camvb[3]/60,"alignment-baseline":"middle"},i[0].toUpperCase()+i.slice(1)+": "+((i==="shoot")?("s: "+(npl[i]?"Yes":"No")):npl[i])))
