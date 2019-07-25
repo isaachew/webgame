@@ -472,12 +472,12 @@ function clev(el){
 			$("#buildgui").append(svgel("text",{"x":camvb[2]*7/36+colwid/2,"y":camvb[3]*5/24,"alignment-baseline":"middle","text-anchor":"start","fill":"#ffffff","id":"bucstb"},nl.cost[1]))
 			$("#buildgui").append(svgel("use",{"href":"#coll0","x":camvb[2]/36-colwid/2,"y":camvb[3]*5/24-colwid/2}))
 			$("#buildgui").append(svgel("use",{"href":"#coll1","x":camvb[2]*7/36-colwid/2,"y":camvb[3]*5/24-colwid/2}))
+			$("#buildgui").append(svgel("line",{"x1":camvb[2]/6,"x2":camvb[2]/6,"y1":camvb[3]/60,"y2":camvb[3]*25/96,"stroke":"#ffffff"}))
 		}
 		$("#buildgui").append(svgel("rect",{"x":9*camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn2"}))
 		$("#buildgui").append(svgel("text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2","font-size":camvb[2]/60},"Sell for 75%"))
 		$("#buildgui").append(svgel("g",{"id":"upstats"}))
 		c=0
-		$("#buildgui").append(svgel("line",{"x1":camvb[2]/6,"x2":camvb[2]/6,"y1":camvb[3]/60,"y2":camvb[3]*25/96,"stroke":"#ffffff"}))
 		for(i in nl){
 			k=nl[i]
 			if(i==="shoot"){
