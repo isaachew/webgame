@@ -1,5 +1,5 @@
 keyp=false
-servers=["http://127.0.0.1:8080"]
+servers=["http://192.168.1.160:8080"]
 ev=undefined
 ke=undefined
 $(document).keydown(function(e){keyp=!0;ev=e;ke=ev.key})
