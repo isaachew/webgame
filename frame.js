@@ -138,7 +138,7 @@ function frame(ts){
 	requestAnimationFrame(frame)
 }
 function mode1(){
-	if(players[playid]==undefined){
+	if(players[playid].left){
 		mode=2
 		newmode=true
 		return
