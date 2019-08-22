@@ -124,8 +124,8 @@ function frame(ts){
 			if(ff){
 				$("svg").append(svgel("g",{"id":"statsmodal"}))
 				$("#statsmodal").append(svgel("rect",{"x":camvb[0],"y":camvb[1],"width":camvb[2],"height":camvb[3],"opacity":0.5}))
-				$("#statsmodal").append(svgel("text",{"x":camvb[2]/2+camvb[0],"y":camvb[3]/2+camvb[1],"color":"#ffffff","font-size":camvb[2]/50,"text-align":"center"},"Score:"+players[playid]))
-				$("#statsmodal").append(svgel("text",{"x":camvb[2]/2+camvb[0],"y":3*camvb[3]/4+camvb[1],"color":"#ffffff","font-size":camvb[2]/30,"text-align":"center"},"Press a key to continue"))
+				$("#statsmodal").append(svgel("text",{"x":camvb[2]/2+camvb[0],"y":camvb[3]/2+camvb[1],"fill":"#ffffff","font-size":camvb[2]/50,"text-anchor":"middle"},"Score:"+players[playid]))
+				$("#statsmodal").append(svgel("text",{"x":camvb[2]/2+camvb[0],"y":3*camvb[3]/4+camvb[1],"fill":"#ffffff","font-size":camvb[2]/30,"text-anchor":"middle"},"Press a key to continue"))
 			}
 			if(keyp){
 				smode(0)
