@@ -12,29 +12,29 @@ function frame(ts){
 			if(ff){
 				if(!$("#svg").length){
 					$("body").css("background-color","#c0c0c0")
-					$("body").append(svgel("svg",{"id":"svg"}))
-					$("svg").append(svgel("rect",{"id":"erct","width":500,"height":500,"fill":"#ffffff"}))
+					apsvel("body","svg",{"id":"svg"})
+					apsvel("svg","rect",{"id":"erct","width":500,"height":500,"fill":"#ffffff"})
 				}
-				$("svg").append(svgel("rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","class":"stru"}))
-				$("svg").append(svgel("clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>"))
+				apsvel("svg","rect",{"x":"200","y":"237.5","width":"100","height":"25","rx":"1","ry":"0.5","class":"stru"})
+				apsvel("svg","clipPath",{"id":"clipname"},"<rect x=\"200\" y=\"237.5\" width=\"100\" height=\"25\" rx=\"1\" ry=\"0.5\"></rect>")
 				x=document.cookie.match(/(^| )(nam=(.*?)($|;))/)
 				name=x?x[3]:""
 				if(mobile){
 					$("body").append(el("input",{"style":"position:absolute;z-index:15;font-size:2.5vh","oninput":"name=this.value","id":"ninput"}))
-					$("svg").append(svgel("rect",{"x":"215","y":"243.75","width":"35","height":"12.5","fill":"none","stroke":"none","id":"inpos"},""))
+					apsvel("svg","rect",{"x":"215","y":"243.75","width":"35","height":"12.5","fill":"none","stroke":"none","id":"inpos"},"")
 				}else{
-					$("svg").append(svgel("text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},x))
+					apsvel("svg","text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},x)
 				}
-				$("svg").append(svgel("g",{"id":"gobtn","transform":mobile?"":"translate(-800,-800)"},""))
-				$("svg").append(svgel("text",{"x":250,"y":150,"text-anchor":"middle","alignment-baseline":"middle","font-size":25},"Title"))
-				$("svg").append(svgel("text",{"x":250,"y":225,"text-anchor":"middle","alignment-baseline":"middle","font-size":10},"Enter Name"))
-				$("svg").append(svgel("text",{"x":250,"y":275,"text-anchor":"middle","alignment-baseline":"middle","font-size":10},"Press Enter to start"))
-				$("#gobtn").append(svgel("rect",{"x":"265","y":"240","width":"25","height":"20","fill":"white","stroke":"black"},""))
-				$("#gobtn").append(svgel("text",{"x":"277.5","y":"250","fill":"white","stroke":"black","text-anchor":"middle","alignment-baseline":"middle","font-size":"10"},"Play"))
-				$("svg").append(svgel("g",{"id":"help"}))
-				$("#help").append(svgel("rect",{"x":"480","y":"0","width":"20","height":"20","rx":"1","ry":"1","fill":"#aaaaaa","id":"helpb"}))
-				$("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
-				$("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
+				apsvel("svg","g",{"id":"gobtn","transform":mobile?"":"translate(-800,-800)"},"")
+				apsvel("svg","text",{"x":250,"y":150,"text-anchor":"middle","alignment-baseline":"middle","font-size":25},"Title")
+				apsvel("svg","text",{"x":250,"y":225,"text-anchor":"middle","alignment-baseline":"middle","font-size":10},"Enter Name")
+				apsvel("svg","text",{"x":250,"y":275,"text-anchor":"middle","alignment-baseline":"middle","font-size":10},"Press Enter to start")
+				apsvel("#gobtn","rect",{"x":"265","y":"240","width":"25","height":"20","fill":"white","stroke":"black"},"")
+				apsvel("#gobtn","text",{"x":"277.5","y":"250","fill":"white","stroke":"black","text-anchor":"middle","alignment-baseline":"middle","font-size":"10"},"Play")
+				apsvel("svg","g",{"id":"help"})
+				apsvel("#help","rect",{"x":"480","y":"0","width":"20","height":"20","rx":"1","ry":"1","fill":"#aaaaaa","id":"helpb"})
+				apsvel("#help","text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?")
+				apsvel("svg","rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},"")
 				$("body").append(el("div",{"style":"position:absolute;overflow:scroll","id":"chlog"}))
 				$("#gobtn").click(()=>{
 					serv=choose(servers)
@@ -54,8 +54,8 @@ function frame(ts){
 						$("#hblack,#hcont").remove()
 					})
 				})
-				$("#help").append(svgel("text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?"))
-				$("svg").append(svgel("rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},""))
+				apsvel("#help","text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?")
+				apsvel("svg","rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},"")
 				fetch("data/changelog.txt")
 				.then((v)=>(v.text()))
 				.then((v)=>{
@@ -67,8 +67,8 @@ function frame(ts){
 						$("#chlog").append(el("ul",{},n.slice(1).map((k)=>("<li>"+k.replace(/</g,"&lt;").replace(/>/g,"&gt;")+"</li>"))))
 					}
 				})
-				$("svg").append(svgel("text",{"x":500,"y":20,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlink"},"GitHub"))
-				$("svg").append(svgel("text",{"x":500,"y":30,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlinks"},"GitHub Server"))
+				apsvel("svg","text",{"x":500,"y":20,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlink"},"GitHub")
+				apsvel("svg","text",{"x":500,"y":30,"text-anchor":"end","alignment-baseline":"hanging","font-size":10,"id":"ghlinks"},"GitHub Server")
 				$("#ghlink").click(()=>{
 					document.location.href="https://github.com/isaachew/webgame"
 				})
@@ -122,10 +122,10 @@ function frame(ts){
 			break
 		case 2:
 			if(ff){
-				$("svg").append(svgel("g",{"id":"statsmodal"}))
-				$("#statsmodal").append(svgel("rect",{"x":camvb[0],"y":camvb[1],"width":camvb[2],"height":camvb[3],"opacity":0.5}))
-				$("#statsmodal").append(svgel("text",{"x":camvb[2]/2+camvb[0],"y":camvb[3]/2+camvb[1],"fill":"#ffffff","font-size":camvb[2]/50,"text-anchor":"middle"},"Score:"+players[playid]))
-				$("#statsmodal").append(svgel("text",{"x":camvb[2]/2+camvb[0],"y":3*camvb[3]/4+camvb[1],"fill":"#ffffff","font-size":camvb[2]/30,"text-anchor":"middle"},"Press a key to continue"))
+				apsvel("svg","g",{"id":"statsmodal"})
+				apsvel("#statsmodal","rect",{"x":camvb[0],"y":camvb[1],"width":camvb[2],"height":camvb[3],"opacity":0.5})
+				apsvel("#statsmodal","text",{"x":camvb[2]/2+camvb[0],"y":camvb[3]/2+camvb[1],"fill":"#ffffff","font-size":camvb[2]/50,"text-anchor":"middle"},"Score:"+players[playid])
+				apsvel("#statsmodal","text",{"x":camvb[2]/2+camvb[0],"y":3*camvb[3]/4+camvb[1],"fill":"#ffffff","font-size":camvb[2]/30,"text-anchor":"middle"},"Press a key to continue")
 			}
 			if(keyp){
 				smode(0)
@@ -145,7 +145,7 @@ function mode1(){
 	}
 	$("svg").attr("viewBox",camvb.join(" "))
 	if(ff){
-		$("svg").append(svgel("g",{"id":"objects"},""))
+		apsvel("svg","g",{"id":"objects"},"")
 		if(mobile){
 			sv=$("svg")
 			sv.append(svgel("g",{"id":"arrs"},""))
@@ -161,33 +161,33 @@ function mode1(){
 			})
 			sv.on("touchend",function(){cdir=[0,0]})
 		}
-		$("svg").append(svgel("g",{"id":"sprites","transform":"translate(-1000,-1000)"},""))
-		$("svg").append(svgel("g",{"id":"stats"},"<rect fill='#dddddd' opacity='0.75' id='statbar'>"))
-		$("svg").append(svgel("g",{"id":"scb","transform":"translate(400,380)","dn":"0"}))
-		$("#scb").append(svgel("rect",{"fill":"#808080","width":0.2*camvb[2],"height":camvb[3]/50,"id":"scbu"}))
+		apsvel("svg","g",{"id":"sprites","transform":"translate(-1000,-1000)"},"")
+		apsvel("svg","g",{"id":"stats"},"<rect fill='#dddddd' opacity='0.75' id='statbar'>")
+		apsvel("svg","g",{"id":"scb","transform":"translate(400,380)","dn":"0"})
+		apsvel("#scb","rect",{"fill":"#808080","width":0.2*camvb[2],"height":camvb[3]/50,"id":"scbu"})
 		$("#scbu").click(()=>{
 			if($("#scb").attr("dn")<=0){return}
 			$("#scb")
 			.attr("dn",(i,a)=>(parseInt(a)-1))
 		})
-		$("#scb").append(svgel("rect",{"fill":"#808080","y":0.22*camvb[3],"width":0.2*camvb[2],"height":camvb[3]/50,"id":"scbd"}))
+		apsvel("#scb","rect",{"fill":"#808080","y":0.22*camvb[3],"width":0.2*camvb[2],"height":camvb[3]/50,"id":"scbd"})
 		$("#scbd").click(()=>{
 			$("#scb")
 			.attr("dn",(i,a)=>(parseInt(a)+1))
 		})
-		$("#scb").append(svgel("text",{"x":0.1*camvb[2],"y":camvb[3]/100,"fill":"#ffffff","font-size":camvb[2]/75},"Up"))
-		$("#scb").append(svgel("text",{"x":0.1*camvb[2],"y":0.23*camvb[3],"fill":"#ffffff","font-size":camvb[3]/75},"Down"))
-		$("#stats").append(svgel("text",{"id":"score","clip-path":"url(#ctext)"},"Score: 0"))
-		$("#stats").append(svgel("text",{"id":"name","clip-path":"url(#ctext)"},"Name: "+name))
-		$("#stats").append(svgel("text",{"id":"res0","clip-path":"url(#ctext)"},": 0"))
-		$("#stats").append(svgel("text",{"id":"res1","clip-path":"url(#ctext)"},": 0"))
-		$("#stats").append(svgel("use",{"id":"resspr0","href":"#coll0"}))
-		$("#stats").append(svgel("use",{"id":"resspr1","href":"#coll1"}))
-		$("#stats").append(svgel("clipPath",{"id":"ctext"},"<rect y='0' id='ctrect'>"))
-		$("#stats").append(svgel("g",{"id":"buihold","clip-path":"url(#buiclp)"}))
+		apsvel("#scb","text",{"x":0.1*camvb[2],"y":camvb[3]/100,"fill":"#ffffff","font-size":camvb[2]/75},"Up")
+		apsvel("#scb","text",{"x":0.1*camvb[2],"y":0.23*camvb[3],"fill":"#ffffff","font-size":camvb[3]/75},"Down")
+		apsvel("#stats","text",{"id":"score","clip-path":"url(#ctext)"},"Score: 0")
+		apsvel("#stats","text",{"id":"name","clip-path":"url(#ctext)"},"Name: "+name)
+		apsvel("#stats","text",{"id":"res0","clip-path":"url(#ctext)"},": 0")
+		apsvel("#stats","text",{"id":"res1","clip-path":"url(#ctext)"},": 0")
+		apsvel("#stats","use",{"id":"resspr0","href":"#coll0"})
+		apsvel("#stats","use",{"id":"resspr1","href":"#coll1"})
+		apsvel("#stats","clipPath",{"id":"ctext"},"<rect y='0' id='ctrect'>")
+		apsvel("#stats","g",{"id":"buihold","clip-path":"url(#buiclp)"})
 		reqs=7/90*camvb[2]
-		$("#buihold").append(svgel("g",{"id":"builds","scrl":0}))
-		$("#stats").append(svgel("clipPath",{"id":"buiclp"},"<rect x='"+(14*camvb[2]/45)+"' y='0' width='"+reqs*4+"' height='"+reqs+"'>"))
+		apsvel("#buihold","g",{"id":"builds","scrl":0})
+		apsvel("#stats","clipPath",{"id":"buiclp"},"<rect x='"+(14*camvb[2]/45)+"' y='0' width='"+reqs*4+"' height='"+reqs+"'>")
 		for(id=0;id<pres.length;id++){
 			i=pres[id][0]
 			crespr(i.type)
@@ -209,9 +209,9 @@ function mode1(){
 					buiobj=pres[n.currentTarget.id.slice(3)][0]
 					$(".phrect,#buiprev,#buirange").remove()
 					$(".btrect",n.currentTarget).css("stroke","#ffffff")
-					$("svg").append(svgel("rect",{"x":camvb[0],"y":camvb[1]+0.1*camvb[3],"width":camvb[2],"height":0.9*camvb[3],"fill":"#ffffff","stroke":"none","opacity":0,"class":"phrect","id":"r"+n.currentTarget.id}))
-					$("svg").append(svgel("use",{"id":"buiprev","href":"#"+buiobj.type,"x":0,"y":0,"opacity":0,"stroke":"#808080","fill":"#404040"}))
-					$("#objects").append(svgel("circle",{"id":"buirange","r":buiobj.radius,"cx":0,"cy":0,"opacity":0,"fill":"#ff7700","stroke":"#ffff00","stroke-width":camvb[2]/100}))
+					apsvel("svg","rect",{"x":camvb[0],"y":camvb[1]+0.1*camvb[3],"width":camvb[2],"height":0.9*camvb[3],"fill":"#ffffff","stroke":"none","opacity":0,"class":"phrect","id":"r"+n.currentTarget.id})
+					apsvel("svg","use",{"id":"buiprev","href":"#"+buiobj.type,"x":0,"y":0,"opacity":0,"stroke":"#808080","fill":"#404040"})
+					apsvel("#objects","circle",{"id":"buirange","r":buiobj.radius,"cx":0,"cy":0,"opacity":0,"fill":"#ff7700","stroke":"#ffff00","stroke-width":camvb[2]/100})
 					$(".phrect").click((e)=>{
 						tre=e.currentTarget.getBoundingClientRect()
 						relw=tre.width/camvb[2]
@@ -241,11 +241,11 @@ function mode1(){
 			})
 			$("#builds").append(btile)
 		}
-		$("#stats").append(svgel("polygon",{"id":"larrow"}))
+		apsvel("#stats","polygon",{"id":"larrow"})
 		$("#larrow").click(()=>{
 			scrbar(-reqs)
 		})
-		$("#stats").append(svgel("polygon",{"id":"rarrow"}))
+		apsvel("#stats","polygon",{"id":"rarrow"})
 		$("#rarrow").click(()=>{
 			scrbar(reqs)
 		})
@@ -285,9 +285,9 @@ function mode1(){
 					.attr("width",en.size[0]*en.hp/en.maxhp*0.75)
 					.attr("height",en.size[0]/5*0.75)
 				}else{
-					$("#objects").append(svgel("g",{"id":en.id+"hb"}))
-					$("#"+en.id+"hb").append(svgel("rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*0.75,"height":en.size[0]/5*0.75,"fill":"#ff0000","class":"hebr"}))
-					$("#"+en.id+"hb").append(svgel("rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*en.hp/en.maxhp*0.75,"height":en.size[0]/5*0.75,"fill":"#00ff00","class":"hebg"}))
+					apsvel("#objects","g",{"id":en.id+"hb"})
+					apsvel("#"+en.id+"hb","rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*0.75,"height":en.size[0]/5*0.75,"fill":"#ff0000","class":"hebr"})
+					apsvel("#"+en.id+"hb","rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*en.hp/en.maxhp*0.75,"height":en.size[0]/5*0.75,"fill":"#00ff00","class":"hebg"})
 				}
 			}else if($("#"+en.id+"hb").length){
 				$("#"+en.id+"hb").remove()
@@ -328,9 +328,9 @@ function mode1(){
 				$("#scbg"+i).remove()			
 			}
 		}else if(plss.length>i+tf){
-			$("#scb").append(svgel("g",{"id":"scbg"+i}))
-			$("#scbg"+i).append(svgel("rect",{"y":(i+1)*camvb[3]/50,"width":camvb[2]/5,"height":camvb[3]/50,"fill":plss[i].fill,"stroke":plss[i].stroke,"id":"scbr"+i}))
-			$("#scbg"+i).append(svgel("text",{"y":(i+1.5)*camvb[3]/50,"x":camvb[2]/10,"text-anchor":"middle","alignment-baseline":"middle","font-size":camvb[3]/75,"id":"scbt"+i}))
+			apsvel("#scb","g",{"id":"scbg"+i})
+			apsvel("#scbg"+i,"rect",{"y":(i+1)*camvb[3]/50,"width":camvb[2]/5,"height":camvb[3]/50,"fill":plss[i].fill,"stroke":plss[i].stroke,"id":"scbr"+i})
+			apsvel("#scbg"+i,"text",{"y":(i+1.5)*camvb[3]/50,"x":camvb[2]/10,"text-anchor":"middle","alignment-baseline":"middle","font-size":camvb[3]/75,"id":"scbt"+i})
 		}
 	}
 	if(keyp){
@@ -461,29 +461,29 @@ function clev(el){
 		tt=pres.find((a)=>a[0].type===en.type)
 		nl=tt[en.level]
 		npl=tt[en.level-1]
-		$("svg").append(svgel("g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"}))
-		$("#buildgui").append(svgel("ellipse",{"cx":0,"cy":0,"rx":en.radius,"ry":en.radius,"fill":"#ff8000","stroke":"#ffff00","stroke-width":camvb[2]/100,"opacity":"0.5","id":"rangec"}))
-		$("#buildgui").append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3,"fill":"#606060","id":"brect"}))
-		$("#buildgui").append(svgel("text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},en.name+" Level "+en.level))
+		apsvel("svg","g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"})
+		apsvel("#buildgui","ellipse",{"cx":0,"cy":0,"rx":en.radius,"ry":en.radius,"fill":"#ff8000","stroke":"#ffff00","stroke-width":camvb[2]/100,"opacity":"0.5","id":"rangec"})
+		apsvel("#buildgui","rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3,"fill":"#606060","id":"brect"})
+		apsvel("#buildgui","text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},en.name+" Level "+en.level)
 		if(nl!=undefined){
-			$("#buildgui").append(svgel("rect",{"x":camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"font-size":camvb[2]/30,"id":"buildbtn1"}))
-			$("#buildgui").append(svgel("text",{"x":camvb[2]/12,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx1"},"Upgrade"))
-			$("#buildgui").append(svgel("text",{"x":camvb[2]/36+colwid/2,"y":camvb[3]*5/24,"alignment-baseline":"middle","text-anchor":"start","fill":"#ffffff","id":"bucsta"},nl.cost[0]))
-			$("#buildgui").append(svgel("text",{"x":camvb[2]*7/36+colwid/2,"y":camvb[3]*5/24,"alignment-baseline":"middle","text-anchor":"start","fill":"#ffffff","id":"bucstb"},nl.cost[1]))
-			$("#buildgui").append(svgel("use",{"href":"#coll0","x":camvb[2]/36-colwid/2,"y":camvb[3]*5/24-colwid/2}))
-			$("#buildgui").append(svgel("use",{"href":"#coll1","x":camvb[2]*7/36-colwid/2,"y":camvb[3]*5/24-colwid/2}))
-			$("#buildgui").append(svgel("line",{"x1":camvb[2]/6,"x2":camvb[2]/6,"y1":camvb[3]/60,"y2":camvb[3]*25/96,"stroke":"#ffffff"}))
+			apsvel("#buildgui","rect",{"x":camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"font-size":camvb[2]/30,"id":"buildbtn1"})
+			apsvel("#buildgui","text",{"x":camvb[2]/12,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx1"},"Upgrade")
+			apsvel("#buildgui","text",{"x":camvb[2]/36+colwid/2,"y":camvb[3]*5/24,"alignment-baseline":"middle","text-anchor":"start","fill":"#ffffff","id":"bucsta"},nl.cost[0])
+			apsvel("#buildgui","text",{"x":camvb[2]*7/36+colwid/2,"y":camvb[3]*5/24,"alignment-baseline":"middle","text-anchor":"start","fill":"#ffffff","id":"bucstb"},nl.cost[1])
+			apsvel("#buildgui","use",{"href":"#coll0","x":camvb[2]/36-colwid/2,"y":camvb[3]*5/24-colwid/2})
+			apsvel("#buildgui","use",{"href":"#coll1","x":camvb[2]*7/36-colwid/2,"y":camvb[3]*5/24-colwid/2})
+			apsvel("#buildgui","line",{"x1":camvb[2]/6,"x2":camvb[2]/6,"y1":camvb[3]/60,"y2":camvb[3]*25/96,"stroke":"#ffffff"})
 		}
-		$("#buildgui").append(svgel("rect",{"x":9*camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn2"}))
-		$("#buildgui").append(svgel("text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2","font-size":camvb[2]/60},"Sell for 75%"))
-		$("#buildgui").append(svgel("g",{"id":"upstats"}))
+		apsvel("#buildgui","rect",{"x":9*camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn2"})
+		apsvel("#buildgui","text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2","font-size":camvb[2]/60},"Sell for 75%")
+		apsvel("#buildgui","g",{"id":"upstats"})
 		c=0
 		for(i in nl){
 			k=nl[i]
 			if(!["update","ty","cost"].includes(i)){
-				$("#buildgui").append(svgel("text",{"x":camvb[2]/6,"y":(c+0.5)*camvb[3]/60,"font-size":camvb[3]/60,"alignment-baseline":"middle"},i[0].toUpperCase()+i.slice(1)+": "+((i==="shoot")?("s: "+nl[i]?"Yes":"No"):k)))
+				apsvel("#buildgui","text",{"x":camvb[2]/6,"y":(c+0.5)*camvb[3]/60,"font-size":camvb[3]/60,"alignment-baseline":"middle"},i[0].toUpperCase()+i.slice(1)+": "+((i==="shoot")?("s: "+nl[i]?"Yes":"No"):k))
 				if(npl[i]){
-					$("#buildgui").append(svgel("text",{"y":(c+0.5)*camvb[3]/60,"font-size":camvb[3]/60,"alignment-baseline":"middle"},i[0].toUpperCase()+i.slice(1)+": "+((i==="shoot")?("s: "+(npl[i]?"Yes":"No")):npl[i])))
+					apsvel("#buildgui","text",{"y":(c+0.5)*camvb[3]/60,"font-size":camvb[3]/60,"alignment-baseline":"middle"},i[0].toUpperCase()+i.slice(1)+": "+((i==="shoot")?("s: "+(npl[i]?"Yes":"No")):npl[i]))
 				}
 			}
 			c+=1
@@ -491,7 +491,7 @@ function clev(el){
 		if(en.troops){
 			l=en.troops.length
 			$("#brect").attr("width",camvb[2]/12*Math.ceil(l/2+4))
-			$("#buildgui").append(svgel("g",{"id":"troopgui"}))
+			apsvel("#buildgui","g",{"id":"troopgui"})
 			for(f=0;f<l;f++){
 				trp={}
 				for(i=0;i<players[playid].trlev[en.troops[f]];i++){
@@ -500,16 +500,16 @@ function clev(el){
 					}
 				}
 				console.log(trp)
-				$("#trppr"+f).append(svgel("text",{"name":"trpnam"+f,"alignment-baseline":"middle","font-size":camvb[2]/60},trps[en.troops[f]][0].name))
-				$("#troopgui").append(svgel("g",{"id":"trppr"+f,"transform":"translate("+((f%Math.ceil(l/2))*camvb[2]/12+camvb[2]/3)+","+(Math.floor(f/l*2)*camvb[3]/6)+")"}))
-				$("#trppr"+f).append(svgel("rect",{"x":0,"y":0,"width":camvb[2]/12,"height":camvb[3]/6,"rx":camvb[2]/200,"ry":camvb[2]/200,"fill":"#c08000"}))
+				apsvel("#trppr"+f,"text",{"name":"trpnam"+f,"alignment-baseline":"middle","font-size":camvb[2]/60},trps[en.troops[f]][0].name)
+				apsvel("#troopgui","g",{"id":"trppr"+f,"transform":"translate("+((f%Math.ceil(l/2))*camvb[2]/12+camvb[2]/3)+","+(Math.floor(f/l*2)*camvb[3]/6)+")"})
+				apsvel("#trppr"+f,"rect",{"x":0,"y":0,"width":camvb[2]/12,"height":camvb[3]/6,"rx":camvb[2]/200,"ry":camvb[2]/200,"fill":"#c08000"})
 				crespr(en.troops[f])
-				$("#trppr"+f).append(svgel("use",{"href":"#"+en.troops[f],"transform":"translate("+camvb[2]/48+",0) scale("+camvb[2]/24/trp.size+")","stroke":"#808080","fill":"#404040"}))
+				apsvel("#trppr"+f,"use",{"href":"#"+en.troops[f],"transform":"translate("+camvb[2]/48+",0) scale("+camvb[2]/24/trp.size+")","stroke":"#808080","fill":"#404040"})
 				collbox=gbb("#coll0")
-				$("#trppr"+f).append(svgel("use",{"href":"#coll0","class":"trpcspr0"}))
-				$("#trppr"+f).append(svgel("use",{"href":"#coll1","class":"trpcspr1"}))
-				$("#trppr"+f).append(svgel("text",{"class":"trpctx0","x":camvb[2]/50,"y":camvb[3]/8,"alignment-baseline":"middle","font-size":camvb[2]/60},trp.cost[0]))
-				$("#trppr"+f).append(svgel("text",{"class":"trpctx1","x":camvb[2]/50,"y":camvb[3]*7/48,"alignment-baseline":"middle","font-size":camvb[2]/60},trp.cost[1]))
+				apsvel("#trppr"+f,"use",{"href":"#coll0","class":"trpcspr0"})
+				apsvel("#trppr"+f,"use",{"href":"#coll1","class":"trpcspr1"})
+				apsvel("#trppr"+f,"text",{"class":"trpctx0","x":camvb[2]/50,"y":camvb[3]/8,"alignment-baseline":"middle","font-size":camvb[2]/60},trp.cost[0])
+				apsvel("#trppr"+f,"text",{"class":"trpctx1","x":camvb[2]/50,"y":camvb[3]*7/48,"alignment-baseline":"middle","font-size":camvb[2]/60},trp.cost[1])
 				$("#trppr"+f).click((ev)=>{
 					t=ev.currentTarget
 					t=t.id.slice(5)
@@ -532,22 +532,22 @@ function clev(el){
 		if(en.uptrp){
 			console.log("troop upgrade gui")
 			wid=$("#brect").attr("width")
-			$("#buildgui").append(svgel("g",{"id":"upgtrp","transform":"translate("+wid+",0)"}))
+			apsvel("#buildgui","g",{"id":"upgtrp","transform":"translate("+wid+",0)"})
 			$("#brect").attr("width",(i,a)=>(parseInt(a)+Math.ceil(en.uptrp.length/2)*camvb[2]/12))
 			for(i=0;i<en.uptrp.length;i++){
 				tae=trps[en.uptrp[i]]
 				le=players[playid].trlev[en.uptrp[i]]
 				crespr(en.uptrp[i])
-				$("#upgtrp").append(svgel("g",{"id":"uptrp"+i,"transform":"translate("+camvb[2]/12*(i%Math.floor(en.uptrp.length/2))+","+camvb[3]/6*Math.floor(i/en.uptrp.length*2)+")"}))
-				$("#uptrp"+i).append(svgel("rect",{"width":camvb[2]/12,"height":camvb[2]/6,"fill":tae.length>le?"#8040c0":"#808080"}))
-				$("#uptrp"+i).append(svgel("use",{"href":"#"+en.uptrp[i],"transform":"translate("+camvb[2]/48+") scale("+(camvb[2]/tae[le-1].size/24)+")","id":"uptr"+i,"stroke":"#808080","fill":"#404040"}))
-				$("#uptrp"+i).append(svgel("text",{"fill":"white","font-size":camvb[2]/60},tae.name))
+				apsvel("#upgtrp","g",{"id":"uptrp"+i,"transform":"translate("+camvb[2]/12*(i%Math.floor(en.uptrp.length/2))+","+camvb[3]/6*Math.floor(i/en.uptrp.length*2)+")"})
+				apsvel("#uptrp"+i,"rect",{"width":camvb[2]/12,"height":camvb[2]/6,"fill":tae.length>le?"#8040c0":"#808080"})
+				apsvel("#uptrp"+i,"use",{"href":"#"+en.uptrp[i],"transform":"translate("+camvb[2]/48+") scale("+(camvb[2]/tae[le-1].size/24)+")","id":"uptr"+i,"stroke":"#808080","fill":"#404040"})
+				apsvel("#uptrp"+i,"text",{"fill":"white","font-size":camvb[2]/60},tae.name)
 				if(tae.length>le){
-					$("#uptrp"+i).append(svgel("use",{"href":"#coll0","x":camvb[2]/36-colwid/2,"y":camvb[3]/8}))
-					$("#uptrp"+i).append(svgel("use",{"href":"#coll1","x":camvb[2]/36-colwid/2,"y":camvb[3]*7/48}))
-					$("#uptrp"+i).append(svgel("text",{"fill":"black","x":camvb[2]/36+colwid/2,"y":camvb[3]/8+colwid/2,"font-size":camvb[2]/60,"alignment-baseline":"middle","text-anchor":"start"},tae[le].cost[0]))
-					$("#uptrp"+i).append(svgel("text",{"fill":"black","x":camvb[2]/36+colwid/2,"y":camvb[3]*7/48+colwid/2,"font-size":camvb[2]/60,"alignment-baseline":"middle","text-anchor":"start"},tae[le].cost[1]))
-					$("#uptrp"+i).append(svgel("text",{"fill":"white","font-size":camvb[2]/60,"text-anchor":"start","alignment-baseline":"hanging"},tae[le].name))
+					apsvel("#uptrp"+i,"use",{"href":"#coll0","x":camvb[2]/36-colwid/2,"y":camvb[3]/8})
+					apsvel("#uptrp"+i,"use",{"href":"#coll1","x":camvb[2]/36-colwid/2,"y":camvb[3]*7/48})
+					apsvel("#uptrp"+i,"text",{"fill":"black","x":camvb[2]/36+colwid/2,"y":camvb[3]/8+colwid/2,"font-size":camvb[2]/60,"alignment-baseline":"middle","text-anchor":"start"},tae[le].cost[0])
+					apsvel("#uptrp"+i,"text",{"fill":"black","x":camvb[2]/36+colwid/2,"y":camvb[3]*7/48+colwid/2,"font-size":camvb[2]/60,"alignment-baseline":"middle","text-anchor":"start"},tae[le].cost[1])
+					apsvel("#uptrp"+i,"text",{"fill":"white","font-size":camvb[2]/60,"text-anchor":"start","alignment-baseline":"hanging"},tae[le].name)
 					$("#uptrp"+i).click(()=>{
 						da.uptrp=en.uptrp[i]
 					})

@@ -58,6 +58,9 @@ function svgel(n,attrs,content){
 	d.innerHTML=content
 	return d
 }
+function apsvel(a,b,c,d){
+	$(a).append(svgel(b,c,d))
+}
 function el(n,attrs,content){
 	if (typeof content === 'undefined') content = ""
 	d=document.createElement(n)
