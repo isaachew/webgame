@@ -455,7 +455,7 @@ function mode1(){
 	.attr("height",camvb[3])
 }
 function clev(el){
-	$("#buildgui").remove()
+	$("#buildintf").remove()
 	k=el.id.slice(1)
 	en=(el.id[0]==="E")?entities[k]:buildings[k]
 	if(en.type.slice(0,4)=="coll")da.collect=en.id
@@ -463,8 +463,9 @@ function clev(el){
 		tt=pres.find((a)=>a[0].type===en.type)
 		nl=tt[en.level]
 		npl=tt[en.level-1]
-		apsvel("svg","g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"})
-		apsvel("#buildgui","ellipse",{"cx":0,"cy":0,"rx":en.radius,"ry":en.radius,"fill":"#ff8000","stroke":"#ffff00","stroke-width":camvb[2]/100,"opacity":"0.5","id":"rangec"})
+		apsvel("svg","g",{"id":"buildintf"})
+		apsvel("#buildintf","ellipse",{"cx":(en.pos[0]+en.size[0]),"cy":(en.pos[1]+en.size[1]),"rx":en.radius,"ry":en.radius,"fill":"#ff8000","stroke":"#ffff00","stroke-width":camvb[2]/100,"opacity":"0.5","id":"rangec"})
+		apsvel("#buildintf","g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"})
 		apsvel("#buildgui","rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3,"fill":"#606060","id":"brect"})
 		apsvel("#buildgui","text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},en.name+" Level "+en.level)
 		if(nl!=undefined){
@@ -535,7 +536,7 @@ function clev(el){
 			console.log("troop upgrade gui")
 			wid=$("#brect").attr("width")
 			apsvel("#buildgui","g",{"id":"upgtrp","transform":"translate("+wid+",0)"})
-			$("#brect").attr("width",(i,a)=>(parseInt(a)+Math.ceil(en.uptrp.length/2)*camvb[2]/12))
+			$("#brect").attr("width",(a,i)=>(parseInt(i)+Math.ceil(en.uptrp.length/2)*camvb[2]/12))
 			for(i=0;i<en.uptrp.length;i++){
 				tae=trps[en.uptrp[i]]
 				le=players[playid].trlev[en.uptrp[i]]
@@ -556,6 +557,14 @@ function clev(el){
 				}	
 			}
 		}
+		$("#buildgui").attr("transform",(i,a)=>{
+			console.log(a)
+			arr=a.slice(10,-1).split(",").map(a=>parseInt(a))
+			console.log("bound check",arr)
+			arr[0]=Math.min(arr[0],result.bounds[0]-$("#brect").attr("width"))
+			arr[1]=Math.min(arr[1],result.bounds[1]-camvb[3]/3)
+			return "translate("+arr+")"
+		})
 		$("#buildbtn1,#buildbtntx1").click(()=>{
 			$("#buildgui").mouseleave()
 			da.upgrade=en.id
@@ -565,7 +574,7 @@ function clev(el){
 			da.sell=en.id
 		})
 		$("#buildgui").mouseleave((ev)=>{
-			$("#buildgui").remove()
+			$("#buildintf").remove()
 		})
 	}
 }
