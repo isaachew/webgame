@@ -100,7 +100,7 @@ function frame(ts){
 				if(ke==="Enter"){
 					$("#gobtn").click()
 				}else if(!mobile){
-					if(ke==="Backspace"){
+					if(ke==="Backspace"&&namecr>0){
 						name=name.slice(0,namecr-1)+name.slice(namecr,name.length)
 						namecr-=1
 					}else if(["ArrowLeft","ArrowRight"].includes(ke)) namecr+=2*(["ArrowLeft","ArrowRight"].indexOf(ke)-0.5)
