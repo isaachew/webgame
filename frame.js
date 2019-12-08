@@ -75,13 +75,6 @@ function frame(ts){
 				$("#ghlinks").click(()=>{
 					document.location.href="https://github.com/isaachew/webgameserver"
 				})
-				$("#help").click(()=>{
-					$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
-					$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1;z-index:30000","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>x</span>"))
-					$("#chelp").click(()=>{
-						$("#hblack,#hcont").remove()
-					})
-				})
 			}
 			$("svg").attr("viewBox","0 0 500 500")
 			$("#name").text(name.slice(0,namecr)+(count<30?"|":" ")+name.slice(namecr,name.length))
