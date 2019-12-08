@@ -34,7 +34,7 @@ function frame(ts){
 				apsvel("svg","g",{"id":"help"})
 				apsvel("#help","rect",{"x":"480","y":"0","width":"20","height":"20","rx":"1","ry":"1","fill":"#aaaaaa","id":"helpb"})
 				apsvel("#help","text",{"x":"490","y":"10","font-size":"12.5","text-anchor":"middle","alignment-baseline":"middle"},"?")
-				apsvel("svg","rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"},"")
+				apsvel("svg","rect",{"x":"350","y":"100","width":"150","height":"300","rx":"5","ry":"5","class":"stru","id":"chlogh"})
 				$("body").append(el("div",{"style":"position:absolute;overflow:scroll","id":"chlog"}))
 				$("#gobtn").click(()=>{
 					serv=choose(servers)
@@ -50,6 +50,7 @@ function frame(ts){
 				$("#help").click(()=>{
 					$("body").append(el("div",{"style":"position:absolute;min-width:100vw;min-height:100vh;background-color:black;top:0;left:0;opacity:0.5","id":"hblack"}))
 					$("body").append(el("div",{"style":"position:absolute;min-width:50vw;min-height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>&#10006;</span>"))
+					$("#hcont").append(el("div",{"style":"top:10vh;min-height:40vh;background-color:#ffffff","id":"htext"},"Placeholder text"))
 					$("#chelp").click(()=>{
 						$("#hblack,#hcont").remove()
 					})
