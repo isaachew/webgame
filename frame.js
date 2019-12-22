@@ -278,10 +278,11 @@ function mode1(){
 				if($("#"+en.id+"hb").length){
 					console.log("hb update",en.hp/en.maxhp)
 					$("#"+en.id+"hb .hebg")
-					.attr("x",en.pos[0]+en.size[0]*0.125)
-					.attr("y",en.pos[1]-en.size[1]*0.3)
 					.attr("width",en.size[0]*en.hp/en.maxhp*0.75)
 					.attr("height",en.size[0]/5*0.75)
+					.add("#"+en.id+"hb .hebr")
+					.attr("x",en.pos[0]+en.size[0]*0.125)
+					.attr("y",en.pos[1]-en.size[1]*0.3)
 				}else{
 					apsvel("#objects","g",{"id":en.id+"hb"})
 					apsvel("#"+en.id+"hb","rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*0.75,"height":en.size[0]/5*0.75,"fill":"#ff0000","class":"hebr"})
