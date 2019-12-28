@@ -476,7 +476,7 @@ function clev(el){
 			apsvel("#buildgui","line",{"x1":camvb[2]/6,"x2":camvb[2]/6,"y1":camvb[3]/60,"y2":camvb[3]*25/96,"stroke":"#ffffff"})
 		}
 		apsvel("#buildgui","rect",{"x":9*camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn2"})
-		apsvel("#buildgui","text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2","font-size":camvb[2]/60},"Sell for 75%")
+		apsvel("#buildgui","text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2"},"Sell")
 		apsvel("#buildgui","g",{"id":"upstats"})
 		c=0
 		for(i in nl){
@@ -501,12 +501,12 @@ function clev(el){
 					}
 				}
 				console.log(trp)
-				apsvel("#trppr"+f,"text",{"name":"trpnam"+f,"alignment-baseline":"middle","font-size":camvb[2]/60},trps[en.troops[f]][0].name)
 				apsvel("#troopgui","g",{"id":"trppr"+f,"transform":"translate("+((f%Math.ceil(l/2))*camvb[2]/12+camvb[2]/3)+","+(Math.floor(f/l*2)*camvb[3]/6)+")"})
 				apsvel("#trppr"+f,"rect",{"x":0,"y":0,"width":camvb[2]/12,"height":camvb[3]/6,"rx":camvb[2]/200,"ry":camvb[2]/200,"fill":"#c08000"})
 				crespr(en.troops[f])
 				apsvel("#trppr"+f,"use",{"href":"#"+en.troops[f],"transform":"translate("+camvb[2]/48+",0) scale("+camvb[2]/24/trp.size+")","stroke":"#808080","fill":"#404040"})
 				collbox=gbb("#coll0")
+				apsvel("#trppr"+f,"text",{"name":"trpnam"+f,"alignment-baseline":"hanging","font-size":camvb[2]/60,"fill":"#ffffff"},trps[en.troops[f]][0].name)
 				apsvel("#trppr"+f,"use",{"href":"#coll0","class":"trpcspr0"})
 				apsvel("#trppr"+f,"use",{"href":"#coll1","class":"trpcspr1"})
 				apsvel("#trppr"+f,"text",{"class":"trpctx0","x":camvb[2]/50,"y":camvb[3]/8,"alignment-baseline":"middle","font-size":camvb[2]/60},trp.cost[0])
