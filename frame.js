@@ -23,7 +23,7 @@ function frame(ts){
 					$("body").append(el("input",{"style":"position:absolute;z-index:15;font-size:2.5vh","oninput":"name=this.value","id":"ninput"}))
 					apsvel("svg","rect",{"x":"215","y":"243.75","width":"35","height":"12.5","fill":"none","stroke":"none","id":"inpos"},"")
 				}else{
-					apsvel("svg","text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},x)
+					apsvel("svg","text",{"x":"250","y":"250","id":"name","text-anchor":"middle","font-size":"7.5","clip-path":"url(\"#clipname\")"},name)
 				}
 				apsvel("svg","g",{"id":"gobtn","transform":mobile?"":"translate(-800,-800)"},"")
 				apsvel("svg","text",{"x":250,"y":150,"text-anchor":"middle","alignment-baseline":"middle","font-size":25},"Title")
