@@ -61,7 +61,6 @@ function svgel(n,attrs,content){
 	return d
 }
 function apsvel(a,b,c,d){
-	console.log("apsvel",a,b,c,d)
 	$(a).append(svgel(b,c,d))
 }
 function el(n,attrs,content){
