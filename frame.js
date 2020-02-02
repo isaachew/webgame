@@ -247,7 +247,7 @@ function mode1(){
 			scrbar(reqs)
 		})
 	}
-	for(var en of entities.concat(buildings)){
+	for(var en of entities.concat(buildings)){//Rendering
 		if(en.id[0]==="E"){
 			en.pos[0]+=en.vel[0]/60
 			en.pos[1]+=en.vel[1]/60
@@ -284,7 +284,7 @@ function mode1(){
 					.attr("x",en.pos[0]+en.size[0]*0.125)
 					.attr("y",en.pos[1]-en.size[1]*0.3)
 				}else{
-					apsvel("#objects","g",{"id":en.id+"hb"})
+					apsvel("#objects","g",{"id":en.id+"hb","class":"hb"})
 					apsvel("#"+en.id+"hb","rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*0.75,"height":en.size[0]/5*0.75,"fill":"#ff0000","class":"hebr"})
 					apsvel("#"+en.id+"hb","rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*en.hp/en.maxhp*0.75,"height":en.size[0]/5*0.75,"fill":"#00ff00","class":"hebg"})
 				}
@@ -297,7 +297,7 @@ function mode1(){
 			}
 		}
 	}
-	htnts=$.makeArray($(".object"))
+	htnts=$.makeArray($(".object"))//Camera bounding box clipping
 	entis=entities.concat(buildings).map(a=>a.id+"")
 	for(k of htnts){
 		if(!entis.includes(k.id)){
@@ -313,7 +313,13 @@ function mode1(){
 			}
 		}
 	}
-	plss=result.playerss
+	hebs=$.makeArray($(".hb"))//Health bar removal
+	for(k of hebs){
+		if(!$("#"+k.id.slice(0,-2)).length){
+			$(k).remove()
+		}
+	}
+	plss=result.playerss//Scoreboard system
 	tf=parseInt($("#scb").attr("dn"))
 	for(i=0;i<10;i++){
 		f=plss[i+tf]
