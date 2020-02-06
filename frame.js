@@ -344,6 +344,10 @@ function mode1(){
 		if(ke==="ArrowDown")cdir[1]=1
 		if(ke==="ArrowLeft")cdir[0]=-1
 		if(ke==="ArrowRight")cdir[0]=1
+		if(ke==="w")cdir[1]=-1
+		if(ke==="s")cdir[1]=1
+		if(ke==="a")cdir[0]=-1
+		if(ke==="d")cdir[0]=1
 		if(ke==="keyup")cdir=[0,0]
 	}
 	if(mobile){
