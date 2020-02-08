@@ -1,4 +1,7 @@
 function frame(ts){
+	fps=1000/(ts-lt)
+	lt=ts
+	
 	if(clear){
 		clears()
 		clear=false
@@ -248,7 +251,7 @@ function mode1(){
 		})
 	}
 	for(var en of entities.concat(buildings)){//Rendering
-		if(en.id[0]==="E"){
+		if(en.id[0]==="E"){//Entities move if they have velocity
 			en.pos[0]+=en.vel[0]/60
 			en.pos[1]+=en.vel[1]/60
 		}
@@ -258,9 +261,9 @@ function mode1(){
 			crespr(ty)
 		}
 		allids=$("#objects").children().toArray().map(a=>a.id)
-		if((en.pos[0]-camvb[0]>0)&&(en.pos[0]-camvb[0]<camvb[2])&&(en.pos[1]-camvb[1]>0)&&(en.pos[1]-camvb[1]<camvb[3])){
+		if((en.pos[0]-camvb[0]>0)&&(en.pos[0]-camvb[0]<camvb[2])&&(en.pos[1]-camvb[1]>0)&&(en.pos[1]-camvb[1]<camvb[3])){//Camera check
 			epl=en.player			
-			if(!allids.includes(en.id+"")){
+			if(!allids.includes(en.id+"")){//Rendering the entity
 				console.log(epl,epl?epl.stroke:undefined,epl?epl.fill:undefined,ty,"entity spawn")
 				spr=$(svgel("use",{"href":"#"+ty,"id":en.id,"class":"object","stroke":(epl||{}).stroke,"fill":(epl||{}).fill,"pid":(epl||{"id":""}).id}))
 				.click((n)=>{
@@ -274,7 +277,7 @@ function mode1(){
 			entdh=entdbox.height
 			entdis.attr("x",en.pos[0]).attr("y",en.pos[1])
 			.attr("transform","rotate("+en.rot+","+(en.pos[0]+entdw/2)+","+(en.pos[1]+entdh/2)+")")
-			if(en.hp<en.maxhp){
+			if(en.hp<en.maxhp){//Health bar
 				if($("#"+en.id+"hb").length){
 					console.log("hb update",en.hp/en.maxhp)
 					$("#"+en.id+"hb .hebg")
@@ -339,19 +342,20 @@ function mode1(){
 			apsvel("#scbg"+i,"text",{"y":(i+1.5)*camvb[3]/50,"x":camvb[2]/10,"text-anchor":"middle","alignment-baseline":"middle","font-size":camvb[3]/75,"id":"scbt"+i})
 		}
 	}
-	if(keyp){
-		if(ke==="ArrowUp")cdir[1]=-1
-		if(ke==="ArrowDown")cdir[1]=1
-		if(ke==="ArrowLeft")cdir[0]=-1
-		if(ke==="ArrowRight")cdir[0]=1
-		if(ke==="w")cdir[1]=-1
-		if(ke==="s")cdir[1]=1
-		if(ke==="a")cdir[0]=-1
-		if(ke==="d")cdir[0]=1
-		if(ke==="keyup")cdir=[0,0]
+	//Key press test
+	switch(ke){
+		case "ArrowUp":cdir[1]=-1;break
+		case "ArrowDown":cdir[1]=1;break
+		case "ArrowLeft":cdir[0]=-1;break
+		case "ArrowRight":cdir[0]=1;break
+		case "w":cdir[1]=-1;break
+		case "s":cdir[1]=1;break
+		case "a":cdir[0]=-1;break
+		case "d":cdir[0]=1;break
+		case "keyup":cdir=[0,0]
 	}
 	if(mobile){
-		for(a of arrhdr.children().toArray()){
+		for(a of arrhdr.children().toArray()){//Directional buttons
 			$(a).attr("fill","#808080")
 			s=$(a).attr("id").slice(2).split("")
 			gnd=[parseInt(s[0])-1,parseInt(s[1])-1]
@@ -449,7 +453,7 @@ function mode1(){
 	.attr("width",camvb[2])
 	.attr("height",camvb[3])
 }
-function clev(el){
+function clev(el){//If clicked
 	$("#buildintf").remove()
 	k=el.id.slice(1)
 	en=(el.id[0]==="E")?entities[k]:buildings[k]

@@ -2,6 +2,7 @@ keyp=false
 servers=["http://192.168.1.160:8080"]
 ev=undefined
 ke=undefined
+lt=0
 $(document).keydown(function(e){keyp=!0;ev=e;ke=ev.key})
 $(document).keyup(function(e){keyp=!0;ev=e;ke="keyup"})
 entities=[]
