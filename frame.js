@@ -55,7 +55,9 @@ function frame(ts){
 					$("body").append(el("div",{"style":"position:absolute;width:50vw;height:50vh;background-color:#C0C0C0;top:25vh;left:25vw;opacity:1","id":"hcont"},"<span style='color:#777777;top:0;left:0;font-size:2.5vw' id='chelp'>&#10006;</span>"))
 					$("#hcont").append(el("div",{"style":"top:10vh;width:100%;height:40vh;background-color:#ffffff;overflow:auto","id":"htext"}))
 					for(i of helpc){			
-						$("#htext").append("<p>"+i.replace(/</g,"&lt;")+"</p>")
+						$("#htext").append("<p>"+i.replace(/</g,"&lt;").replace(/{(.*?)}/g,(...rm)=>{
+							return `<img src=${rm[0]}>`
+						})+"</p>")
 					}
 					$("#chelp").click(()=>{
 						$("#hblack,#hcont").remove()
