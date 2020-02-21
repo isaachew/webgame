@@ -468,7 +468,7 @@ function clev(el){//If clicked
 		apsvel("#buildintf","ellipse",{"cx":(en.pos[0]+en.size[0]),"cy":(en.pos[1]+en.size[1]),"rx":en.radius,"ry":en.radius,"fill":"#ff8000","stroke":"#ffff00","stroke-width":camvb[2]/100,"opacity":"0.5","id":"rangec"})
 		apsvel("#buildintf","g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"})
 		apsvel("#buildgui","rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3,"fill":"#606060","id":"brect"})
-		apsvel("#buildgui","text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},en.name+" Level "+en.level)
+		apsvel("#buildgui","text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},npl.name+" Level "+en.level)
 		if(nl!=undefined){
 			apsvel("#buildgui","rect",{"x":camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"font-size":camvb[2]/30,"id":"buildbtn1"})
 			apsvel("#buildgui","text",{"x":camvb[2]/12,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx1"},"Upgrade")
@@ -481,16 +481,16 @@ function clev(el){//If clicked
 		apsvel("#buildgui","rect",{"x":9*camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"id":"buildbtn2"})
 		apsvel("#buildgui","text",{"x":camvb[2]/4,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx2"},"Sell")
 		apsvel("#buildgui","g",{"id":"upstats"})
-		c=0
+		c=1
 		for(i in nl){
 			k=nl[i]
-			if(!["update","ty","cost"].includes(i)){
-				apsvel("#buildgui","text",{"x":camvb[2]/6,"y":(c+0.5)*camvb[3]/60,"font-size":camvb[3]/60,"alignment-baseline":"middle"},i[0].toUpperCase()+i.slice(1)+": "+((i==="shoot")?("s: "+nl[i]?"Yes":"No"):k))
+			if(i[0]!=i[0].toLowerCase()){
+				apsvel("#buildgui","text",{"x":camvb[2]/6,"y":(c+0.5)*camvb[3]/60,"font-size":camvb[3]/60,"alignment-baseline":"middle"},i+(i==="shoot"?"s":"")+": "+((i==="shoot")?("s: "+k?"Yes":"No"):k))
 				if(npl[i]){
-					apsvel("#buildgui","text",{"y":(c+0.5)*camvb[3]/60,"font-size":camvb[3]/60,"alignment-baseline":"middle"},i[0].toUpperCase()+i.slice(1)+": "+((i==="shoot")?("s: "+(npl[i]?"Yes":"No")):npl[i]))
+					apsvel("#buildgui","text",{"y":(c+0.5)*camvb[3]/60,"font-size":camvb[3]/60,"alignment-baseline":"middle"},i+(i==="shoot"?"s":"")+": "+((i==="shoot")?(npl[i]?"Yes":"No"):npl[i]))
 				}
 			}
-			c+=1
+			c++
 		}
 		if(en.troops){
 			l=en.troops.length
