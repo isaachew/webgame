@@ -174,8 +174,10 @@ function mode1(){
 		})
 		apsvel("#scb","rect",{"fill":"#808080","y":0.22*camvb[3],"width":0.2*camvb[2],"height":camvb[3]/50,"id":"scbd"})
 		$("#scbd").click(()=>{
-			$("#scb")
-			.attr("dn",(i,a)=>(parseInt(a)+1))
+			if($("#scb").attr("dn")+1<players.length){
+				$("#scb")
+				.attr("dn",(i,a)=>(parseInt(a)+1))
+			}
 		})
 		apsvel("#scb","text",{"x":0.1*camvb[2],"y":camvb[3]/100,"fill":"#ffffff","font-size":camvb[2]/75},"Up")
 		apsvel("#scb","text",{"x":0.1*camvb[2],"y":0.23*camvb[3],"fill":"#ffffff","font-size":camvb[3]/75},"Down")
