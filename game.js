@@ -138,6 +138,5 @@ function scrbar(a){
 		n.attr("scrl",n.attr("scrl")-(-a/reqs))
 	}
 }
-re=function(el){$(el).attr("class","remo");
 setTimeout(el.remove.bind(el),500)}
 requestAnimationFrame(frame)

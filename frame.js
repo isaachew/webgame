@@ -308,7 +308,7 @@ function mode1(){
 	entis=entities.concat(buildings).map(a=>a.id+"")
 	for(k of htnts){
 		if(!entis.includes(k.id)){
-			re(k)
+			$(k).remove()
 		}else{
 			kd=k.id
 			ks=kd.slice(1)
