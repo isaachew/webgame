@@ -138,5 +138,5 @@ function scrbar(a){
 		n.attr("scrl",n.attr("scrl")-(-a/reqs))
 	}
 }
-setTimeout(el.remove.bind(el),500)}
+setTimeout(el.remove.bind(el),500)
 requestAnimationFrame(frame)
