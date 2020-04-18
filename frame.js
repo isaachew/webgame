@@ -56,7 +56,7 @@ function frame(ts){
 					$("#hcont").append(el("div",{"style":"top:10vh;width:100%;height:40vh;background-color:#ffffff;overflow:auto","id":"htext"}))
 					for(i of helpc){			
 						$("#htext").append("<p>"+i.replace(/</g,"&lt;").replace(/{(.*?)}/g,(...rm)=>{
-							return `<img src=${rm[0]}>`
+							return `<img src=${rm[1]}>`
 						})+"</p>")
 					}
 					$("#chelp").click(()=>{
@@ -192,14 +192,15 @@ function mode1(){
 		reqs=7/90*camvb[2]
 		apsvel("#buihold","g",{"id":"builds","scrl":0})
 		apsvel("#stats","clipPath",{"id":"buiclp"},"<rect x='"+(14*camvb[2]/45)+"' y='0' width='"+reqs*4+"' height='"+reqs+"'>")
-		for(id=0;id<pres.length;id++){
+		ind=0
+		for(id in pres){
 			i=pres[id][0]
-			crespr(i.type)
+			crespr(id)
 			btile=$(svgel("g",{"transform":"translate("+
-			id*reqs+",0)","id":"bui"+id}))
+			ind*reqs+",0)","id":"bui"+id}))
 			sca=(reqs/2)/Math.max.apply(null,i.size)
 			btile.append(svgel("rect",{"width":reqs,"height":reqs,"x":0,"y":0,"rx":camvb[2]/250,"ry":camvb[3]/250,"class":"btrect"}))
-			btile.append(svgel("use",{"href":"#"+i.type,"transform":"scale("+sca+")","x":0,"y":0,"class":"buitile","stroke":"#808080","fill":"#404040"},""))
+			btile.append(svgel("use",{"href":"#"+id,"transform":"scale("+sca+")","x":0,"y":0,"class":"buitile","stroke":"#808080","fill":"#404040"},""))
 			btile.append(svgel("text",{"fill":"#ffffff","y":reqs/16,"x":0,"alignment-baseline":"middle","text-anchor":"start","font-size":reqs/8},i.name))
 			btile.append(svgel("text",{"fill":"#ffffff","y":5*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},i.cost[0]))
 			btile.append(svgel("text",{"fill":"#ffffff","y":7*reqs/8,"x":reqs/4,"alignment-baseline":"middle","text-anchor":"start","font-size":3*reqs/20},i.cost[1]))
@@ -214,7 +215,7 @@ function mode1(){
 					$(".phrect,#buiprev,#buirange").remove()
 					$(".btrect",n.currentTarget).css("stroke","#ffffff")
 					apsvel("svg","rect",{"x":camvb[0],"y":camvb[1]+0.1*camvb[3],"width":camvb[2],"height":0.9*camvb[3],"fill":"#ffffff","stroke":"none","opacity":0,"class":"phrect","id":"r"+n.currentTarget.id})
-					apsvel("svg","use",{"id":"buiprev","href":"#"+buiobj.type,"x":0,"y":0,"opacity":0,"stroke":"#808080","fill":"#404040"})
+					apsvel("svg","use",{"id":"buiprev","href":"#"+n.currentTarget.id.slice(3),"x":0,"y":0,"opacity":0,"stroke":"#808080","fill":"#404040"})
 					apsvel("#objects","circle",{"id":"buirange","r":buiobj.radius,"cx":0,"cy":0,"opacity":0,"fill":"#ff7700","stroke":"#ffff00","stroke-width":camvb[2]/100})
 					$(".phrect").click((e)=>{
 						tre=e.currentTarget.getBoundingClientRect()
@@ -244,6 +245,7 @@ function mode1(){
 				}
 			})
 			$("#builds").append(btile)
+			ind++
 		}
 		apsvel("#stats","polygon",{"id":"larrow"})
 		$("#larrow").click(()=>{
@@ -296,11 +298,11 @@ function mode1(){
 					apsvel("#"+en.id+"hb","rect",{"x":en.pos[0]+en.size[0]*0.125,"y":en.pos[1]-en.size[1]*0.3,"width":en.size[0]*en.hp/en.maxhp*0.75,"height":en.size[0]/5*0.75,"fill":"#00ff00","class":"hebg"})
 				}
 			}else if($("#"+en.id+"hb").length){
-				$("#"+en.id+"hb").remove()
+				$("#"+en.id+"hb").remove()//Remove it
 			}
 			if(entdis.attr("href")!=="#"+en.type||entdis.attr("pid")!=(epl||{"id":""}).id){
 				console.log(entdis.attr("pid"),(epl||{"id":""}).id)
-				entdis.remove()
+				entdis.remove()//The entity is replaced/rendered differently
 			}
 		}
 	}
@@ -428,7 +430,7 @@ function mode1(){
 		$(elem)
 		.attr("transform","translate("+id*reqs+")")
 		$(".buitile",elem)
-		.attr("transform","scale("+reqs/2/Math.max.apply(null,pres[id][0].size)+")")
+		.attr("transform","scale("+reqs/2/Math.max.apply(null,pres[elem.id.slice(3)][0].size)+")")
 	})
 	$("rect","#buiclp")
 	.attr("x",(14*camvb[2]/45))
@@ -463,14 +465,14 @@ function clev(el){//If clicked
 	en=(el.id[0]==="E")?entities[k]:buildings[k]
 	if(en.type.slice(0,4)=="coll")da.collect=en.id
 	if(en.id[0]==="B"&&en.player.id===playid){
-		tt=pres.find((a)=>a[0].type===en.type)
+		tt=pres[en.ty]
 		nl=tt[en.level]
 		npl=tt[en.level-1]
 		apsvel("svg","g",{"id":"buildintf"})
 		apsvel("#buildintf","ellipse",{"cx":(en.pos[0]+en.size[0]),"cy":(en.pos[1]+en.size[1]),"rx":en.radius,"ry":en.radius,"fill":"#ff8000","stroke":"#ffff00","stroke-width":camvb[2]/100,"opacity":"0.5","id":"rangec"})
 		apsvel("#buildintf","g",{"id":"buildgui","transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")"})
 		apsvel("#buildgui","rect",{"x":0,"y":0,"width":camvb[2]/3,"height":camvb[3]/3,"fill":"#606060","id":"brect"})
-		apsvel("#buildgui","text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},npl.name+" Level "+en.level)
+		apsvel("#buildgui","text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},en.name+" Level "+en.level)
 		if(nl!=undefined){
 			apsvel("#buildgui","rect",{"x":camvb[2]/48,"y":camvb[3]*25/96,"width":camvb[3]/8,"height":camvb[3]/16,"font-size":camvb[2]/30,"id":"buildbtn1"})
 			apsvel("#buildgui","text",{"x":camvb[2]/12,"y":camvb[3]*7/24,"alignment-baseline":"middle","text-anchor":"middle","fill":"#ffffff","id":"buildbtntx1"},"Upgrade")
@@ -579,5 +581,22 @@ function clev(el){//If clicked
 		$("#buildgui").mouseleave((ev)=>{
 			$("#buildintf").remove()
 		})
+	}else{
+		apsvel("svg","g",{"transform":"translate("+(en.pos[0]+en.size[0])+","+(en.pos[1]+en.size[1])+")","id":"trpgui"})
+		apsvel("#trpgui","rect",{"width":camvb[2]/3,"height":camvb[3]/3,"fill":"#808080"})
+		$("#trpgui").mouseleave((ev)=>{
+			$("#trpgui").remove()
+		})
+		apsvel("#buildgui","text",{"x":0,"y":0,"font-size":camvb[2]/60,"fill":"#ffffff","alignment-baseline":"hanging","text-anchor":"start"},npl.name+" Level "+en.level)
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 }

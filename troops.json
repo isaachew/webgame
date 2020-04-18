@@ -1,0 +1,26 @@
+{
+    "CE":[
+        {
+            "size":25,
+            "fr":60,
+            "cost":[0,0],
+            "hp":1000, 
+            "name":"First",
+            "ai":["bu","en","const buil=bu.length?bu[0]:undefined\nif(buil){\nlet dist=[buil.pos[0]-this.pos[0],buil.pos[1]-this.pos[1]]\nlet sndist=dist[0]*dist[0]+dist[1]*dist[1]\nif(sndist>40000)this.vel=[50*dist[0]/Math.sqrt(sndist),50*dist[1]/Math.sqrt(sndist)]\nelse if(!this.frt){en.push(new bullet(this.pos[0]+this.size[0]/2,this.pos[1]+this.size[1]/2,dist[0],dist[1],0,this.player,50));this.frt=this.fir}\n}"]
+        },
+        {
+            "size":25,
+            "cost":[100,100],
+            "hp":1250,
+            "name":"Sample2"
+            
+        },
+        {
+            "size":25,
+            "cost":[150,150],
+            "hp":1250,
+            "name":"Sample3"
+            
+        }
+    ]
+}

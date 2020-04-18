@@ -1,7 +1,10 @@
-Web Game
-=
-(Server can be found at [isaachew/webgameserver](github.com/isaachew/webgameserver).)
+Web Game Server
+-
+([Web game is here](github.com/isaachew/webgame).)
 
-How to play
-=
-Anything with a square base is a *troop*.
+JSON format:
+`[<building>,<building>,<building>,...]`
+
+`<building>=[<definition>,<definition>,<definition>,...]`
+
+`<definition>={<property>:<value>,<property>:<value>,<property>:...}`
