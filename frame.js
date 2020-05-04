@@ -211,11 +211,12 @@ function mode1(){
 				if($("#r"+n.currentTarget.id+".phrect").toArray().length){
 					$(".phrect,#buiprev,#buirange").remove()
 				}else{
-					buiobj=pres[n.currentTarget.id.slice(3)][0]
+					cid=n.currentTarget.id.slice(3)
+					buiobj=pres[cid][0]
 					$(".phrect,#buiprev,#buirange").remove()
 					$(".btrect",n.currentTarget).css("stroke","#ffffff")
 					apsvel("svg","rect",{"x":camvb[0],"y":camvb[1]+0.1*camvb[3],"width":camvb[2],"height":0.9*camvb[3],"fill":"#ffffff","stroke":"none","opacity":0,"class":"phrect","id":"r"+n.currentTarget.id})
-					apsvel("svg","use",{"id":"buiprev","href":"#"+n.currentTarget.id.slice(3),"x":0,"y":0,"opacity":0,"stroke":"#808080","fill":"#404040"})
+					apsvel("svg","use",{"id":"buiprev","href":"#"+cid,"x":0,"y":0,"opacity":0,"stroke":"#808080","fill":"#404040"})
 					apsvel("#objects","circle",{"id":"buirange","r":buiobj.radius,"cx":0,"cy":0,"opacity":0,"fill":"#ff7700","stroke":"#ffff00","stroke-width":camvb[2]/100})
 					$(".phrect").click((e)=>{
 						tre=e.currentTarget.getBoundingClientRect()
@@ -224,7 +225,6 @@ function mode1(){
 						relx=tre.left
 						rely=tre.top-relh*camvb[3]*0.1
 						pcos=[(e.pageX-relx)/relw,(e.pageY-rely)/relh]
-						prse=Object.assign({},pres[n.currentTarget.id.slice(3)][0])
 						crds=[camvb[0]+pcos[0]-prse.size[0]/2,camvb[1]+pcos[1]-prse.size[1]/2]
 						$("#buiprev,#buirange")
 						.css("opacity",0.5)
@@ -238,7 +238,7 @@ function mode1(){
 						prse.rot=0
 					})
 					$("#buiprev").click((e)=>{
-						da.build=prse
+						da.build=cid
 						$(".phrect,#buiprev,#buirange").remove()
 						$(".btrect").css("stroke","none")
 					})
