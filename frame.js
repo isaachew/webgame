@@ -225,20 +225,18 @@ function mode1(){
 						relx=tre.left
 						rely=tre.top-relh*camvb[3]*0.1
 						pcos=[(e.pageX-relx)/relw,(e.pageY-rely)/relh]
-						crds=[camvb[0]+pcos[0]-prse.size[0]/2,camvb[1]+pcos[1]-prse.size[1]/2]
+						crds=[camvb[0]+pcos[0]-buiobj.size[0]/2,camvb[1]+pcos[1]-buiobj.size[1]/2]
 						$("#buiprev,#buirange")
 						.css("opacity",0.5)
 						$("#buiprev")
 						.attr("x",crds[0])
 						.attr("y",crds[1])
 						$("#buirange")
-						.attr("cx",crds[0]+prse.size[0]/2)
-						.attr("cy",crds[1]+prse.size[1]/2)
-						prse.pos=crds
-						prse.rot=0
+						.attr("cx",crds[0]+buiobj.size[0]/2)
+						.attr("cy",crds[1]+buiobj.size[1]/2)
 					})
 					$("#buiprev").click((e)=>{
-						da.build=cid
+						da.build=[cid,crds]
 						$(".phrect,#buiprev,#buirange").remove()
 						$(".btrect").css("stroke","none")
 					})
